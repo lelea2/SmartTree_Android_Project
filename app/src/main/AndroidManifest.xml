@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.kdao.cmpe235_project"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".SplashActivity">
+        </activity>
+        <activity android:name=".BarcodeActivity">
+        </activity>
+        <activity android:name=".SigninActivity">
+        </activity>
+        <activity android:name=".SignupActivity">
+        </activity>
+        <activity android:name=".TreesListActivity">
+        </activity>
+        <activity android:name=".CommentsListActivity">
+        </activity>
+        <activity android:name=".CommentActivity">
+        </activity>
+        <activity android:name=".TreeActivity">
+        </activity>
+        <activity android:name=".UserProfileActivity">
+        </activity>
+        <activity android:name=".VideoActivity">
+        </activity>
+        <activity android:name=".CameraActivity">
+        </activity>
+        <activity android:name=".AudioActivity">
+        </activity>
+        <activity android:name=".MapActivity">
+        </activity>
+    </application>
+
+</manifest>
