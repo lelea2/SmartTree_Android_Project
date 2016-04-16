@@ -26,75 +26,41 @@
             android:text="@string/register_title"
             android:textSize="25sp"
             android:textStyle="bold" />
-        <!-- Name Label -->
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/name" />
-        <!-- Name TextField -->
-
         <EditText
-            android:id="@+id/registerName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:hint="Enter your Name"/>
-
-        <!-- Phone Label -->
-        <TextView
+            android:id="@+id/registerFirstName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/phone" />
-        <!-- Phone textfield -->
+            android:hint="@string/firstName"/>
+        <EditText
+            android:id="@+id/registerLastName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/lastName" />
+        <EditText
+            android:id="@+id/registerEmail"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
         <EditText
             android:id="@+id/registerPhone"
             android:inputType="phone"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your Phone"
+            android:hint="@string/phone"
             android:digits="0123456789+" />
-
-        <!-- Email Label -->
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/email" />
-        <!-- Email TextField -->
-
         <EditText
-            android:id="@+id/registerEmail"
+            android:id="@+id/registerPwd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your Email ID"
-            android:inputType="textEmailAddress" />
-
-        <!-- Password Label -->
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dip"
-            android:text="@string/pwd" />
-        <!-- Password TextField -->
-
-        <EditText
-            android:id="@+id/registerPassword"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Password"
+            android:hint="@string/pwd"
             android:inputType="textPassword" />
-
-        <!-- Error message -->
-
-        <TextView
-            android:id="@+id/register_error"
+        <EditText
+            android:id="@+id/registerConfirmPwd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dip"
-            android:textColor="#e30000"
-            android:textStyle="bold" />
-
+            android:hint="@string/confirm_pwd"
+            android:inputType="textPassword" />
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="fill_parent"
@@ -104,9 +70,6 @@
             android:onClick="registerUser"
             android:text="@string/register_btn"
             android:textColor="#fff" />
-
-        <!-- Link to Login Screen -->
-
         <Button
             android:id="@+id/btnLinkToLoginScreen"
             android:layout_width="fill_parent"

@@ -29,12 +29,15 @@
     <string name="permission_request">This sample needs permission for camera and audio recording.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
+    <!-- String for registration -->
     <string name="register_title">REGISTER NEW ACCOUNT</string>
     <string name="login_title">LOG IN TO YOUR ACCOUNT</string>
-    <string name="name">Name</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
     <string name="phone">Phone</string>
     <string name="email">Email</string>
     <string name="pwd">Password</string>
+    <string name="confirm_pwd">Confirm Password</string>
     <string name="register_btn">Register</string>
     <string name="intro_message">
         <![CDATA[
