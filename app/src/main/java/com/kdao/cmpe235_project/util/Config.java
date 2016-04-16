@@ -7,10 +7,13 @@ public class Config {
 
     public static final String BASE_URL = "https://secure-dusk-26659.herokuapp.com";
 
-
     //Configuration for error message
     public static final String VALID_FORM = "Please fill out the form";
     public static final String VALID_EMAIL = "Please enter valid email";
     public static final String VALID_PWD = "Please enter matching confirmed password";
     public static final String REGISTER_ERR = "Error when register user. Please try again!";
+    public static final String LOGIN_ERR = "Invalid email or password. Please try again!";
+
+    //FLAG key configuration
+    public static final String SIGN_IN_WITH_BARCODE = "SIGN_IN_WITH_BARCODE";
 }

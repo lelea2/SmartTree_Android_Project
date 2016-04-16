@@ -30,12 +30,12 @@ import com.kdao.cmpe235_project.util.Config;
 import com.kdao.cmpe235_project.util.PreferenceData;
 
 public class SigninActivity extends AppCompatActivity {
-    ProgressDialog progressDialog;
-    TextView errMsg;
-    EditText emailText;
-    EditText pwdText;
+    private TextView errMsg;
+    private EditText emailText;
+    private EditText pwdText;
 
-    static String TAG = "SigninActivity";
+    private static String TAG = "SigninActivity";
+    private static String LOGIN_URL = Config.BASE_URL + "/user/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +51,6 @@ public class SigninActivity extends AppCompatActivity {
         errMsg = (TextView) findViewById(R.id.login_error);
         emailText = (EditText) findViewById(R.id.loginEmail);
         pwdText = (EditText) findViewById(R.id.loginPassword);
-        // Instantiate Progress Dialog object
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
     }
 
     /**
@@ -70,10 +66,10 @@ public class SigninActivity extends AppCompatActivity {
             if (Utility.isEmailValid(email)) {
                 logUserIn(email, password);
             } else { // When Email is invalid
-                Toast.makeText(getApplicationContext(), "Please enter valid email", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), Config.VALID_EMAIL, Toast.LENGTH_LONG).show();
             }
         } else { //Empty form handle
-            Toast.makeText(getApplicationContext(), "Please fill in the form", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), Config.VALID_FORM, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -89,7 +85,7 @@ public class SigninActivity extends AppCompatActivity {
                 String userEmail = params[0];
                 String userPassword = params[1];
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost(Config.BASE_URL + "/user/login");
+                HttpPost httpPost = new HttpPost(LOGIN_URL);
                 JSONObject json = new JSONObject();
                 try {
                     json.put("email", userEmail);
@@ -132,13 +128,11 @@ public class SigninActivity extends AppCompatActivity {
                 } catch(Exception ex) {
                 }
                 if(!Utility.isEmptyString(userId)){
-                    //Toast.makeText(getApplicationContext(), "working", Toast.LENGTH_LONG).show();
                     PreferenceData.setUserLoggedInStatus(getApplication(), true);
                     PreferenceData.setLoggedInUserId(getApplication(), userId);
                     navigateToMainActivity();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Invalid email or password. Please " +
-                            "try again!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), Config.LOGIN_ERR, Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -164,7 +158,7 @@ public class SigninActivity extends AppCompatActivity {
         Intent launchActivity = new Intent(SigninActivity.this, BarcodeActivity.class);
         Log.i(TAG, "Sign-in with barcode");
         //navigate to barcode page with SIGN_IN_WITH_BARCODE flag
-        launchActivity.putExtra("SIGN_IN_WITH_BARCODE", "1");
+        launchActivity.putExtra(Config.SIGN_IN_WITH_BARCODE, "1");
         startActivity(launchActivity);
     }
 
