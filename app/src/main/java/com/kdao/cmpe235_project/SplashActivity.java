@@ -2,8 +2,6 @@ package com.kdao.cmpe235_project;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.content.Intent;
 
 import com.kdao.cmpe235_project.util.PreferenceData;
@@ -21,7 +19,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 PreferenceData.clearLoggedInEmailAddress(getApplicationContext());
                 boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
-                if (userLoggedIn == true) { //navigate to signin page if user is not signin yet*/
+                if (userLoggedIn == false) { //navigate to signin page if user is not signin yet*/
                     Intent signinIntent = new Intent(SplashActivity.this, SigninActivity.class);
                     SplashActivity.this.startActivity(signinIntent);
                 } else {
@@ -32,6 +30,5 @@ public class SplashActivity extends AppCompatActivity {
             }
 
         }, SPLASH_DISPLAY_LENGHT);
-
     }
 }

@@ -13,6 +13,9 @@ public class Config {
     public static final String VALID_PWD = "Please enter matching confirmed password";
     public static final String REGISTER_ERR = "Error when register user. Please try again!";
     public static final String LOGIN_ERR = "Invalid email or password. Please try again!";
+    public static final String SCAN_ERR = "No scan data received!";
+    public static final String URL_ENCODE_ERR = "An Exception given because of " +
+            "UrlEncodedFormEntity argument :";
 
     //FLAG key configuration
     public static final String SIGN_IN_WITH_BARCODE = "SIGN_IN_WITH_BARCODE";
