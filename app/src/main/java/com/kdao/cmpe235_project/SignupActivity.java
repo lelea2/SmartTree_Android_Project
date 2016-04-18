@@ -55,7 +55,7 @@ public class SignupActivity extends AppCompatActivity {
         emailInput = (EditText)findViewById(R.id.registerEmail);
         phoneInput = (EditText)findViewById(R.id.registerPhone);
         pwdInput = (EditText)findViewById(R.id.registerPwd);
-        confirmPwdInput = (EditText) findViewById(R.id.registerConfirmPwd);
+        confirmPwdInput = (EditText) findViewById(R.id.registerRepwd);
         //Set up progress dialog
         prgDialog = new ProgressDialog(this);
         prgDialog.setMessage("Please wait...");

@@ -10,4 +10,12 @@ public class TreeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tree);
     }
+
+    /**
+     * Private function to get all trees available
+     * @method getTrees
+     */
+    private void getTrees() {
+
+    }
 }

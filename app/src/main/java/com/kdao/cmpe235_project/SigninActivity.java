@@ -48,7 +48,6 @@ public class SigninActivity extends AppCompatActivity {
      * Private method to get elemnt on page
      */
     private void getElem() {
-        errMsg = (TextView) findViewById(R.id.login_error);
         emailText = (EditText) findViewById(R.id.loginEmail);
         pwdText = (EditText) findViewById(R.id.loginPassword);
     }
