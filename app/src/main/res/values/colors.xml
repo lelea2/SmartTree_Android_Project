@@ -9,5 +9,6 @@
     <color name="colorBlue">#366aad</color>
     <color name="colorBlueLight">#57C3F0</color>
     <color name="colorTextMainColor">#fff</color>
+    <color name="colorTextHint">#AEAAA9</color>
     <color name="colorAccent">#fff</color>
 </resources>

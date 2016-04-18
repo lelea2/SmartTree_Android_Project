@@ -34,7 +34,7 @@
                     android:layout_height="165dp"
                     android:id="@+id/btn_createTree"
                     android:onClick="navigateToCreateTree"
-                    android:background="@drawable/main_ico_createtree" />
+                    android:background="@drawable/main_ico_create_tree" />
             </TableRow>
             <TableRow
                 android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
                     android:layout_height="165dp"
                     android:id="@+id/btn_createSensor"
                     android:onClick="navigateToCreateSensor"
-                    android:background="@drawable/main_ico_createsensor" />
+                    android:background="@drawable/main_ico_create_sensor" />
             </TableRow>
             <TableRow
                 android:layout_width="wrap_content"

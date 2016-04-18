@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@color/colorBackground"
-             android:paddingBottom="@dimen/activity_vertical_margin"
-             android:paddingLeft="0dp"
-             android:paddingRight="0dp"
-             android:paddingTop="@dimen/activity_vertical_margin"
-             tools:context="com.kdao.cmpe235_project.MainActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/colorBackground"
+            android:scaleType = "centerCrop"
+            tools:context="com.kdao.cmpe235_project.MainActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,82 +15,80 @@
             android:id="@+id/gridview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:stretchColumns="2">
+            android:stretchColumns="*">
             <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <Button
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp">
+                <ImageButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="165dp"
                     android:id="@+id/btn_viewTree"
-                    android:background="@color/colorGreen"
-                    android:text="View Tree"
+                    android:background="@drawable/main_ico_view_tree"
                     android:onClick="navigateToAllTree"
                     android:scaleType="fitXY" />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="165dp"
-                    android:id="@+id/imageView"
-                    android:scaleType="fitXY" />
+                    android:id="@+id/imageButton"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/main_image3" />
             </TableRow>
             <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp">
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="165dp"
                     android:id="@+id/imageView2"
-                    android:scaleType="fitXY"/>
-                <Button
+                    android:background="@drawable/main_image3" />
+                <ImageButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="165dp"
                     android:id="@+id/btn_scan"
                     android:onClick="navigateToBarCode"
-                    android:scaleType="fitXY"
-                    android:background="@color/colorRed"
-                    android:text="Scan"/>
+                    android:background="@drawable/main_ico_scan" />
             </TableRow>
             <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <Button
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp">
+                <ImageButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="165dp"
                     android:id="@+id/btn_photo"
                     android:onClick="navigateToPhoto"
-                    android:scaleType="fitXY"
-                    android:background="@color/colorOrange"
-                    android:text="Photo"/>
+                    android:background="@drawable/main_ico_photo" />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="165dp"
                     android:id="@+id/imageView3"
-                    android:scaleType="fitXY" />
+                    android:background="@drawable/main_image3" />
             </TableRow>
             <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp">
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="165dp"
                     android:id="@+id/imageView4"
-                    android:scaleType="fitXY" />
-                <Button
+                    android:background="@drawable/main_image3" />
+                <ImageButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="165dp"
                     android:id="@+id/btn_comment"
-                    android:scaleType="fitXY"
                     android:onClick="navigateToComment"
-                    android:background="@color/colorBlueLight"
-                    android:text="Comment" />
+                    android:background="@drawable/main_ico_comment" />
             </TableRow>
         </TableLayout>
     </RelativeLayout>

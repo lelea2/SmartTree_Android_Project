@@ -34,11 +34,11 @@
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:background="@drawable/border_selecter"
-            android:textColorHint="#AEAAA9"
+            android:textColorHint="@color/colorTextHint"
             android:fontFamily="Helvetica Neue"
             android:paddingLeft="40px"
             android:paddingRight="40px"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/colorTextMainColor"
             android:textColorHighlight="#FFFFFF"
             android:textSize="19sp"
             android:layout_marginBottom="20dp"
@@ -51,58 +51,66 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:background="@drawable/border_default"
-            android:textColorHint="#AEAAA9"
+            android:textColorHint="@color/colorTextHint"
             android:fontFamily="Helvetica Neue"
             android:paddingLeft="40px"
             android:paddingRight="40px"
-            android:textColor="#FFFFFF"
-            android:textColorHighlight="#FFFFFF"
+            android:textColor="@color/colorTextMainColor"
+            android:textColorHighlight="@color/colorTextMainColor"
             android:textSize="19sp"
             android:layout_marginBottom="20dp"
             android:singleLine="true"/>
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp">
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="184dp"
-                android:layout_height="50dp"
-                android:background="#E24F67"
-                android:onClick="loginUser"
-                android:text="Login"
-                android:textColor="#fff"
-                android:textSize="15sp"
-                style="?android:attr/borderlessButtonStyle"/>
-            <Button
-                android:id="@+id/btnLinkToRegisterScreen"
-                android:layout_width="184dp"
-                android:layout_height="50dp"
-                android:background="#2AA7AA"
-                android:onClick="navigateToSignupActivity"
-                android:text="REGISTRATION"
-                android:textSize="15sp"
-                android:textColor="#FFFFFF"
-                style="?android:attr/borderlessButtonStyle" />
-        </TableRow>
+        <TableLayout
+            android:id="@+id/button_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="2">
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp">
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/colorRed"
+                    android:onClick="loginUser"
+                    android:text="Login"
+                    android:textColor="@color/colorTextMainColor"
+                    android:textSize="15sp"
+                    style="?android:attr/borderlessButtonStyle"/>
+                <Button
+                    android:id="@+id/btnLinkToRegisterScreen"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/colorGreen"
+                    android:onClick="navigateToSignupActivity"
+                    android:text="REGISTRATION"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorTextMainColor"
+                    style="?android:attr/borderlessButtonStyle" />
+            </TableRow>
+        </TableLayout>
         <Button
             android:id="@+id/btnBarcodeLogin"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="7.5dp"
-            android:background="#366AAD"
+            android:background="@color/colorBlue"
             android:onClick="loginByBarCode"
             android:text="QR FAST REGISTRACTION"
             android:textSize="15sp"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/colorTextMainColor"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="7.5dp"
-            android:background="#57C3F0"
+            android:background="@color/colorBlueLight"
             android:text="GUEST FAST ENTRANCE"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/colorTextMainColor"
             android:onClick="navigateToMainActivity"
             style="?android:attr/borderlessButtonStyle"
             android:id="@+id/btnGuest" />
