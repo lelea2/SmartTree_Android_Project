@@ -8,6 +8,8 @@ public class Comment {
     private String treeId;
     private boolean like;
 
+    public Comment() {}
+
     public Comment(String comment, int rating, boolean like, User user) {
         this.comment = comment;
         this.rating = rating;

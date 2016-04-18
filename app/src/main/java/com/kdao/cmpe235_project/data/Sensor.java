@@ -5,6 +5,8 @@ public class Sensor {
     private String name;
     private SensorType type;
 
+    public Sensor() {}
+
     public Sensor(String id, String name, SensorType type) {
         this.id = id;
         this.name = name;

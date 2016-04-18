@@ -20,9 +20,8 @@ public class SplashActivity extends AppCompatActivity {
                 PreferenceData.clearLoggedInEmailAddress(getApplicationContext());
                 boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
                 if (userLoggedIn == false) { //navigate to signin page if user is not signin yet*/
-                    //Intent signinIntent = new Intent(SplashActivity.this, SigninActivity.class);
-                    Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
-                    SplashActivity.this.startActivity(mainIntent);
+                    Intent signinIntent = new Intent(SplashActivity.this, SigninActivity.class);
+                    SplashActivity.this.startActivity(signinIntent);
                 } else {
                     Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
                     SplashActivity.this.startActivity(mainIntent);

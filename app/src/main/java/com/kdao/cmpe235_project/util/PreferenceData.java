@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
  */
 public class PreferenceData {
     static final String PREF_LOGGEDIN_USER_EMAIL = "logged_in_email";
+    static final String PREF_LOGGEDIN_USER_ROLE = "logged_in_role";
     static final String PREF_USER_LOGGEDIN_STATUS = "logged_in_status";
     static final String PREF_LOGGEDIN_USER_ID = "logged_in_id";
 
@@ -31,6 +32,16 @@ public class PreferenceData {
         Editor editor = getSharedPreferences(ctx).edit();
         editor.putString(PREF_LOGGEDIN_USER_EMAIL, email);
         editor.commit();
+    }
+
+    public static void setLoggedInRole(Context ctx, int roleId) {
+        Editor editor = getSharedPreferences(ctx).edit();
+        editor.putInt(PREF_LOGGEDIN_USER_ROLE, roleId);
+        editor.commit();
+    }
+
+    public static int getLoggedInRole(Context ctx) {
+        return getSharedPreferences(ctx).getInt(PREF_LOGGEDIN_USER_ROLE, 0);
     }
 
     /**
@@ -90,6 +101,7 @@ public class PreferenceData {
         Editor editor = getSharedPreferences(ctx).edit();
         editor.remove(PREF_LOGGEDIN_USER_EMAIL);
         editor.remove(PREF_USER_LOGGEDIN_STATUS);
+        editor.remove(PREF_LOGGEDIN_USER_ROLE);
         editor.commit();
     }
 }

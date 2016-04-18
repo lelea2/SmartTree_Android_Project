@@ -7,6 +7,8 @@ public class Location {
     private String address;
     private String name;
 
+    public Location() {}
+
     public Location(double latitude, double longitude, String address, String name) {
         this.latitude = latitude;
         this.longitude = longitude;

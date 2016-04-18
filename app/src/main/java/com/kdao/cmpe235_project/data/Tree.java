@@ -10,6 +10,8 @@ public class Tree {
     private Location location;
     private Sensor sensor;
 
+    public Tree() {}
+
     public Tree(String id, String title, String description, String icon, String youtubeId, Location location, Sensor sensor)  {
         this.id = id;
         this.title = title;

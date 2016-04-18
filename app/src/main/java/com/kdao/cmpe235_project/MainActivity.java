@@ -9,15 +9,23 @@ import android.widget.Toast;
 
 import com.kdao.cmpe235_project.util.Config;
 import com.kdao.cmpe235_project.util.PreferenceData;
+import com.kdao.cmpe235_project.data.Role;
 
 public class MainActivity extends AppCompatActivity {
 
     private static String TAG = "MainActivity";
+    private Role role = new Role();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        PreferenceData.clearLoggedInEmailAddress(getApplicationContext());
+        int userRole = PreferenceData.getLoggedInRole(getApplicationContext());
+        if (role.isAdmin(userRole)) {
+            setContentView(R.layout.activity_main_admin);
+        } else {
+            setContentView(R.layout.activity_main);
+        }
     }
 
     public void navigateToAllTree(View v) {

@@ -4,6 +4,9 @@ public class Role {
 
     private int roleId;
     private String roleName;
+    private static int ADMIN_ROLE = 1;
+
+    public Role() {}
 
     public Role(int roleId, String roleName) {
         this.roleId = roleId;
@@ -30,7 +33,7 @@ public class Role {
      * Helper function to get roleId
      * @return
      */
-    public boolean isAdmin() {
-        return roleId == 1;
+    public boolean isAdmin(int roleId) {
+        return (roleId == ADMIN_ROLE);
     }
 }
