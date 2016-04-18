@@ -129,7 +129,7 @@ public class SigninActivity extends AppCompatActivity {
                 if(!Utility.isEmptyString(userId)){
                     PreferenceData.setUserLoggedInStatus(getApplication(), true);
                     PreferenceData.setLoggedInUserId(getApplication(), userId);
-                    navigateToMainActivity();
+                    _nagivateToMainActivity();
                 } else {
                     Toast.makeText(getApplicationContext(), Config.LOGIN_ERR, Toast.LENGTH_LONG).show();
                 }
@@ -141,9 +141,9 @@ public class SigninActivity extends AppCompatActivity {
 
     /**
      * Public method to navigate to signup page
-     * @method navigatetoSignupActivity
+     * @method navigateToSignupActivity
      */
-    public void navigatetoSignupActivity(View view) {
+    public void navigateToSignupActivity(View view) {
         Intent loginIntent = new Intent(getApplicationContext(), SignupActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(loginIntent);
@@ -154,7 +154,7 @@ public class SigninActivity extends AppCompatActivity {
      * @method loginByBarCode
      */
     public void loginByBarCode(View view) {
-        Intent launchActivity = new Intent(SigninActivity.this, BarcodeActivity.class);
+        Intent launchActivity = new Intent(getApplicationContext(), BarcodeActivity.class);
         Log.i(TAG, "Sign-in with barcode");
         //navigate to barcode page with SIGN_IN_WITH_BARCODE flag
         launchActivity.putExtra(Config.SIGN_IN_WITH_BARCODE, "1");
@@ -165,8 +165,13 @@ public class SigninActivity extends AppCompatActivity {
      * Private function to navigate to home activity
      * @method navigateToMainActivity
      */
-    private void navigateToMainActivity() {
+    public void navigateToMainActivity(View view) {
+        _nagivateToMainActivity();
+    }
+
+    private void _nagivateToMainActivity() {
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+        Log.i(TAG, "Navigate to main page as anonymous user");
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainIntent);
     }

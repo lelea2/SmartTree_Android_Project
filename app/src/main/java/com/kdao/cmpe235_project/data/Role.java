@@ -25,4 +25,12 @@ public class Role {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
+
+    /**
+     * Helper function to get roleId
+     * @return
+     */
+    public boolean isAdmin() {
+        return roleId == 1;
+    }
 }

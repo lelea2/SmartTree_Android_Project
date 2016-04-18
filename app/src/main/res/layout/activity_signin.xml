@@ -8,7 +8,8 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.kdao.cmpe235_project.SigninActivity">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -59,10 +60,10 @@
             android:textSize="19sp"
             android:layout_marginBottom="20dp"
             android:singleLine="true"/>
-        <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_height="wrap_content" android:orientation="horizontal"
-            android:layout_width="fill_parent">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp">
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="184dp"
@@ -72,27 +73,18 @@
                 android:text="Login"
                 android:textColor="#fff"
                 android:textSize="15sp"
-                android:layout_gravity="top"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 style="?android:attr/borderlessButtonStyle"/>
-
             <Button
                 android:id="@+id/btnLinkToRegisterScreen"
                 android:layout_width="184dp"
                 android:layout_height="50dp"
                 android:background="#2AA7AA"
-                android:onClick="navigatetoSignupActivity"
+                android:onClick="navigateToSignupActivity"
                 android:text="REGISTRATION"
                 android:textSize="15sp"
                 android:textColor="#FFFFFF"
-                android:layout_gravity="top|right"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
                 style="?android:attr/borderlessButtonStyle" />
-        </RelativeLayout>
+        </TableRow>
         <Button
             android:id="@+id/btnBarcodeLogin"
             android:layout_width="fill_parent"
@@ -111,6 +103,7 @@
             android:background="#57C3F0"
             android:text="GUEST FAST ENTRANCE"
             android:textColor="#FFFFFF"
+            android:onClick="navigateToMainActivity"
             style="?android:attr/borderlessButtonStyle"
             android:id="@+id/btnGuest" />
     </LinearLayout>

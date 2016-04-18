@@ -1,88 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.kdao.cmpe235_project.MainActivity">
-
-    <ImageButton
-        android:layout_width="210dp"
-        android:layout_height="165dp"
-        android:id="@+id/btn_viewTree"
-        android:background="@drawable/main_ico_viewtree"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/btn_scan"
-        android:layout_toStartOf="@+id/btn_scan" />
-
-    <ImageButton
-        android:layout_width="210dp"
-        android:layout_height="165dp"
-        android:id="@+id/imageButton"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/btn_viewTree"
-        android:layout_toEndOf="@+id/btn_viewTree"
-        android:background="@drawable/main_image1" />
-
-    <ImageView
-        android:layout_width="210dp"
-        android:layout_height="165dp"
-        android:id="@+id/imageView2"
-        android:layout_below="@+id/btn_viewTree"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/main_image2" />
-
-    <ImageButton
-        android:layout_width="210dp"
-        android:layout_height="165dp"
-        android:id="@+id/btn_scan"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_toEndOf="@+id/imageView2"
-        android:background="@drawable/main_ico_scan" />
-
-    <ImageButton
-        android:layout_width="210dp"
-        android:layout_height="165dp"
-        android:id="@+id/btn_photo"
-        android:layout_below="@+id/imageView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/main_ico_photo" />
-
-    <ImageView
-        android:layout_width="220dp"
-        android:layout_height="165dp"
-        android:id="@+id/imageView3"
-        android:layout_below="@+id/btn_scan"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_toEndOf="@+id/imageView2"
-        android:background="@drawable/main_image3" />
-
-    <ImageView
-        android:layout_width="210dp"
-        android:layout_height="165dp"
-        android:id="@+id/imageView4"
-        android:layout_below="@+id/btn_photo"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/main_image4" />
-
-    <ImageButton
-        android:layout_width="220dp"
-        android:layout_height="165dp"
-        android:id="@+id/btn_comment"
-        android:layout_alignTop="@+id/imageView4"
-        android:layout_toRightOf="@+id/imageView4"
-        android:layout_toEndOf="@+id/imageView4"
-        android:background="@drawable/main_ico_comment" />
-
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/colorBackground"
+             android:paddingBottom="@dimen/activity_vertical_margin"
+             android:paddingLeft="0dp"
+             android:paddingRight="0dp"
+             android:paddingTop="@dimen/activity_vertical_margin"
+             tools:context="com.kdao.cmpe235_project.MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TableLayout
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="2">
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="165dp"
+                    android:id="@+id/btn_viewTree"
+                    android:background="@color/colorGreen"
+                    android:text="View Tree"
+                    android:onClick="navigateToAllTree"
+                    android:scaleType="fitXY" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="165dp"
+                    android:id="@+id/imageView"
+                    android:scaleType="fitXY" />
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="165dp"
+                    android:id="@+id/imageView2"
+                    android:scaleType="fitXY"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="165dp"
+                    android:id="@+id/btn_scan"
+                    android:onClick="navigateToBarCode"
+                    android:scaleType="fitXY"
+                    android:background="@color/colorRed"
+                    android:text="Scan"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="165dp"
+                    android:id="@+id/btn_photo"
+                    android:onClick="navigateToPhoto"
+                    android:scaleType="fitXY"
+                    android:background="@color/colorOrange"
+                    android:text="Photo"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="165dp"
+                    android:id="@+id/imageView3"
+                    android:scaleType="fitXY" />
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="165dp"
+                    android:id="@+id/imageView4"
+                    android:scaleType="fitXY" />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="165dp"
+                    android:id="@+id/btn_comment"
+                    android:scaleType="fitXY"
+                    android:onClick="navigateToComment"
+                    android:background="@color/colorBlueLight"
+                    android:text="Comment" />
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
 </ScrollView>
