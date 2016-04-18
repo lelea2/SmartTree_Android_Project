@@ -19,6 +19,7 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowTitleBackgroundStyle">@android:color/transparent</item>
         <item name="android:windowTitleStyle">@style/CustomWindowTitleStyle</item>
     </style>

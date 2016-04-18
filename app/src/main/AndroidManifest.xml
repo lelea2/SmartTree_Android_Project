@@ -74,8 +74,6 @@
         </activity>
         <activity android:name=".TreeActivity">
         </activity>
-        <activity android:name=".UserProfileActivity">
-        </activity>
         <activity android:name=".VideoActivity">
         </activity>
         <activity android:name=".CameraActivity">

@@ -3,6 +3,7 @@
     <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#fff</color>
     <color name="colorBackground">#394264</color>
+    <color name="colorBackgroundLight">#505A7A</color>
     <color name="colorGreen">#2aa7aa</color>
     <color name="colorOrange">#fbb151</color>
     <color name="colorRed">#e24f67</color>
@@ -11,4 +12,5 @@
     <color name="colorTextMainColor">#fff</color>
     <color name="colorTextHint">#AEAAA9</color>
     <color name="colorAccent">#fff</color>
+    <color name="transparent">transparent</color>
 </resources>
