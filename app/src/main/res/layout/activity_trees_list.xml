@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="All Tree"
-        android:id="@+id/textView"
+        android:text="All Trees"
+        android:id="@+id/tree_list_heading"
         android:textColor="@color/colorTextMainColor"
         android:textSize="30dp"
         android:layout_marginLeft="27dp"
@@ -23,32 +23,23 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="Helvetica Neue" />
 
-    <ScrollView
-        android:layout_width="358dp"
-        android:layout_height="522dp"
-        android:id="@+id/scrollView"
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tree_list_heading"
+        android:layout_marginTop="10dp"
         android:background="@color/colorBackgroundLight"
-        android:fillViewport="false"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/treeListView" />
-    </ScrollView>
+        android:id="@+id/treeListView" />
 
     <Button
         android:id="@+id/btn_back"
-        android:layout_width="184dp"
-        android:layout_height="50dp"
         android:background="@color/colorRed"
         android:onClick="navigateToMainActivity"
-        android:text="BACK"
+        android:text="BACK TO HOME"
         android:textColor="#fff"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_gravity="center"
-        android:layout_below="@+id/scrollView"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
