@@ -89,7 +89,6 @@
                 android:text=""
                 android:textOff=""
                 android:textOn=""
-                android:button="drawable/toggle_style.xml"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
