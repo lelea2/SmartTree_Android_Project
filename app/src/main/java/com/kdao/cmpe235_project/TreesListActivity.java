@@ -1,5 +1,6 @@
 package com.kdao.cmpe235_project;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.AdapterView.*;
 
 import com.kdao.cmpe235_project.data.Tree;
 import com.kdao.cmpe235_project.data.Location;
@@ -37,6 +40,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 public class TreesListActivity extends AppCompatActivity {
 
+    private ProgressDialog progressDialog;
     private ListView treeList;
     private List<Tree> trees = new ArrayList<Tree>();
     private static String GEL_TREES_URL = Config.BASE_URL + "/trees";
@@ -56,6 +60,12 @@ public class TreesListActivity extends AppCompatActivity {
         ArrayAdapter<Tree> adapter = new MyListAdapter();
         treeList = (ListView) findViewById(R.id.treeListView);
         treeList.setAdapter(adapter);
+        //handle tree item on click
+        treeList.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
+                handleViewTreeItem(adapter, v, position, id);
+            }
+        });
     }
 
     /**
@@ -63,7 +73,7 @@ public class TreesListActivity extends AppCompatActivity {
      * @method populateTrees
      */
     private void populateTrees(JSONArray arrayObj) {
-        System.out.println(arrayObj.size());
+        //System.out.println(arrayObj.size());
         for (int i = 0; i < arrayObj.size(); i++) {
             try {
                 JSONObject object = (JSONObject) arrayObj.get(i);
@@ -86,6 +96,12 @@ public class TreesListActivity extends AppCompatActivity {
      */
     private void getAllTrees() {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(TreesListActivity.this, "", Config.GET_TREES);
+            }
+
             @Override
             protected String doInBackground(String... params) {
                 HttpClient httpClient = new DefaultHttpClient();
@@ -114,6 +130,7 @@ public class TreesListActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
+                progressDialog.dismiss();
                 try {
                     JSONArray arrayObj = null;
                     JSONParser jsonParser = new JSONParser();
@@ -122,8 +139,7 @@ public class TreesListActivity extends AppCompatActivity {
                     populateListView();
                 } catch(Exception ex) {
                     System.out.println(ex);
-                    Toast.makeText(getApplicationContext(), "Technical difficulty, please try " +
-                            "again", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), Config.SCAN_ERR, Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -143,7 +159,7 @@ public class TreesListActivity extends AppCompatActivity {
             if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.tree_item, parent, false);
             }
-            System.out.println(">>>> Generate tree <<<<< ");
+            //System.out.println(">>>> Generate tree <<<<< ");
             Tree tree = trees.get(position);
             TextView treeTitle = (TextView) itemView.findViewById(R.id.tree_title);
             treeTitle.setText(tree.getLocation().getName());
@@ -161,8 +177,12 @@ public class TreesListActivity extends AppCompatActivity {
     }
 
     //handle navigate to tree view page
-    public void handleViewTreeItem(View view) {
+    public void handleViewTreeItem(AdapterView<?> adapter, View v, int position, long id) {
+        Tree selItem = (Tree) adapter.getItemAtPosition(position);
+        String treeId = selItem.getId();
+        System.out.println(">>>> treeId: " + treeId + "<<<<<<<");
         Intent newIntent = new Intent(getApplicationContext(), TreeActivity.class);
+        newIntent.putExtra(Config.TREE_SESSION_ID, treeId);
         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newIntent);
     }

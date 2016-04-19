@@ -4,8 +4,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                android:background="@drawable/border_default"
-                android:onClick="handleViewTreeItem">
+                android:background="@drawable/border_default">
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,8 +23,8 @@
         android:layout_marginBottom="5dp" />
 
     <ImageView
-        android:layout_width="136dp"
-        android:layout_height="136dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:id="@+id/tree_icon"
         android:layout_below="@+id/tree_title"
         android:layout_alignLeft="@+id/tree_title"

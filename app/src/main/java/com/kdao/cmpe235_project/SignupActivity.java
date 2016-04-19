@@ -29,7 +29,7 @@ import java.io.InputStreamReader;
 
 
 public class SignupActivity extends AppCompatActivity {
-    private ProgressDialog prgDialog;
+    private ProgressDialog progressDialog;
     private EditText firstNameInput;
     private EditText lastNameInput;
     private EditText emailInput;
@@ -56,10 +56,6 @@ public class SignupActivity extends AppCompatActivity {
         phoneInput = (EditText)findViewById(R.id.registerPhone);
         pwdInput = (EditText)findViewById(R.id.registerPwd);
         confirmPwdInput = (EditText) findViewById(R.id.registerRepwd);
-        //Set up progress dialog
-        prgDialog = new ProgressDialog(this);
-        prgDialog.setMessage("Please wait...");
-        prgDialog.setCancelable(false);
     }
 
     /**
@@ -78,7 +74,7 @@ public class SignupActivity extends AppCompatActivity {
             //When confirm pwd and pwd not match
             if (!Utility.isEmailValid(email)) {
                 Toast.makeText(getApplicationContext(), Config.VALID_EMAIL, Toast.LENGTH_LONG).show();
-            } else if (password != confirmpwd) {
+            } else if (!password.equals(confirmpwd)) {
                 Toast.makeText(getApplicationContext(), Config.VALID_PWD, Toast.LENGTH_LONG).show();
             } else { //Valid email and pwd, proceed to signup user
                 signupUser(email, password, firstName, lastName, phone);
@@ -98,6 +94,12 @@ public class SignupActivity extends AppCompatActivity {
      */
     private void signupUser(String email, String password, String firstName, String lastName, String phone) {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(SignupActivity.this, "", Config.AUTHENTICATE);
+            }
+
             @Override
             protected String doInBackground(String... params) {
                 String userEmail = params[0];
@@ -146,6 +148,7 @@ public class SignupActivity extends AppCompatActivity {
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
                 //System.out.println(result);
+                progressDialog.dismiss();
                 String userId = "";
                 try {
                     JSONObject jObject  = new JSONObject(result);

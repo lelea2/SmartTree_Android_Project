@@ -1,9 +1,11 @@
 package com.kdao.cmpe235_project;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.kdao.cmpe235_project.data.Tree;
 import com.kdao.cmpe235_project.util.Config;
 import com.kdao.cmpe235_project.util.PreferenceData;
 import com.kdao.cmpe235_project.util.Utility;
@@ -37,6 +39,9 @@ public class BarcodeActivity extends AppCompatActivity {
     static String TAG = "BarCodeActivity";
     private ImageView scanBtn;
     private String signinWithBarCode = "0";
+    private String viewTreeWithBarCode = "0";
+
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +49,12 @@ public class BarcodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_barcode);
         try {
             Bundle extras = getIntent().getExtras();
-            signinWithBarCode = extras.getString("SIGN_IN_WITH_BARCODE");
-            if (signinWithBarCode.equals("1")) {
+            signinWithBarCode = extras.getString(Config.SIGN_IN_WITH_BARCODE);
+            viewTreeWithBarCode = extras.getString(Config.VIEW_TREE_WITH_BARCODE);
+            if (signinWithBarCode == "1" || viewTreeWithBarCode == "1") {
                 initiateScan();
+            } else {
+                navigateToMainActivity();
             }
         } catch(Exception ex) {
             //catching
@@ -73,6 +81,8 @@ public class BarcodeActivity extends AppCompatActivity {
             String scanContent = scanningResult.getContents();
             if (signinWithBarCode.equals("1")) {
                 logUserIn(scanContent);
+            } else {
+                getTreePerId(scanContent);
             }
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), Config.SCAN_ERR, Toast.LENGTH_SHORT);
@@ -84,8 +94,13 @@ public class BarcodeActivity extends AppCompatActivity {
      * Private function to log user in
      */
     private void logUserIn(String userId) {
-        scanBtn.setImageResource(R.drawable.progressbar);
+        //scanBtn.setImageResource(R.drawable.progressbar);
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(BarcodeActivity.this, "", Config.AUTHENTICATE);
+            }
             @Override
             protected String doInBackground(String... params) {
                 String id = params[0];
@@ -115,6 +130,7 @@ public class BarcodeActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
+                progressDialog.dismiss();
                 String userId = "";
                 try {
                     JSONObject jObject  = new JSONObject(result);
@@ -136,13 +152,23 @@ public class BarcodeActivity extends AppCompatActivity {
     }
 
     /**
+     *  Private function to get tree perId
+     */
+    private void getTreePerId(String treeId) {
+        Intent launchActivity = new Intent(BarcodeActivity.this, TreeActivity.class);
+        launchActivity.putExtra(Config.TREE_SESSION_ID, treeId);
+        startActivity(launchActivity);
+    }
+
+    /**
      * Private function to navigate back to signin activity if scanning barcode failed
      * @method navigateToSignInActivity
      */
     private void navigateToSignInActivity() {
-        Intent mainIntent = new Intent(getApplicationContext(), SigninActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(mainIntent);
+        Intent launchActivity = new Intent(getApplicationContext(), SigninActivity.class);
+        launchActivity.putExtra(Config.SIGN_IN_WITH_BARCODE_ERR, "1");
+        launchActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(launchActivity);
     }
 
     /**

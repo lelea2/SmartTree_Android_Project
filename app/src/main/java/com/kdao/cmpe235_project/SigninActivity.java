@@ -34,13 +34,25 @@ public class SigninActivity extends AppCompatActivity {
     private EditText emailText;
     private EditText pwdText;
 
+    private ProgressDialog progressDialog;
+
     private static String TAG = "SigninActivity";
     private static String LOGIN_URL = Config.BASE_URL + "/user/login";
+    private String signinErr = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+        try {
+            Bundle extras = getIntent().getExtras();
+            signinErr = extras.getString(Config.SIGN_IN_WITH_BARCODE_ERR);
+            if (signinErr == "1") {
+                Toast.makeText(getApplicationContext(), Config.LOGIN_BARCODE_ERR, Toast.LENGTH_LONG).show();
+            }
+        } catch(Exception ex) {
+            //catching
+        }
         getElem();
     }
 
@@ -79,6 +91,12 @@ public class SigninActivity extends AppCompatActivity {
      */
     private void logUserIn(String email, String password) {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(SigninActivity.this, "", Config.AUTHENTICATE);
+            }
+
             @Override
             protected String doInBackground(String... params) {
                 String userEmail = params[0];
@@ -120,6 +138,7 @@ public class SigninActivity extends AppCompatActivity {
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
                 //System.out.println(result);
+                progressDialog.dismiss();
                 String userId = "";
                 try {
                     JSONObject jObject  = new JSONObject(result);
