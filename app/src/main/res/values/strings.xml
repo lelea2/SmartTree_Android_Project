@@ -3,6 +3,7 @@
     <string name="welcome_message">Smart Tree</string>
     <string name="subtitle">Enjoy the city life...</string>
     <string name="message_about">About</string>
+    <string name="message_upload">Upload</string>
     <string name="message_interact">Interact</string>
     <string name="message_sharing">Sharing</string>
     <string name="message_nearby">Nearby</string>
@@ -28,6 +29,9 @@
     <string name="description_info">Info</string>
     <string name="permission_request">This sample needs permission for camera and audio recording.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="homeIcon">Home Page</string>
+    <string name="COGNITO_POOL_ID">us-east-1:d697056a-be38-4a11-a44d-456dff57792a</string>
+    <string name="BUCKET_NAME">smarttreebucket1</string>
 
     <!-- String for registration -->
     <string name="register_title">REGISTER NEW ACCOUNT</string>
@@ -39,6 +43,16 @@
     <string name="pwd">Password</string>
     <string name="confirm_pwd">Confirm Password</string>
     <string name="register_btn">Register</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="pause_all">Pause all</string>
+    <string name="cancel_all">Cancel all</string>
+    <string name="upload_image">upload image</string>
+    <string name="upload_video">upload video</string>
+    <string name="upload_audio">upload audio</string>
+
     <string name="intro_message">
         <![CDATA[
             This sample demonstrates how to record video using Camera2 API.
