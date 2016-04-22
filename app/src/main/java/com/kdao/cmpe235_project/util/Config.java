@@ -20,11 +20,18 @@ public class Config {
     public static final String URL_ENCODE_ERR = "An Exception given because of " +
             "UrlEncodedFormEntity argument :";
     public static final String SERVER_ERR = "Technical difficulty. Please try again!";
+    public static final String REQUIRE_SIGNIN = "You need to log in to execute these action";
+    public static final String CREATE_TREE_ERR = "Error creating new tree. Please try again!";
+
+    //Configuration for informative msg
+    public static final String NEW_TREE_CREATED = "New tree created";
+    public static final String NEW_SENSOR_CREATED = "New sensor created";
 
     //Configuration for loading msg
     public static final String AUTHENTICATE = "Authenticating...";
     public static final String GET_TREES = "Getting All Trees...";
     public static final String GET_TREE_INFO = "Get tree info...";
+    public static final String CREATE_TREE = "Generate New Tree...";
     public static final String GET_SENSORS = "Getting All Sensors...";
 
     //FLAG key configuration
@@ -32,6 +39,9 @@ public class Config {
     public static final String VIEW_TREE_WITH_BARCODE = "VIEW_TREE_WITH_BARCODE";
     public static final String SIGN_IN_WITH_BARCODE_ERR = "SIGN_IN_WITH_BARCODE_ERR";
     public static final String TREE_SESSION_ID = "TREE_SESSION_ID";
+    public static final String SIGN_IN_REQUIRED = "SIGN_IN_REQUIRED";
+    public static final String TREE_ACTIVITY = "TREE_ACTIVITY";
+    public static final String SENSOR_ACTIVITY = "SENSOR_ACTIVITY";
 
     //Config for ROLE
     public static final int ADMIN_ROLE = 1;

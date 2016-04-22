@@ -49,6 +49,14 @@ public class TreesListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trees_list);
+        try {
+            Bundle extras = getIntent().getExtras();
+            String msg = extras.getString(Config.TREE_ACTIVITY);
+            if (!Utility.isEmptyString(msg)) {
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            }
+        } catch(Exception ex) {
+        }
         getAllTrees();
     }
 

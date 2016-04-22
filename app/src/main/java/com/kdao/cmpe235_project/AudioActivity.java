@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.kdao.cmpe235_project.util.Config;
 import com.kdao.cmpe235_project.util.PreferenceData;
 
 import java.io.IOException;
@@ -41,6 +42,7 @@ public class AudioActivity extends AppCompatActivity {
         boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
         if (userLoggedIn == false) { //navigate to signin page if user is not signin yet*/
             Intent signinIntent = new Intent(AudioActivity.this, SigninActivity.class);
+            signinIntent.putExtra(Config.SIGN_IN_REQUIRED, Config.REQUIRE_SIGNIN);
             startActivity(signinIntent);
             return;
         }

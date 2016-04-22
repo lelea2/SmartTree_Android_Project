@@ -20,6 +20,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
+import com.kdao.cmpe235_project.util.Config;
 import com.kdao.cmpe235_project.util.PreferenceData;
 
 public class CameraActivity extends AppCompatActivity {
@@ -44,6 +45,7 @@ public class CameraActivity extends AppCompatActivity {
         boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
         if (userLoggedIn == false) { //navigate to signin page if user is not signin yet*/
             Intent signinIntent = new Intent(CameraActivity.this, SigninActivity.class);
+            signinIntent.putExtra(Config.SIGN_IN_REQUIRED, Config.REQUIRE_SIGNIN);
             startActivity(signinIntent);
             return;
         }

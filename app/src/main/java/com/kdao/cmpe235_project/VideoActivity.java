@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.kdao.cmpe235_project.util.PreferenceData;
+import com.kdao.cmpe235_project.util.Config;
 
 public class VideoActivity extends Activity {
 
@@ -36,6 +37,7 @@ public class VideoActivity extends Activity {
         boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
         if (userLoggedIn == false) { //navigate to signin page if user is not signin yet*/
             Intent signinIntent = new Intent(VideoActivity.this, SigninActivity.class);
+            signinIntent.putExtra(Config.SIGN_IN_REQUIRED, Config.REQUIRE_SIGNIN);
             startActivity(signinIntent);
             return;
         }
