@@ -158,6 +158,8 @@ public class SignupActivity extends AppCompatActivity {
                 if(!Utility.isEmptyString(userId)) {
                     PreferenceData.setUserLoggedInStatus(getApplication(), true);
                     PreferenceData.setLoggedInUserId(getApplication(), userId);
+                    PreferenceData.setLoggedInRole(getApplication(), Config.USER_ROLE); //signup from
+                    // application will never be an admin
                     navigateToMainActivity();
                 } else {
                     Toast.makeText(getApplicationContext(), Config.REGISTER_ERR, Toast.LENGTH_LONG).show();

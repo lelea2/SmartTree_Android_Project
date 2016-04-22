@@ -19,9 +19,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PreferenceData.clearLoggedInEmailAddress(getApplicationContext());
         int userRole = PreferenceData.getLoggedInRole(getApplicationContext());
-        if (role.isAdmin(userRole)) {
+        if (userRole == Config.ADMIN_ROLE) {
             setContentView(R.layout.activity_main_admin);
         } else {
             setContentView(R.layout.activity_main);
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void navigateToBarCode(View v) {
         Intent launchActivity = new Intent(getApplicationContext(), BarcodeActivity.class);
+        launchActivity.putExtra(Config.VIEW_TREE_WITH_BARCODE, 1);
         Log.i(TAG, "Navigate to Barcode");
         startActivity(launchActivity);
     }

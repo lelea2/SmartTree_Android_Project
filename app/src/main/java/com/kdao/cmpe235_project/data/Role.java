@@ -4,7 +4,6 @@ public class Role {
 
     private int roleId;
     private String roleName;
-    private static int ADMIN_ROLE = 1;
 
     public Role() {}
 
@@ -29,11 +28,4 @@ public class Role {
         this.roleName = roleName;
     }
 
-    /**
-     * Helper function to get roleId
-     * @return
-     */
-    public boolean isAdmin(int roleId) {
-        return (roleId == ADMIN_ROLE);
-    }
 }

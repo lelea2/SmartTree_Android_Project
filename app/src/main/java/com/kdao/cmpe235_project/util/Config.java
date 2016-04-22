@@ -32,4 +32,8 @@ public class Config {
     public static final String VIEW_TREE_WITH_BARCODE = "VIEW_TREE_WITH_BARCODE";
     public static final String SIGN_IN_WITH_BARCODE_ERR = "SIGN_IN_WITH_BARCODE_ERR";
     public static final String TREE_SESSION_ID = "TREE_SESSION_ID";
+
+    //Config for ROLE
+    public static final int ADMIN_ROLE = 1;
+    public static final int USER_ROLE = 2;
 }

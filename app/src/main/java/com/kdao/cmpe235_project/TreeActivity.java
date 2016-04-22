@@ -200,7 +200,7 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     }
 
     private void navigateToTreesList() {
-        Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent mainIntent = new Intent(getApplicationContext(), TreesListActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainIntent);
     }

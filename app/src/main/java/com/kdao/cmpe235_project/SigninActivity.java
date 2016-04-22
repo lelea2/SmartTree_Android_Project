@@ -143,15 +143,19 @@ public class SigninActivity extends AppCompatActivity {
                 try {
                     JSONObject jObject  = new JSONObject(result);
                     userId = (String) jObject.get("userId");
+                    if(!Utility.isEmptyString(userId)){
+                        PreferenceData.setUserLoggedInStatus(getApplication(), true);
+                        PreferenceData.setLoggedInUserId(getApplication(), userId);
+                        PreferenceData.setLoggedInRole(getApplication(), Integer.parseInt(jObject.get
+                                ("roleId").toString()));
+                        _nagivateToMainActivity();
+                    } else {
+                        Toast.makeText(getApplicationContext(), Config.LOGIN_ERR, Toast.LENGTH_LONG).show();
+                    }
                 } catch(Exception ex) {
-                }
-                if(!Utility.isEmptyString(userId)){
-                    PreferenceData.setUserLoggedInStatus(getApplication(), true);
-                    PreferenceData.setLoggedInUserId(getApplication(), userId);
-                    _nagivateToMainActivity();
-                } else {
                     Toast.makeText(getApplicationContext(), Config.LOGIN_ERR, Toast.LENGTH_LONG).show();
                 }
+
             }
         }
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
