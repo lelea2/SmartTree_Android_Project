@@ -6,6 +6,8 @@ public class Tree {
     private String description;
     private String icon;
     private String youtubeId;
+    private int sensorCount;
+    private int likecount;
     private Location location;
     private Sensor sensor;
 
@@ -18,6 +20,18 @@ public class Tree {
         this.youtubeId = youtubeId;
         this.location = location;
         this.sensor = sensor;
+    }
+
+    public Tree(String id, String description, String icon, String youtubeId, Location location,
+                Sensor sensor, int sensorCount, int likecount)  {
+        this.id = id;
+        this.description = description;
+        this.icon = icon;
+        this.youtubeId = youtubeId;
+        this.location = location;
+        this.sensor = sensor;
+        this.sensorCount = sensorCount;
+        this.likecount = likecount;
     }
 
     public String getId() {
@@ -66,5 +80,21 @@ public class Tree {
 
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
+    }
+
+    public int getSensorCount() {
+        return sensorCount;
+    }
+
+    public void setSensorCount(int sensorCount) {
+        this.sensorCount = sensorCount;
+    }
+
+    public int getLikecount() {
+        return likecount;
+    }
+
+    public void setLikecount(int likecount) {
+        this.likecount = likecount;
     }
 }

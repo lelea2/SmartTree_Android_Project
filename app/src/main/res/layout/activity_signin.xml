@@ -76,7 +76,7 @@
                     android:layout_height="50dp"
                     android:background="@color/colorRed"
                     android:onClick="loginUser"
-                    android:text="Login"
+                    android:text="LOGIN"
                     android:textColor="@color/colorTextMainColor"
                     android:textSize="15sp"
                     style="?android:attr/borderlessButtonStyle"/>

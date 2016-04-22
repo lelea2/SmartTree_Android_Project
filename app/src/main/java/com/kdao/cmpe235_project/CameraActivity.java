@@ -44,7 +44,6 @@ public class CameraActivity extends AppCompatActivity {
         handleCameraButton();
         handleVideoButton();
         handleAudioButton();
-        handleHomeIconClick();
         handleSharePhoto();
         handleUpload();
     }
@@ -100,7 +99,6 @@ public class CameraActivity extends AppCompatActivity {
         audioButton = (Button)findViewById(R.id.audio_btn);
         shareButton = (Button) findViewById(R.id.image_share_btn);
         uploadButton = (Button) findViewById(R.id.upload_btn);
-        viewImage= (ImageView)findViewById(R.id.viewImage);
     }
 
     /**
@@ -145,22 +143,6 @@ public class CameraActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.e(TAG, e.toString());
                 }
-            }
-        });
-    }
-
-    /**
-     * Function handle home icon click
-     * navigate back to main activity
-     */
-    private void handleHomeIconClick() {
-        ImageView homeicon = (ImageView) findViewById(R.id.home_icon);
-        homeicon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "Comment action");
-                Intent mainView = new Intent(CameraActivity.this, MainActivity.class);
-                startActivity(mainView);
             }
         });
     }

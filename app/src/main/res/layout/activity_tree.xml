@@ -59,7 +59,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="View Location"
+                    android:text="View Map"
                     android:id="@+id/tree_view_map"
                     android:background="@color/colorBlue"
                     style="?android:attr/borderlessButtonStyle"
@@ -68,7 +68,7 @@
             </TableRow>
         </TableLayout>
 
-        <RelativeLayout
+        <!--<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border_default"
@@ -98,8 +98,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true" />
-        </RelativeLayout>
-        <RelativeLayout
+        </RelativeLayout>-->
+
+        <!---<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/border_default"
@@ -123,6 +124,37 @@
                 android:layout_alignParentRight="true"
                 android:background="#2AA7AA"
                 android:layout_marginRight="15dp"></FrameLayout>
+        </RelativeLayout>-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_default"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/tree_sensor_state">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:textColor="@color/colorTextMainColor"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="19dp"
+                android:id="@+id/tree_sensor_count" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:id="@+id/sensorView"
+                android:layout_marginRight="10dp"
+                android:text="View Sensors >>"
+                android:textColor="@color/colorOrange"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true" />
         </RelativeLayout>
         <com.google.android.youtube.player.YouTubePlayerView
             android:id="@+id/tree_video"

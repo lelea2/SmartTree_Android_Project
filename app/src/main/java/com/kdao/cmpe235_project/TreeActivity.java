@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Switch;
 import android.widget.CompoundButton;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.util.Log;
 
 import com.kdao.cmpe235_project.data.Location;
+import com.kdao.cmpe235_project.data.Sensor;
 import com.kdao.cmpe235_project.data.Tree;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -34,6 +36,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
@@ -70,7 +73,8 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
             Bundle extras = getIntent().getExtras();
             treeId = extras.getString(Config.TREE_SESSION_ID);
             if (treeId != null) {
-            } else {
+                getTree(treeId);
+            } else { //return to treeId list if treeId in session not available
                 showAlertDialog();
                 navigateToTreesList();
             }
@@ -82,6 +86,7 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     }
 
     //Helper function to get tree information
+    //[{"id":"45304c60-9eac-48bf-9d0b-c02dda6c6cb3","title":"San Jose Center for the Performing Arts","description":"Landmark art deco-style theater presenting Broadway musicals & ballet & dance performances.","address":"255 S Almaden Blvd, San Jose, CA 95113","longitude":"37.32","latitude":"-121.9","youtubeId":"HZS3cWlr4AI","ts":"2016-04-15 07:54:28","likecount":"1","sensorCount":"2"}]
     private void getTree(String treeId) {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
@@ -121,6 +126,12 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                 super.onPostExecute(result);
                 progressDialog.dismiss();
                 try {
+                    JSONArray arrayObj = null;
+                    JSONParser jsonParser = new JSONParser();
+                    arrayObj= (JSONArray) jsonParser.parse(result);
+                    JSONObject obj = (JSONObject) arrayObj.get(0);
+                    createCurrentTreeView(obj);
+                    initializeYoutubeVideo();
                 } catch(Exception ex) {
                     System.out.println(ex);
                     showAlertDialog();
@@ -132,38 +143,66 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         sendPostReqAsyncTask.execute(treeId);
     }
 
+    //private function generate tree view
+    private void createCurrentTreeView(JSONObject object) {
+        Location location = new Location(Double.parseDouble(object.get("longitude").toString()),
+                Double.parseDouble(object.get("latitude").toString()), object.get
+                ("address").toString(), object.get("title").toString());
+        Sensor sensor = new Sensor();
+        currentTree = new Tree(object.get("id").toString(), object.get("description")
+                .toString(), "", object.get("youtubeId").toString(), location, sensor, Integer
+                .parseInt(object.get("sensorCount").toString()), Integer.parseInt(object.get
+                ("likecount").toString()));
+        TextView treeName = (TextView) findViewById(R.id.tree_title);
+        TextView treeDesc = (TextView) findViewById(R.id.tree_description);
+        TextView treeAddr = (TextView) findViewById(R.id.tree_address);
+        RelativeLayout sensorLayout = (RelativeLayout) findViewById(R.id.tree_sensor_state);
+        if (currentTree.getSensorCount() == 0) {
+            sensorLayout.setVisibility(View.INVISIBLE);
+        } else {
+            TextView treeSensorsCount = (TextView) findViewById(R.id.tree_sensor_count);
+            treeSensorsCount.setText(currentTree.getSensorCount() + " sensors available");
+            Button sensorBtn = (Button) findViewById(R.id.sensorView);
+            sensorBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent launchActivity = new Intent(TreeActivity.this, MapsActivity.class);
+                    launchActivity.putExtra("treeId", currentTree.getId());
+                    startActivity(launchActivity);
+                }
+            });
+        }
+        treeName.setText(location.getName());
+        treeDesc.setText(currentTree.getDescription());
+        treeAddr.setText(location.getAddress());
+        //Set up handler for view location button for specific tree
+        Button viewLoc = (Button) findViewById(R.id.tree_view_map);
+        viewLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent launchActivity = new Intent(TreeActivity.this, MapsActivity.class);
+                launchActivity.putExtra("longitude", currentTree.getLocation().getLongitude());
+                launchActivity.putExtra("latitude", currentTree.getLocation().getLatitude());
+                launchActivity.putExtra("name", currentTree.getLocation().getName());
+                launchActivity.putExtra("address", currentTree.getLocation().getAddress());
+                startActivity(launchActivity);
+            }
+        });
+    }
+
+    //private function handle initialize youtube video
+    private void initializeYoutubeVideo() {
+        //Initialize youtube video view
+        youTubeView = (YouTubePlayerView) findViewById(R.id.tree_video);
+        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+        playerStateChangeListener = new MyPlayerStateChangeListener();
+        playbackEventListener = new MyPlaybackEventListener();
+    }
+
     private void navigateToTreesList() {
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainIntent);
-    }
-    //Function handle session passed by other activity
-    /*private void handleSession() {
-        Bundle extras = getIntent().getExtras();
-        String value = "";
-        currentTree = null;
-        if (extras != null) {
-            value = extras.getString("SESSION_ID");
-            Log.i(TAG, "SESSION_ID=" + value);
-            currentTree = hmTrees.get(value);
-        }
-        if (currentTree != null) {
-            createCurrentTreeView(currentTree);
-            //Initialize youtube video view
-            youTubeView = (YouTubePlayerView) findViewById(R.id.tree_video);
-            youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
-            playerStateChangeListener = new MyPlayerStateChangeListener();
-            playbackEventListener = new MyPlaybackEventListener();
-        } else {
-            showAlertDialog();
-        }
-    }*/
-
-    /**
-     * Create view for current tree
-     */
-    private void createCurrentTreeView(Tree mytree) {
-
     }
 
     /**

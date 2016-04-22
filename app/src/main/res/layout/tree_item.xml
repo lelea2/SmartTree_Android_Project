@@ -38,6 +38,7 @@
         android:text="Sample Describe. A rooted tree is a tree in which one vertex has been designated the root…."
         android:id="@+id/tree_description"
         android:textColor="#FFF"
+        android:layout_below="@+id/tree_title"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-public class VideoActivity extends Activity{
+public class VideoActivity extends Activity {
 
     private Camera myCamera;
     private MyCameraSurfaceView myCameraSurfaceView;
