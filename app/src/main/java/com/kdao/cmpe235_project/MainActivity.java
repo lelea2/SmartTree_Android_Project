@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void navigateToBarCode(View v) {
         Intent launchActivity = new Intent(getApplicationContext(), BarcodeActivity.class);
-        launchActivity.putExtra(Config.VIEW_TREE_WITH_BARCODE, 1);
+        launchActivity.putExtra(Config.VIEW_TREE_WITH_BARCODE, "1");
         Log.i(TAG, "Navigate to Barcode");
         startActivity(launchActivity);
     }
@@ -53,25 +53,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void navigateToCreateTree(View v) {
-        Intent launchActivity = new Intent(getApplicationContext(), CommentsListActivity.class);
+        Intent launchActivity = new Intent(getApplicationContext(), CreateTreeActivity.class);
         Log.i(TAG, "Navigate to Create tree");
         startActivity(launchActivity);
     }
 
     public void navigateToCreateSensor(View v) {
-        Intent launchActivity = new Intent(getApplicationContext(), CommentsListActivity.class);
+        Intent launchActivity = new Intent(getApplicationContext(), CreateSensorActivity.class);
         Log.i(TAG, "Navigate to Create tree");
         startActivity(launchActivity);
     }
 
     public void navigateToDeployTree(View v) {
-        Intent launchActivity = new Intent(getApplicationContext(), CommentsListActivity.class);
+        Intent launchActivity = new Intent(getApplicationContext(), DeployActivity.class);
         Log.i(TAG, "Navigate to deploy tree");
         startActivity(launchActivity);
     }
 
     public void navigateToStatus(View v) {
-        Intent launchActivity = new Intent(getApplicationContext(), CommentsListActivity.class);
+        Intent launchActivity = new Intent(getApplicationContext(), SensorsListActivity.class);
         Log.i(TAG, "Navigate to view status");
         startActivity(launchActivity);
     }

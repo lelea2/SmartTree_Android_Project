@@ -17,7 +17,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         new android.os.Handler().postDelayed(new Runnable() {
             public void run() {
-                PreferenceData.clearLoggedInEmailAddress(getApplicationContext());
+                //PreferenceData.clearLoggedInEmailAddress(getApplicationContext());
                 boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
                 if (userLoggedIn == false) { //navigate to signin page if user is not signin yet*/
                     Intent signinIntent = new Intent(SplashActivity.this, SigninActivity.class);

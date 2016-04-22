@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import com.kdao.cmpe235_project.util.PreferenceData;
 
 public class VideoActivity extends Activity {
 
@@ -30,7 +33,12 @@ public class VideoActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
+        if (userLoggedIn == false) { //navigate to signin page if user is not signin yet*/
+            Intent signinIntent = new Intent(VideoActivity.this, SigninActivity.class);
+            startActivity(signinIntent);
+            return;
+        }
         recording = false;
         sharing = false;
 

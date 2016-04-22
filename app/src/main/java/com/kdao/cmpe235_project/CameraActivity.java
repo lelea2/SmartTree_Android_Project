@@ -20,6 +20,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
+import com.kdao.cmpe235_project.util.PreferenceData;
+
 public class CameraActivity extends AppCompatActivity {
 
     //Pre-select option for photo taking
@@ -39,6 +41,12 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
+        if (userLoggedIn == false) { //navigate to signin page if user is not signin yet*/
+            Intent signinIntent = new Intent(CameraActivity.this, SigninActivity.class);
+            startActivity(signinIntent);
+            return;
+        }
         setContentView(R.layout.activity_camera);
         getElements();
         handleCameraButton();
