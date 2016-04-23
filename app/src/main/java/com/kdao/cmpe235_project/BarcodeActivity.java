@@ -39,7 +39,6 @@ public class BarcodeActivity extends AppCompatActivity {
     static String TAG = "BarCodeActivity";
     private ImageView scanBtn;
     private String signinWithBarCode = "0";
-    private String viewTreeWithBarCode = "0";
 
     private ProgressDialog progressDialog;
 
@@ -50,15 +49,10 @@ public class BarcodeActivity extends AppCompatActivity {
         try {
             Bundle extras = getIntent().getExtras();
             signinWithBarCode = extras.getString(Config.SIGN_IN_WITH_BARCODE).toString();
-            viewTreeWithBarCode = extras.getString(Config.VIEW_TREE_WITH_BARCODE).toString();
         } catch(Exception ex) {
             //catching
         }
-        if (signinWithBarCode.equals("1") || viewTreeWithBarCode.equals("1")) {
-            initiateScan();
-        } else {
-            navigateToMainActivity();
-        }
+        initiateScan();
     }
 
     /**

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.kdao.cmpe235_project.data.Comment;
 import com.kdao.cmpe235_project.util.Config;
+import com.kdao.cmpe235_project.util.Utility;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -35,11 +36,24 @@ public class CommentsListActivity extends AppCompatActivity {
     private ListView commentList;
     private List<Comment> comments = new ArrayList<Comment>();
     private ProgressDialog progressDialog;
+    private static String COMMENT_URL = Config.BASE_URL + "/comments";
+    private String sessionTreeId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments_list);
+        try {
+            Bundle extras = getIntent().getExtras();
+            sessionTreeId = extras.getString(Config.TREE_SESSION_ID).toString();
+            COMMENT_URL = Config.BASE_URL + "/comments/tree/" + sessionTreeId;
+        } catch(Exception ex) {
+            //catching
+        }
+        if (Utility.isEmptyString(sessionTreeId)) {
+            Toast.makeText(getApplicationContext(), "View all comments available", Toast
+                    .LENGTH_LONG);
+        }
         getAllComments();
     }
 
@@ -58,12 +72,16 @@ public class CommentsListActivity extends AppCompatActivity {
      * @method populateComments
      */
     private void populateComments(JSONArray arrayObj) {
-        for (int i = 0; i < arrayObj.size(); i++) {
-            try {
-                JSONObject object = (JSONObject) arrayObj.get(i);
-                comments.add(new Comment(object.get("firstName").toString(), Integer.parseInt(object.get("rating").toString()), object.get("comment").toString(), object.get("ts").toString()));
-            } catch(Exception e) {
-                System.out.println(e);
+        if (arrayObj.size() == 0) {
+            Toast.make(getApplicationContext(), Config.NO_COMMENTS, Toast.LENGTH_LONG);
+        } else {
+            for (int i = 0; i < arrayObj.size(); i++) {
+                try {
+                    JSONObject object = (JSONObject) arrayObj.get(i);
+                    comments.add(new Comment(object.get("firstName").toString(), Integer.parseInt(object.get("rating").toString()), object.get("comment").toString(), object.get("ts").toString()));
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
             }
         }
     }
@@ -84,7 +102,7 @@ public class CommentsListActivity extends AppCompatActivity {
             @Override
             protected String doInBackground(String... params) {
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(Config.BASE_URL + "/comments");
+                HttpGet httpGet = new HttpGet(COMMENT_URL);
                 try {
                     try {
                         HttpResponse httpResponse = httpClient.execute(httpGet);

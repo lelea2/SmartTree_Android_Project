@@ -47,9 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void navigateToComment(View v) {
-        Intent launchActivity = new Intent(getApplicationContext(), CommentsListActivity.class);
-        Log.i(TAG, "Navigate to Comment lists");
-        startActivity(launchActivity);
+        Toast.makeText(getApplicationContext(), Config.COMMENT_PER_TREE, Toast.LENGTH_LONG).show();
     }
 
     public void navigateToCreateTree(View v) {

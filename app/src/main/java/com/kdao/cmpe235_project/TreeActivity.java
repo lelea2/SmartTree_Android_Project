@@ -20,6 +20,7 @@ import android.view.MenuItem;
 
 import android.util.Log;
 
+import com.kdao.cmpe235_project.data.Comment;
 import com.kdao.cmpe235_project.data.Location;
 import com.kdao.cmpe235_project.data.Sensor;
 import com.kdao.cmpe235_project.data.Tree;
@@ -47,10 +48,6 @@ import java.util.HashMap;
 public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
     private HashMap<String, Tree> hmTrees= new HashMap<String, Tree>();
     final Context context = this;
-    Switch switchButton;
-    TextView textView;
-    String switchOn = "ON";
-    String switchOff = "OFF";
 
     static String TAG = "TreeActivity";
     //Pre-define for youtube video handler
@@ -166,12 +163,24 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
             sensorBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent launchActivity = new Intent(TreeActivity.this, MapsActivity.class);
-                    launchActivity.putExtra("treeId", currentTree.getId());
+                    Intent launchActivity = new Intent(TreeActivity.this, SensorsListActivity.class);
+                    launchActivity.putExtra(Config.TREE_SESSION_ID, currentTree.getId());
                     startActivity(launchActivity);
                 }
             });
         }
+        //Set up for like count
+        TextView treeLikeCount = (TextView) findViewById(R.id.tree_comments_count);
+        treeLikeCount.setText(currentTree.getLikecount() + " likes");
+        Button commentBtn = (Button) findViewById(R.id.commentView);
+        commentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent launchActivity = new Intent(TreeActivity.this, CommentsListActivity.class);
+                launchActivity.putExtra(Config.TREE_SESSION_ID, currentTree.getId());
+                startActivity(launchActivity);
+            }
+        });
         treeName.setText(location.getName());
         treeDesc.setText(currentTree.getDescription());
         treeAddr.setText(location.getAddress());

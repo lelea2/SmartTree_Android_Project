@@ -58,10 +58,16 @@ public class CreateTreeActivity extends AppCompatActivity {
 
     //public view function to handle create tree
     public void createNewTree(View v) {
-        String name = treeTitle.getText().toString();
-        String desc = treeDesc.getText().toString();
-        String addr = treeAddr.getText().toString();
-        String videoId = youtubeId.getText().toString();
+        String name = "";
+        String desc = "";
+        String addr = "";
+        String videoId = "";
+        try {
+            name = treeTitle.getText().toString();
+            desc = treeDesc.getText().toString();
+            addr = treeAddr.getText().toString();
+            videoId = youtubeId.getText().toString();
+        } catch(Exception ex) {}
         if (!Utility.isEmptyString(name) && !Utility.isEmptyString(desc) && !Utility
                 .isEmptyString(addr) && !Utility.isEmptyString(videoId)) {
             // Valide form
