@@ -142,7 +142,7 @@
         android:id="@+id/button_grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/commentList"
+        android:layout_below="@id/linearLayout2"
         android:layout_alignParentBottom="true"
         android:stretchColumns="2">
         <TableRow
