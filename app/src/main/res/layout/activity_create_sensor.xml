@@ -31,19 +31,18 @@
         android:background="@drawable/border_default"
         android:hint="Sensor Name"
         android:textSize="19dp"
-        android:digits="0123456789+"
-        android:textColorHint="#9E9DA1"
+        android:textColorHint="@color/colorTextHint"
         android:fontFamily="Helvetica Neue"
-        android:paddingLeft="40px"
-        android:paddingRight="40px"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
+        android:paddingLeft="16dp"
+        android:textColor="@color/colorTextMainColor"
+        android:textColorHighlight="@color/colorTextMainColor"
         android:layout_marginBottom="10dp"
         android:singleLine="true"/>
     <Spinner
         android:id="@+id/new_sensor_type"
         android:background="@drawable/border_default"
         android:layout_width="match_parent"
+        android:textColor="@color/colorTextMainColor"
         android:layout_height="50dp"
         android:layout_marginBottom="15dp" />
     <Button
@@ -57,14 +56,13 @@
         android:layout_alignParentRight="true"
         style="?android:attr/borderlessButtonStyle"
         android:background="#57C3F0"
-        android:textColor="#FFF"
+        android:textColor="@color/colorTextMainColor"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="103dp" />
+        android:layout_marginBottom="20dp" />
     <RelativeLayout
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
-
         <Button
             android:layout_width="175dp"
             android:layout_height="50dp"
@@ -74,7 +72,6 @@
             android:id="@+id/btn_back"
             android:textColor="#fff"
             style="?android:attr/borderlessButtonStyle"/>
-
         <Button
             android:layout_width="175dp"
             android:layout_height="50dp"
