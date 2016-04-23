@@ -44,16 +44,20 @@ public class SigninActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-        try {
-            Bundle extras = getIntent().getExtras();
-            signinErr = extras.getString(Config.SIGN_IN_WITH_BARCODE_ERR);
-            if (signinErr == "1") {
-                Toast.makeText(getApplicationContext(), Config.LOGIN_BARCODE_ERR, Toast.LENGTH_LONG).show();
+        boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
+        if (userLoggedIn == false) {
+            try {
+                Bundle extras = getIntent().getExtras();
+                signinErr = extras.getString(Config.SIGN_IN_WITH_BARCODE_ERR);
+                if (signinErr == "1") {
+                    Toast.makeText(getApplicationContext(), Config.LOGIN_BARCODE_ERR, Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception ex) {
             }
-        } catch(Exception ex) {
-            //catching
+            getElem();
+        } else { //user logged in
+            _nagivateToMainActivity();
         }
-        getElem();
     }
 
     /**

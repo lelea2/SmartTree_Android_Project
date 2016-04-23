@@ -2,8 +2,8 @@ package com.kdao.cmpe235_project.util;
 
 //Maintain constant in Java
 public class Config {
-    public static final String GOOGLE_API = "AIzaSyBOV7pJDxO_vifta4XzE4b_RnDTs0NeV0o";
-    public static final String YOUTUBE_API_KEY = "AIzaSyCplV4mTS_Pu-I7ccgGI3RAgmjNa7HDkAI";
+    public static final String GOOGLE_API = "AIzaSyBhy-ej1Fo7fZ85_LWoJ1APY8OJ6yzNhzc";
+    public static final String YOUTUBE_API_KEY = "AIzaSyBhy-ej1Fo7fZ85_LWoJ1APY8OJ6yzNhzc";
     public static final int RADIUS = 20000;
 
     public static final String BASE_URL = "https://secure-dusk-26659.herokuapp.com";

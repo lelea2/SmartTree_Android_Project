@@ -43,7 +43,12 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        getElem();
+        boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
+        if (userLoggedIn == false) {
+            getElem();
+        } else { //user already
+            navigateToMainActivity();
+        }
     }
 
     /**
