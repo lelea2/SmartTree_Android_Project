@@ -69,12 +69,20 @@ public class SignupActivity extends AppCompatActivity {
      * @method registerUser
      */
     public void registerUser(View view) {
-        String email = emailInput.getText().toString();
-        String password = pwdInput.getText().toString();
-        String confirmpwd = confirmPwdInput.getText().toString();
-        String firstName = firstNameInput.getText().toString();
-        String lastName = lastNameInput.getText().toString();
-        String phone = phoneInput.getText().toString();
+        String email = "";
+        String password = "";
+        String confirmpwd = "";
+        String firstName = "";
+        String lastName = "";
+        String phone = "";
+        try {
+            email = emailInput.getText().toString();
+            password = pwdInput.getText().toString();
+            confirmpwd = confirmPwdInput.getText().toString();
+            firstName = firstNameInput.getText().toString();
+            lastName = lastNameInput.getText().toString();
+            phone = phoneInput.getText().toString();
+        } catch(Exception ex) {}
         if (!Utility.isEmptyString(email) && !Utility.isEmptyString(password) && !Utility.isEmptyString(firstName) && !Utility.isEmptyString(lastName) && !Utility.isEmptyString(phone)) {
             //When confirm pwd and pwd not match
             if (!Utility.isEmailValid(email)) {

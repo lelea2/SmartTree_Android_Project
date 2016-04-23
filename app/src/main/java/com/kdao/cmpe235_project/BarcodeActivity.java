@@ -49,15 +49,15 @@ public class BarcodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_barcode);
         try {
             Bundle extras = getIntent().getExtras();
-            signinWithBarCode = extras.getString(Config.SIGN_IN_WITH_BARCODE);
-            viewTreeWithBarCode = extras.getString(Config.VIEW_TREE_WITH_BARCODE);
-            if (signinWithBarCode == "1" || viewTreeWithBarCode == "1") {
-                initiateScan();
-            } else {
-                navigateToMainActivity();
-            }
+            signinWithBarCode = extras.getString(Config.SIGN_IN_WITH_BARCODE).toString();
+            viewTreeWithBarCode = extras.getString(Config.VIEW_TREE_WITH_BARCODE).toString();
         } catch(Exception ex) {
             //catching
+        }
+        if (signinWithBarCode.equals("1") || viewTreeWithBarCode.equals("1")) {
+            initiateScan();
+        } else {
+            navigateToMainActivity();
         }
     }
 

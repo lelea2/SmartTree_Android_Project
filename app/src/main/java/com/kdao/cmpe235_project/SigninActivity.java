@@ -74,8 +74,12 @@ public class SigninActivity extends AppCompatActivity {
      * @method loginUser
      */
     public void loginUser(View view) {
-        String email = emailText.getText().toString();
-        String password = pwdText.getText().toString();
+        String email = "";
+        String password = "";
+        try {
+            email = emailText.getText().toString();
+            password = pwdText.getText().toString();
+        } catch(Exception ex) {}
         if (!Utility.isEmptyString(email) && !Utility.isEmptyString(password)) {
             // When Email entered is Valid
             if (Utility.isEmailValid(email)) {
