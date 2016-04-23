@@ -1,5 +1,6 @@
 package com.kdao.cmpe235_project;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class CommentsListActivity extends AppCompatActivity {
 
     private ListView commentList;
     private List<Comment> comments = new ArrayList<Comment>();
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,12 @@ public class CommentsListActivity extends AppCompatActivity {
     private void getAllComments() {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(CommentsListActivity.this, "", Config.GET_COMMENTS);
+            }
+
+            @Override
             protected String doInBackground(String... params) {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(Config.BASE_URL + "/comments");
@@ -101,6 +109,7 @@ public class CommentsListActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
+                progressDialog.dismiss();
                 try {
                     JSONArray arrayObj = null;
                     JSONParser jsonParser = new JSONParser();
@@ -109,8 +118,7 @@ public class CommentsListActivity extends AppCompatActivity {
                     populateListView();
                 } catch(Exception ex) {
                     System.out.println(ex);
-                    Toast.makeText(getApplicationContext(), "Technical difficulty, please try " +
-                            "again", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), Config.SERVER_ERR, Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -145,7 +153,6 @@ public class CommentsListActivity extends AppCompatActivity {
         }
     }
 
-
     /**
      * Public function navigate to add comment activity
      * @method addComment
@@ -155,4 +162,11 @@ public class CommentsListActivity extends AppCompatActivity {
         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newIntent);
     }
+
+    public void navigateToMainActivity(View v) {
+        Intent newIntent = new Intent(getApplicationContext(), MainActivity.class);
+        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(newIntent);
+    }
+
 }

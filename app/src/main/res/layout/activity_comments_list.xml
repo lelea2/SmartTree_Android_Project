@@ -4,19 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="com.kdao.cmpe235_project.CommentsListActivity"
-    android:background="@color/colorBackground">
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.kdao.cmpe235_project.CommentsListActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Comment"
-        android:id="@+id/textView8"
+        android:text="Comments"
+        android:id="@+id/comment_list_title"
         android:textSize="30sp"
         android:textColor="#FFF"
-        android:layout_marginLeft="27dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="Helvetica Neue" />
@@ -25,15 +27,15 @@
         android:layout_width="358dp"
         android:layout_height="470dp"
         android:id="@+id/scrollView2"
-        android:layout_below="@+id/textView8"
-        android:layout_alignStart="@+id/textView8"
-        android:background="#505A7A"
-        android:layout_alignLeft="@+id/textView8">
+        android:layout_below="@+id/comment_list_title"
+        android:layout_alignStart="@+id/comment_list_title"
+        android:layout_alignLeft="@+id/comment_list_title"
+        android:background="#505A7A" >
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/listView2" />
+            android:id="@+id/commentList" />
     </ScrollView>
 
     <LinearLayout
@@ -43,7 +45,6 @@
         android:background="#505A7A"
         android:layout_below="@+id/scrollView2"
         android:layout_alignStart="@+id/scrollView2"
-        android:layout_alignLeft="@+id/scrollView2"
         android:layout_marginBottom="10dp"
         android:id="@+id/linearLayout2">
 
@@ -72,8 +73,7 @@
                     android:background="@drawable/comment_ico_star"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginLeft="25dp"
-                    android:layout_alignParentLeft="true" />
+                    android:layout_marginLeft="25dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="Helvetica Neue"
-                    android:layout_toRightOf="@+id/imageView7" />
+                    />
 
             </RelativeLayout>
 
@@ -96,8 +96,7 @@
                 android:background="@drawable/border_default"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/relativeLayout"
-                android:id="@+id/relativeLayout2"
-                android:layout_toRightOf="@+id/relativeLayout">
+                android:id="@+id/relativeLayout2">
 
                 <ImageButton
                     android:layout_width="30dp"
@@ -106,8 +105,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
                     android:background="@drawable/comment_ico_feedback"
-                    android:layout_marginLeft="25dp"
-                    android:layout_alignParentLeft="true" />
+                    android:layout_marginLeft="25dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -119,8 +117,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/imageButton3"
                     android:layout_marginLeft="10dp"
-                    android:fontFamily="Helvetica Neue"
-                    android:layout_toRightOf="@+id/imageButton3" />
+                    android:fontFamily="Helvetica Neue" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -128,8 +125,7 @@
                 android:layout_height="52dp"
                 android:background="@drawable/border_default"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/relativeLayout2"
-                android:layout_toRightOf="@+id/relativeLayout2">
+                android:layout_toEndOf="@+id/relativeLayout2">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -138,8 +134,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
                     android:background="@drawable/comment_ico_like"
-                    android:layout_marginLeft="25dp"
-                    android:layout_alignParentLeft="true" />
+                    android:layout_marginLeft="25dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -151,8 +146,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/imageView8"
                     android:layout_marginLeft="10dp"
-                    android:fontFamily="Helvetica Neue"
-                    android:layout_toRightOf="@+id/imageView8" />
+                    android:fontFamily="Helvetica Neue" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -164,14 +158,13 @@
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:background="#E24F67"
-        android:onClick="registerUser"
+        android:onClick="navigateToMainActivity"
         android:text="BACK"
         android:textColor="#fff"
         android:layout_gravity="center"
         android:layout_below="@+id/linearLayout2"
         android:layout_alignStart="@+id/linearLayout2"
-        android:fontFamily="Helvetica Neue"
-        android:layout_alignLeft="@+id/linearLayout2" />
+        android:fontFamily="Helvetica Neue" />
 
     <Button
         android:id="@+id/button3"
@@ -179,30 +172,12 @@
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:background="#2AA7AA"
-        android:text="LEAVE FEEDBCK"
+        android:text="LEAVE FEEDBACK"
+        android:onClick="addComment"
         android:textColor="#fff"
         android:layout_gravity="center"
         android:layout_below="@+id/linearLayout2"
         android:layout_alignEnd="@+id/linearLayout2"
-        android:fontFamily="Helvetica Neue"
-        android:layout_alignRight="@+id/linearLayout2" />
+        android:fontFamily="Helvetica Neue" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_add_comment"
-        android:background="#e5c100"
-        android:onClick="addComment"
-        android:text="Add Comment"
-        android:textColor="#ff6347" />
-
-    <ListView
-        android:id="@+id/commentList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/btn_add_comment"
-        android:layout_marginTop="20dp"
-        android:background="#fff"
-        android:textColor="#444" >
-    </ListView>
 </RelativeLayout>

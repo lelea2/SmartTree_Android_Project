@@ -33,6 +33,7 @@ public class Config {
     public static final String GET_TREE_INFO = "Get tree info...";
     public static final String CREATE_TREE = "Generate New Tree...";
     public static final String GET_SENSORS = "Getting All Sensors...";
+    public static final String GET_COMMENTS = "Getting Comments...";
 
     //FLAG key configuration
     public static final String SIGN_IN_WITH_BARCODE = "SIGN_IN_WITH_BARCODE";
