@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kdao.cmpe235_project.util.Config;
@@ -28,6 +29,8 @@ public class DeployConfirmActivity extends AppCompatActivity {
     private String treeId;
     private String sensorName;
     private String treeName;
+    private TextView treeText;
+    private TextView sensorText;
     private ProgressDialog progressDialog;
 
     @Override
@@ -40,7 +43,11 @@ public class DeployConfirmActivity extends AppCompatActivity {
             treeName = extras.getString(Config.TREE_SESSION_NAME);
             sensorId = extras.getString(Config.SENSOR_SESSION_ID);
             sensorName = extras.getString(Config.SENSOR_SESSION_NAME);
+            treeText = (TextView) findViewById(R.id.tree_name);
+            sensorText = (TextView) findViewById(R.id.sensor_name);
             if (treeId != null && sensorId != null) {
+                sensorText.setText("Sensor name: " + sensorName);
+                treeText.setText("Tree name: " + treeName);
             } else { //return to treeId list if treeId in session not available
                 _navigateToTreeListDeploy();
             }
