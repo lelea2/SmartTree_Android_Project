@@ -23,28 +23,18 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="Helvetica Neue" />
 
-    <ScrollView
-        android:layout_width="358dp"
-        android:layout_height="470dp"
-        android:id="@+id/scrollView2"
-        android:layout_below="@+id/comment_list_title"
-        android:layout_alignStart="@+id/comment_list_title"
-        android:layout_alignLeft="@+id/comment_list_title"
-        android:background="#505A7A" >
-
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/commentList" />
-    </ScrollView>
-
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_below="@id/comment_list_title"
+        android:id="@+id/commentList" />
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="#505A7A"
-        android:layout_below="@+id/scrollView2"
-        android:layout_alignStart="@+id/scrollView2"
+        android:background="@color/colorBackgroundLight"
+        android:layout_below="@+id/commentList"
+        android:layout_alignStart="@+id/commentList"
         android:layout_marginBottom="10dp"
         android:id="@+id/linearLayout2">
 
@@ -151,8 +141,9 @@
     <TableLayout
         android:id="@+id/button_grid_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/scrollView2"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commentList"
+        android:layout_alignParentBottom="true"
         android:stretchColumns="2">
         <TableRow
             android:layout_width="wrap_content"

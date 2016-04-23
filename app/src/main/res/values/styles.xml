@@ -14,7 +14,7 @@
     </style>
     <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingbar_style</item>
-        <item name="android:minHeight">50dip</item>
+        <item name="android:minHeight">20dip</item>
         <item name="android:maxHeight">50dip</item>
     </style>
     <style name="TextClock">

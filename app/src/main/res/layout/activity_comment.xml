@@ -24,11 +24,13 @@
         android:fontFamily="Helvetica Neue" />
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="350dp"
         android:inputType="textMultiLine"
         android:gravity="left|top"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/comment_text"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
         android:background="@drawable/border_default"
         android:layout_below="@+id/comment_leavefeedback"
         android:layout_alignStart="@+id/comment_leavefeedback" />
@@ -39,8 +41,7 @@
         android:background="#505A7A"
         android:layout_marginBottom="10dp"
         android:id="@+id/linearLayout2"
-        android:layout_below="@+id/editText"
-        android:layout_alignStart="@+id/editText">
+        android:layout_below="@+id/comment_text">
 
         <ImageView
             android:layout_width="match_parent"
@@ -56,25 +57,23 @@
 
             <RelativeLayout
                 android:layout_width="179dp"
-                android:layout_height="52dp"
+                android:layout_height="70dp"
                 android:background="@drawable/border_default"
                 android:id="@+id/relativeLayout">
-
                 <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
                     android:id="@+id/ratingBar"
                     android:numStars="5"
                     android:rating="4"
                     android:isIndicator="false"
-                    style="@style/foodRatingBar"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="179dp"
-                android:layout_height="52dp"
+                android:layout_height="70dp"
                 android:background="@drawable/border_default"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/relativeLayout">
@@ -111,7 +110,8 @@
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:background="#E24F67"
-        android:text="BACK"
+        android:text="MAIN"
+        android:onClick="navigateToMainActivity"
         android:textColor="#fff"
         android:layout_gravity="center"
         android:layout_below="@+id/linearLayout2"
@@ -125,12 +125,11 @@
         android:layout_height="50dp"
         android:background="#2AA7AA"
         android:text="LEAVE FEEDBACK"
+        android:onClick="addComment"
         android:textColor="#fff"
         android:layout_gravity="center"
         android:layout_below="@+id/linearLayout2"
         android:layout_alignEnd="@+id/linearLayout2"
         android:fontFamily="Helvetica Neue" />
-
-
 
 </RelativeLayout>

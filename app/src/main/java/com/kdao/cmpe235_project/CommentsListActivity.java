@@ -73,8 +73,9 @@ public class CommentsListActivity extends AppCompatActivity {
      */
     private void populateComments(JSONArray arrayObj) {
         if (arrayObj.size() == 0) {
-            Toast.makeText(getApplicationContext(), Config.NO_COMMENTS, Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), Config.NO_COMMENTS, Toast.LENGTH_LONG).show();
         } else {
+            System.out.println(">>>>>>> Comments count:" + arrayObj.size());
             for (int i = 0; i < arrayObj.size(); i++) {
                 try {
                     JSONObject object = (JSONObject) arrayObj.get(i);
@@ -176,9 +177,15 @@ public class CommentsListActivity extends AppCompatActivity {
      * @method addComment
      */
     public void addComment(View view) {
-        Intent newIntent = new Intent(getApplicationContext(), CommentActivity.class);
-        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(newIntent);
+        if (Utility.isEmptyString(sessionTreeId)) {
+            Intent newIntent = new Intent(getApplicationContext(), TreesListActivity.class);
+            newIntent.putExtra(Config.TREE_ACTIVITY, Config.COMMENT_PER_TREE);
+            startActivity(newIntent);
+        } else {
+            Intent newIntent = new Intent(getApplicationContext(), CommentActivity.class);
+            newIntent.putExtra(Config.TREE_SESSION_ID, sessionTreeId);
+            startActivity(newIntent);
+        }
     }
 
     public void navigateToMainActivity(View v) {

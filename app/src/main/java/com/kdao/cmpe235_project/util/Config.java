@@ -29,6 +29,8 @@ public class Config {
     //Configuration for informative msg
     public static final String NEW_TREE_CREATED = "New tree created";
     public static final String NEW_SENSOR_CREATED = "New sensor created";
+    public static final String NEW_COMMENT_CREATED = "Comment added";
+
 
     //Configuration for loading msg
     public static final String AUTHENTICATE = "Authenticating...";
@@ -36,8 +38,10 @@ public class Config {
     public static final String GET_TREE_INFO = "Get tree info...";
     public static final String CREATE_TREE = "Generate New Tree...";
     public static final String CREATE_SENSOR = "Generate New Sensor...";
+    public static final String CREATE_COMMENT = "Create comment...";
     public static final String GET_SENSORS = "Getting All Sensors...";
     public static final String GET_COMMENTS = "Getting Comments...";
+
 
     //FLAG key configuration
     public static final String SIGN_IN_WITH_BARCODE = "SIGN_IN_WITH_BARCODE";
@@ -45,6 +49,7 @@ public class Config {
     public static final String SIGN_IN_WITH_BARCODE_ERR = "SIGN_IN_WITH_BARCODE_ERR";
     public static final String TREE_SESSION_ID = "TREE_SESSION_ID";
     public static final String SENSOR_SESSION_ID = "SENSOR_SESSION_ID";
+    public static final String COMMENT_SESSION_ID = "COMMENT_SESSION_ID";
     public static final String SIGN_IN_REQUIRED = "SIGN_IN_REQUIRED";
     public static final String TREE_ACTIVITY = "TREE_ACTIVITY";
     public static final String SENSOR_ACTIVITY = "SENSOR_ACTIVITY";

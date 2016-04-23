@@ -55,8 +55,7 @@ public class TreesListActivity extends AppCompatActivity {
             if (!Utility.isEmptyString(msg)) {
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
             }
-        } catch(Exception ex) {
-        }
+        } catch(Exception ex) {}
         getAllTrees();
     }
 
@@ -177,9 +176,9 @@ public class TreesListActivity extends AppCompatActivity {
         }
     }
 
-    //Handle navigate back to home page
-    public void navigateToMainActivity(View view) {
-        Intent newIntent = new Intent(getApplicationContext(), MainActivity.class);
+    //Handle navigate back to treesList page
+    public void navigateToAllTree(View view) {
+        Intent newIntent = new Intent(getApplicationContext(), TreesListActivity.class);
         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newIntent);
     }
