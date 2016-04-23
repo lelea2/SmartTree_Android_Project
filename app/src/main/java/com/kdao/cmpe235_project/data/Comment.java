@@ -2,19 +2,20 @@ package com.kdao.cmpe235_project.data;
 
 public class Comment {
     private int id;
-    private User user;
+    private String username;
     private String comment;
     private int rating;
     private String treeId;
     private boolean like;
+    private String time;
 
     public Comment() {}
 
-    public Comment(String comment, int rating, boolean like, User user) {
-        this.comment = comment;
+    public Comment(String username, int rating, String comment, String time) {
+        this.username = username;
         this.rating = rating;
-        this.like = like;
-        this.user = user;
+        this.comment = comment;
+        this.time = time;
     }
 
     public int getId() {
@@ -24,6 +25,8 @@ public class Comment {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getUsername(){ return username;}
 
     public String getTreeId() {
         return treeId;
@@ -57,11 +60,11 @@ public class Comment {
         this.comment = comment;
     }
 
-    public User getUser() {
-        return user;
+    public String getTime() {
+        return time;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setTime(String time) {
+        this.time = time;
     }
 }
