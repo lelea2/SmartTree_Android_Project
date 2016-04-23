@@ -23,9 +23,10 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="Helvetica Neue" />
     <EditText
-        android:layout_width="358dp"
-        android:layout_height="470dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:inputType="textMultiLine"
+        android:gravity="left|top"
         android:ems="10"
         android:id="@+id/editText"
         android:background="@drawable/border_default"
@@ -33,7 +34,7 @@
         android:layout_alignStart="@+id/comment_leavefeedback" />
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="#505A7A"
         android:layout_marginBottom="10dp"
@@ -123,7 +124,7 @@
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:background="#2AA7AA"
-        android:text="LEAVE FEEDBCK"
+        android:text="LEAVE FEEDBACK"
         android:textColor="#fff"
         android:layout_gravity="center"
         android:layout_below="@+id/linearLayout2"

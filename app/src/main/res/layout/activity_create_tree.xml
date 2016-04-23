@@ -24,40 +24,38 @@
         android:fontFamily="Helvetica Neue"/>
 
     <EditText
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/new_tree_title"
         android:layout_gravity="center"
         android:background="@drawable/border_default"
         android:hint="Tree Name"
         android:textSize="19dp"
-        android:textColorHint="#9E9DA1"
+        android:textColorHint="@color/colorTextHint"
         android:fontFamily="Helvetica Neuedp"
-        android:paddingLeft="40px"
-        android:paddingRight="40px"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
+        android:paddingLeft="16dp"
+        android:textColor="@color/colorTextMainColor"
+        android:textColorHighlight="@color/colorTextMainColor"
         android:layout_marginBottom="10dp"
         android:singleLine="true"/>
 
     <EditText
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/new_tree_address"
         android:background="@drawable/border_default"
         android:hint="Address"
         android:textSize="19dp"
-        android:textColorHint="#9E9DA1"
+        android:textColorHint="@color/colorTextHint"
         android:fontFamily="Helvetica Neuedp"
-        android:paddingLeft="40px"
-        android:paddingRight="40px"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
+        android:paddingLeft="16dp"
+        android:textColor="@color/colorTextMainColor"
+        android:textColorHighlight="@color/colorTextMainColor"
         android:layout_marginBottom="10dp"
         android:singleLine="true" />
 
     <EditText
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="250dp"
         android:inputType="textMultiLine"
         android:ems="10"
@@ -66,10 +64,9 @@
         android:paddingTop="10dp"
         android:hint="Description"
         android:textSize="19dp"
-        android:textColorHint="#9E9DA1"
+        android:textColorHint="@color/colorTextHint"
         android:fontFamily="Helvetica Neuedp"
-        android:paddingLeft="40px"
-        android:paddingRight="40px"
+        android:paddingLeft="16dp"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:layout_marginBottom="10dp"
@@ -110,24 +107,23 @@
     </RelativeLayout>-->
 
     <EditText
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/new_tree_youtubeId"
         android:layout_gravity="center"
         android:background="@drawable/border_default"
-        android:hint="Youtube(http://)"
+        android:hint="YoutubeId"
         android:textSize="19dp"
-        android:textColorHint="#9E9DA1"
+        android:textColorHint="@color/colorTextHint"
         android:fontFamily="Helvetica Neuedp"
-        android:paddingLeft="40px"
-        android:paddingRight="40px"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
+        android:paddingLeft="16dp"
+        android:textColor="@color/colorTextMainColor"
+        android:textColorHighlight="@color/colorTextMainColor"
         android:layout_marginBottom="43dp"
         android:singleLine="true" />
 
     <RelativeLayout
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
         <Button
