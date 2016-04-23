@@ -93,6 +93,8 @@
         </activity>
         <activity android:name=".DeployActivity">
         </activity>
+        <activity android:name=".SensorActivity">
+        </activity>
     </application>
 
 </manifest>

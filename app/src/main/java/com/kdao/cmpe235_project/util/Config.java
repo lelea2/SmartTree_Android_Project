@@ -39,6 +39,7 @@ public class Config {
     public static final String VIEW_TREE_WITH_BARCODE = "VIEW_TREE_WITH_BARCODE";
     public static final String SIGN_IN_WITH_BARCODE_ERR = "SIGN_IN_WITH_BARCODE_ERR";
     public static final String TREE_SESSION_ID = "TREE_SESSION_ID";
+    public static final String SENSOR_SESSION_ID = "SENSOR_SESSION_ID";
     public static final String SIGN_IN_REQUIRED = "SIGN_IN_REQUIRED";
     public static final String TREE_ACTIVITY = "TREE_ACTIVITY";
     public static final String SENSOR_ACTIVITY = "SENSOR_ACTIVITY";
