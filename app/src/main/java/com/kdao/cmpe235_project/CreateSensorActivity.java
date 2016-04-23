@@ -1,5 +1,6 @@
 package com.kdao.cmpe235_project;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -53,6 +54,18 @@ public class CreateSensorActivity extends AppCompatActivity {
 
     private void handleCreateSensor(String name, int sensorType) {
 
+    }
+
+    public void navigateToCreateTree(View v) {
+        Intent newIntent = new Intent(getApplicationContext(), CreateTreeActivity.class);
+        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(newIntent);
+    }
+
+    public void navigateToMainActivity(View v) {
+        Intent newIntent = new Intent(getApplicationContext(), MainActivity.class);
+        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(newIntent);
     }
 
 }
