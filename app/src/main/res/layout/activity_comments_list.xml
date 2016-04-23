@@ -42,6 +42,7 @@
         android:background="#505A7A"
         android:layout_below="@+id/scrollView2"
         android:layout_alignStart="@+id/scrollView2"
+        android:layout_alignLeft="@+id/scrollView2"
         android:layout_marginBottom="10dp"
         android:id="@+id/linearLayout2">
 

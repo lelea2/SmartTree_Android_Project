@@ -1,6 +1,5 @@
 package com.kdao.cmpe235_project;
 
-
 import android.content.Context;
 import android.net.Uri;
 

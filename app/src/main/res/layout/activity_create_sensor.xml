@@ -16,71 +16,42 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Create New Sensor"
-        android:id="@+id/textView16"
+        android:id="@+id/new_sensor_title"
         android:textColor="#FFF"
         android:textSize="30sp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="Helvetica Neue"/>
+
     <EditText
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/editText2"
+        android:id="@+id/new_sensor_name"
         android:layout_gravity="center"
         android:background="@drawable/border_default"
         android:hint="Sensor Name"
         android:textSize="19dp"
+        android:digits="0123456789+"
         android:textColorHint="#9E9DA1"
-        android:fontFamily="Helvetica Neuedp"
+        android:fontFamily="Helvetica Neue"
         android:paddingLeft="40px"
         android:paddingRight="40px"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:layout_marginBottom="10dp"
         android:singleLine="true"/>
-
-    <EditText
-        android:layout_width="358dp"
-        android:layout_height="250dp"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/editText3"
-        android:gravity="left|top"
-        android:paddingTop="10dp"
-        android:hint="Description"
-        android:textSize="19dp"
-        android:textColorHint="#9E9DA1"
-        android:fontFamily="Helvetica Neuedp"
-        android:paddingLeft="40px"
-        android:paddingRight="40px"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
-        android:layout_marginBottom="10dp"
+    <Spinner
+        android:id="@+id/new_sensor_type"
         android:background="@drawable/border_default"
-        android:layout_gravity="center" />
-
-    <EditText
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/editText4"
-        android:layout_gravity="center"
-        android:background="@drawable/border_default"
-        android:hint="Sensor SN"
-        android:textSize="19dp"
-        android:textColorHint="#9E9DA1"
-        android:fontFamily="Helvetica Neuedp"
-        android:paddingLeft="40px"
-        android:paddingRight="40px"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
-        android:layout_marginBottom="10dp"
-        android:singleLine="true" />
-
+        android:layout_marginBottom="15dp" />
     <Button
         android:layout_width="358dp"
         android:layout_height="50dp"
-        android:text="Search Sensor"
-        android:id="@+id/button4"
+        android:text="Create Sensor"
+        android:id="@+id/btn_create_sensor"
+        android:onClick="createNewSensor"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
@@ -88,8 +59,7 @@
         android:background="#57C3F0"
         android:textColor="#FFF"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="103dp"/>
-
+        android:layout_marginBottom="103dp" />
     <RelativeLayout
         android:layout_width="358dp"
         android:layout_height="wrap_content"
@@ -100,7 +70,8 @@
             android:layout_height="50dp"
             android:text="BACK"
             android:background="#E24F67"
-            android:id="@+id/button5"
+            android:onClick="navigateToMainActivity"
+            android:id="@+id/btn_back"
             android:textColor="#fff"
             style="?android:attr/borderlessButtonStyle"/>
 
@@ -108,7 +79,8 @@
             android:layout_width="175dp"
             android:layout_height="50dp"
             android:text="CREATE NEW TREE"
-            android:id="@+id/button6"
+            android:id="@+id/btn_create_tree"
+            android:onClick="navigateToCreateTree"
             style="?android:attr/borderlessButtonStyle"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
