@@ -95,6 +95,8 @@
         </activity>
         <activity android:name=".SensorActivity">
         </activity>
+        <activity android:name=".DeployConfirmActivity">
+        </activity>
     </application>
 
 </manifest>

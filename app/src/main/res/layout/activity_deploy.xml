@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="358dp"
         android:layout_height="50dp"
-        android:text="Please select which sensor need deployed sensor"
+        android:text="Please select which sensor need to be deployed"
         android:id="@+id/textView18"
         android:textColor="#FFF"
         android:textSize="20sp"
