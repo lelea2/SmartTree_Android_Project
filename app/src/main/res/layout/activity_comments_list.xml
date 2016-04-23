@@ -85,9 +85,7 @@
                     android:layout_toEndOf="@+id/imageView7"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
-                    android:fontFamily="Helvetica Neue"
-                    />
-
+                    android:fontFamily="Helvetica Neue"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -149,35 +147,48 @@
                     android:fontFamily="Helvetica Neue" />
             </RelativeLayout>
         </RelativeLayout>
-
     </LinearLayout>
+    <TableLayout
+        android:id="@+id/button_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/scrollView2"
+        android:stretchColumns="2">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp">
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="#E24F67"
+                android:onClick="navigateToMainActivity"
+                android:text="BACK"
+                android:textColor="#fff"
+                android:layout_gravity="center"
+                android:layout_below="@+id/linearLayout2"
+                android:layout_alignStart="@+id/linearLayout2"
+                android:layout_alignParentBottom="true"
+                android:fontFamily="Helvetica Neue" />
 
-    <Button
-        style="?android:attr/borderlessButtonStyle"
-        android:id="@+id/button2"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:background="#E24F67"
-        android:onClick="navigateToMainActivity"
-        android:text="BACK"
-        android:textColor="#fff"
-        android:layout_gravity="center"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignStart="@+id/linearLayout2"
-        android:fontFamily="Helvetica Neue" />
-
-    <Button
-        android:id="@+id/button3"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:background="#2AA7AA"
-        android:text="LEAVE FEEDBACK"
-        android:onClick="addComment"
-        android:textColor="#fff"
-        android:layout_gravity="center"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignEnd="@+id/linearLayout2"
-        android:fontFamily="Helvetica Neue" />
-
+            <Button
+                android:id="@+id/button3"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="#2AA7AA"
+                android:text="LEAVE FEEDBACK"
+                android:onClick="addComment"
+                android:textColor="#fff"
+                android:layout_gravity="center"
+                android:layout_below="@+id/linearLayout2"
+                android:layout_alignEnd="@+id/linearLayout2"
+                android:layout_alignParentBottom="true"
+                android:fontFamily="Helvetica Neue" />
+        </TableRow>
+    </TableLayout>
 </RelativeLayout>
