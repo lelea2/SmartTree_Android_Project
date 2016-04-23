@@ -12,7 +12,16 @@
         <item name="android:windowTitleStyle">@style/CustomWindowTitleStyle</item>
         <item name="android:windowFullscreen">true</item>
     </style>
-
+    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbar_style</item>
+        <item name="android:minHeight">50dip</item>
+        <item name="android:maxHeight">50dip</item>
+    </style>
+    <style name="TextClock">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#FFF</item>
+        <item name="android:format24Hour">HH:mm</item>
+    </style>
     <style name="CustomWindowTitleStyle">
         <item name="android:textColor">@android:color/transparent</item>
     </style>

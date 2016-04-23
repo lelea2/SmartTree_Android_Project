@@ -8,6 +8,128 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.kdao.cmpe235_project.CommentActivity">
+    tools:context="com.kdao.cmpe235_project.CommentsListActivity"
+    android:background="@color/colorBackground">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Leave FeedBack"
+        android:id="@+id/comment_leavefeedback"
+        android:textSize="30sp"
+        android:textColor="#FFF"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="Helvetica Neue" />
+    <EditText
+        android:layout_width="358dp"
+        android:layout_height="470dp"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:background="@drawable/border_default"
+        android:layout_below="@+id/comment_leavefeedback"
+        android:layout_alignStart="@+id/comment_leavefeedback" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="358dp"
+        android:layout_height="52dp"
+        android:background="#505A7A"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/linearLayout2"
+        android:layout_below="@+id/editText"
+        android:layout_alignStart="@+id/editText">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:id="@+id/imageView6"
+            android:background="@drawable/leavefeedback_bar"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="179dp"
+                android:layout_height="52dp"
+                android:background="@drawable/border_default"
+                android:id="@+id/relativeLayout">
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:id="@+id/ratingBar"
+                    android:numStars="5"
+                    android:rating="4"
+                    android:isIndicator="false"
+                    style="@style/foodRatingBar"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="179dp"
+                android:layout_height="52dp"
+                android:background="@drawable/border_default"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/relativeLayout">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imageView8"
+                    android:background="@drawable/like_selecter"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginStart="49dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Like"
+                    android:id="@+id/comment_like"
+                    android:textColor="#FFF"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="Helvetica Neue"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/imageView8" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        style="?android:attr/borderlessButtonStyle"
+        android:id="@+id/button2"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:background="#E24F67"
+        android:text="BACK"
+        android:textColor="#fff"
+        android:layout_gravity="center"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignStart="@+id/linearLayout2"
+        android:fontFamily="Helvetica Neue" />
+
+    <Button
+        android:id="@+id/button3"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:background="#2AA7AA"
+        android:text="LEAVE FEEDBCK"
+        android:textColor="#fff"
+        android:layout_gravity="center"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignEnd="@+id/linearLayout2"
+        android:fontFamily="Helvetica Neue" />
+
+
 
 </RelativeLayout>
