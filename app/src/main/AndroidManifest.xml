@@ -97,6 +97,8 @@
         </activity>
         <activity android:name=".DeployConfirmActivity">
         </activity>
+        <activity android:name=".DeployTreeListActivity">
+        </activity>
     </application>
 
 </manifest>

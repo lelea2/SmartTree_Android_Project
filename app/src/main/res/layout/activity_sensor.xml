@@ -8,6 +8,126 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorBackground"
     tools:context="com.kdao.cmpe235_project.SensorActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Sensor detail"
+        android:id="@+id/sensor_detail_heading"
+        android:textColor="#FFF"
+        android:textSize="30sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="Helvetica Neue"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Deployed: treeId"
+        android:id="@+id/sensor_tree_deploy"
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/sensor_detail_heading"
+        android:fontFamily="Helvetica Neue"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/sensor_tree_deploy"
+        android:background="@drawable/border_default"
+        android:id="@+id/layout1"
+        android:layout_marginBottom="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Light Turn ON/OFF"
+            android:textColor="#FFF"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="19dp"
+            android:id="@+id/tree_sensor_state" />
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:id="@+id/toggleButton"
+            android:layout_marginRight="10dp"
+            android:text=""
+            android:textOff=""
+            android:textOn=""
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/layout1"
+        android:id="@+id/layout2"
+        android:background="@drawable/border_default"
+        android:layout_marginBottom="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Light Color"
+            android:textColor="#FFF"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="19dp" />
+        <FrameLayout
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="#2AA7AA"
+            android:layout_marginRight="15dp"></FrameLayout>
+    </RelativeLayout>
+    <TableLayout
+        android:id="@+id/button_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout2"
+        android:layout_marginTop="20dp"
+        android:stretchColumns="2">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp">
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@color/colorRed"
+                android:onClick="navigateToSensorsList"
+                android:text="BACK"
+                android:textColor="@color/colorTextMainColor"
+                android:textSize="15sp"
+                style="?android:attr/borderlessButtonStyle"/>
+            <Button
+                android:id="@+id/btnLinkToRegisterScreen"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@color/colorGreen"
+                android:onClick="updateSensor"
+                android:text="SAVE CHANGES"
+                android:textSize="15sp"
+                android:textColor="@color/colorTextMainColor"
+                style="?android:attr/borderlessButtonStyle" />
+        </TableRow>
+    </TableLayout>
 </RelativeLayout>

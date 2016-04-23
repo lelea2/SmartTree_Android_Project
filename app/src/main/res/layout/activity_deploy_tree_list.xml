@@ -10,7 +10,7 @@
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
               android:nestedScrollingEnabled="false"
-              tools:context="com.kdao.cmpe235_project.DeployActivity">
+              tools:context="com.kdao.cmpe235_project.DeployTreeListActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,18 +27,18 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Please select which sensor need to be deployed"
+        android:text="Please select which tree need deploy sensor"
         android:id="@+id/textView18"
         android:textColor="#FFF"
         android:textSize="20sp"
         android:layout_marginBottom="10dp"
         android:fontFamily="Helvetica Neue"/>
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_marginBottom="10dp"
-        android:id="@+id/sensor_list_deploy" />
+        android:id="@+id/tree_list_deploy" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,11 +46,11 @@
         <Button
             android:layout_width="175dp"
             android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
             android:text="BACK"
-            android:onClick="navigateToTreeListDeploy"
             android:background="@color/colorRed"
-            android:id="@+id/btn_backs"
+            android:layout_centerHorizontal="true"
+            android:onClick="navigateToMainActivity"
+            android:id="@+id/button5"
             android:textColor="@color/colorTextMainColor"
             style="?android:attr/borderlessButtonStyle"/>
     </RelativeLayout>

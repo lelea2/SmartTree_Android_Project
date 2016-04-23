@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void navigateToDeployTree(View v) {
-        Intent launchActivity = new Intent(getApplicationContext(), DeployActivity.class);
+        Intent launchActivity = new Intent(getApplicationContext(), DeployTreeListActivity.class);
         Log.i(TAG, "Navigate to deploy tree");
         startActivity(launchActivity);
     }

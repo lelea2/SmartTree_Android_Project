@@ -2,6 +2,8 @@ package com.kdao.cmpe235_project;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,10 +59,8 @@ public class SensorsListActivity extends AppCompatActivity {
         for (int i = 0; i < arrObj.size(); i++) {
             try {
                 JSONObject object = (JSONObject) arrObj.get(i);
-                SensorType type = new SensorType(Integer.parseInt(object.get("sensorType")
-                        .toString()));
+                SensorType type = new SensorType(Integer.parseInt(object.get("sensorType").toString()));
                 boolean isDeploy = false;
-                String treeId  = object.get("treeId").toString();
                 try {
                     if (!object.get("treeId").toString().isEmpty()) {
                         isDeploy = true;
@@ -78,10 +78,14 @@ public class SensorsListActivity extends AppCompatActivity {
         Sensor selItem = (Sensor) adapter.getItemAtPosition(position);
         String sensorId = selItem.getId();
         System.out.println(">>>> sensorId: " + sensorId + "<<<<<<<");
-        Intent newIntent = new Intent(getApplicationContext(), SensorActivity.class);
-        newIntent.putExtra(Config.SENSOR_SESSION_ID, sensorId);
-        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(newIntent);
+        if (selItem.isDeploy()) { //If sensor is deployed
+            Intent newIntent = new Intent(getApplicationContext(), SensorActivity.class);
+            newIntent.putExtra(Config.SENSOR_SESSION_ID, sensorId);
+            newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(newIntent);
+        } else {
+            Toast.makeText(getApplicationContext(), Config.SENSOR_NO_DEPLOY, Toast.LENGTH_LONG).show();
+        }
     }
 
     private void populateSensorsView() {
@@ -171,11 +175,12 @@ public class SensorsListActivity extends AppCompatActivity {
             TextView sensorName = (TextView) itemView.findViewById(R.id.sensor_name);
             sensorName.setText(sensor.getName());
             TextView sensorDeploy = (TextView) itemView.findViewById(R.id.sensor_deploy_state);
-            sensorDeploy.setText(sensor.isDeploy()? "Deployed" : "");
+            sensorDeploy.setText(sensor.isDeploy() ? "Connected" : "Disconnected");
+            sensorDeploy.setTextColor(getResources().getColor(sensor.isDeploy() ? R.color.colorGreen
+                    : R.color.colorRed));
             return itemView;
         }
     }
-
 
     //Public function navigate back to main activity page
     public void navigateToMainActivity(View v) {

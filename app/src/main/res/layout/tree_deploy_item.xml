@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical" android:layout_width="match_parent"
+              android:layout_height="80dp"
+              android:background="@drawable/border_default">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tree 1"
+        android:id="@+id/tree_item_deploy_name"
+        android:layout_gravity="center_vertical"
+        android:textSize="20sp"
+        android:textColor="@color/colorTextMainColor"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"/>
+</LinearLayout>
