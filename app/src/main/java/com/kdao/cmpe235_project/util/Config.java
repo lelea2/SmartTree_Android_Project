@@ -31,11 +31,14 @@ public class Config {
             "another one";
     public static final String SENSOR_DEPLOYED = "Sensor already deployed to a tree. Please " +
             "choose another one";
+    public static final String DEPLOY_ERR = "Please choose a tree and sensor before you could " +
+            "execute deployment";
 
     //Configuration for informative msg
     public static final String NEW_TREE_CREATED = "New tree created";
     public static final String NEW_SENSOR_CREATED = "New sensor created";
     public static final String NEW_COMMENT_CREATED = "Comment added";
+    public static final String TREE_DEPLOYED = "Sensor deployed to tree";
 
 
     //Configuration for loading msg
@@ -48,18 +51,21 @@ public class Config {
     public static final String GET_SENSORS = "Getting All Sensors...";
     public static final String GET_SENSOR = "Getting Sensor detail...";
     public static final String GET_COMMENTS = "Getting Comments...";
-
+    public static final String DEPLOY_TREE = "Deploy sensor to tree...";
 
     //FLAG key configuration
     public static final String SIGN_IN_WITH_BARCODE = "SIGN_IN_WITH_BARCODE";
     public static final String VIEW_TREE_WITH_BARCODE = "VIEW_TREE_WITH_BARCODE";
     public static final String SIGN_IN_WITH_BARCODE_ERR = "SIGN_IN_WITH_BARCODE_ERR";
     public static final String TREE_SESSION_ID = "TREE_SESSION_ID";
+    public static final String TREE_SESSION_NAME = "TREE_SESSION_NAME";
     public static final String SENSOR_SESSION_ID = "SENSOR_SESSION_ID";
+    public static final String SENSOR_SESSION_NAME = "SENSOR_SESSION_NAME";
     public static final String COMMENT_SESSION_ID = "COMMENT_SESSION_ID";
     public static final String SIGN_IN_REQUIRED = "SIGN_IN_REQUIRED";
     public static final String TREE_ACTIVITY = "TREE_ACTIVITY";
     public static final String SENSOR_ACTIVITY = "SENSOR_ACTIVITY";
+    public static final String TREE_DEPLOY_ACTIVITY = "TREE_DEPLOY_ACTIVITY";
 
     //Config for ROLE
     public static final int ADMIN_ROLE = 1;

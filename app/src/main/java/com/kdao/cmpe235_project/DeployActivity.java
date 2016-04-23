@@ -41,6 +41,7 @@ public class DeployActivity extends AppCompatActivity {
     private List<Sensor> sensors = new ArrayList<Sensor>();
     private static String GET_SENSORS_URL = Config.BASE_URL + "/sensors";
     private String treeId;
+    private String treeName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,8 @@ public class DeployActivity extends AppCompatActivity {
         try {
             Bundle extras = getIntent().getExtras();
             treeId = extras.getString(Config.TREE_SESSION_ID);
-            if (treeId != null) {
+            treeName = extras.getString(Config.TREE_SESSION_NAME);
+            if (treeId != null && treeName != null) {
                 getSensors();
             } else { //return to treeId list if treeId in session not available
                 _navigateToTreeListDeploy();
@@ -90,6 +92,8 @@ public class DeployActivity extends AppCompatActivity {
             Intent newIntent = new Intent(getApplicationContext(), DeployConfirmActivity.class);
             newIntent.putExtra(Config.SENSOR_SESSION_ID, sensorId);
             newIntent.putExtra(Config.TREE_SESSION_ID, treeId);
+            newIntent.putExtra(Config.TREE_SESSION_NAME, treeName);
+            newIntent.putExtra(Config.SENSOR_SESSION_NAME, selItem.getName());
             startActivity(newIntent);
         }
     }

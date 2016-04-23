@@ -17,6 +17,7 @@ import com.kdao.cmpe235_project.data.Location;
 import com.kdao.cmpe235_project.data.Sensor;
 import com.kdao.cmpe235_project.data.Tree;
 import com.kdao.cmpe235_project.util.Config;
+import com.kdao.cmpe235_project.util.Utility;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -42,6 +43,13 @@ public class DeployTreeListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deploy_tree_list);
+        try {
+            Bundle extras = getIntent().getExtras();
+            String msg = extras.getString(Config.TREE_DEPLOY_ACTIVITY).toString();
+            if (!Utility.isEmptyString(msg)) {
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            }
+        } catch(Exception ex) {}
         getAllTrees();
     }
 
@@ -91,6 +99,7 @@ public class DeployTreeListActivity extends AppCompatActivity {
         System.out.println(">>>> treeId: " + treeId + "<<<<<<<");
         Intent newIntent = new Intent(getApplicationContext(), DeployActivity.class);
         newIntent.putExtra(Config.TREE_SESSION_ID, treeId);
+        newIntent.putExtra(Config.TREE_SESSION_NAME, selItem.getLocation().getName());
         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newIntent);
     }

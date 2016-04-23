@@ -208,6 +208,10 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         playbackEventListener = new MyPlaybackEventListener();
     }
 
+    public void navigateToAllTree(View v) {
+        navigateToTreesList();
+    }
+
     private void navigateToTreesList() {
         Intent mainIntent = new Intent(getApplicationContext(), TreesListActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
