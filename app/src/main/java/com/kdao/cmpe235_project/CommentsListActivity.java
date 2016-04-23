@@ -73,7 +73,7 @@ public class CommentsListActivity extends AppCompatActivity {
      */
     private void populateComments(JSONArray arrayObj) {
         if (arrayObj.size() == 0) {
-            Toast.make(getApplicationContext(), Config.NO_COMMENTS, Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), Config.NO_COMMENTS, Toast.LENGTH_LONG);
         } else {
             for (int i = 0; i < arrayObj.size(); i++) {
                 try {

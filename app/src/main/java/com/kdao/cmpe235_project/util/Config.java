@@ -22,6 +22,7 @@ public class Config {
     public static final String SERVER_ERR = "Technical difficulty. Please try again!";
     public static final String REQUIRE_SIGNIN = "You need to log in to execute these action";
     public static final String CREATE_TREE_ERR = "Error creating new tree. Please try again!";
+    public static final String CREATE_SENSOR_ERR = "Error creating new sensor. Please try again!";
     public static final String COMMENT_PER_TREE = "Please select a specific tree to view comment";
     public static final String NO_COMMENTS = "No comment available for the current tree";
 
@@ -34,6 +35,7 @@ public class Config {
     public static final String GET_TREES = "Getting All Trees...";
     public static final String GET_TREE_INFO = "Get tree info...";
     public static final String CREATE_TREE = "Generate New Tree...";
+    public static final String CREATE_SENSOR = "Generate New Sensor...";
     public static final String GET_SENSORS = "Getting All Sensors...";
     public static final String GET_COMMENTS = "Getting Comments...";
 

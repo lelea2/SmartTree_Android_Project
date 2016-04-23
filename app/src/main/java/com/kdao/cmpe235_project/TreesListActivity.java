@@ -51,7 +51,7 @@ public class TreesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trees_list);
         try {
             Bundle extras = getIntent().getExtras();
-            String msg = extras.getString(Config.TREE_ACTIVITY);
+            String msg = extras.getString(Config.TREE_ACTIVITY).toString();
             if (!Utility.isEmptyString(msg)) {
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
             }

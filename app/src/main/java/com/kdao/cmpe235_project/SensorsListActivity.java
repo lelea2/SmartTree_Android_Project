@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.kdao.cmpe235_project.data.Sensor;
 import com.kdao.cmpe235_project.data.SensorType;
 import com.kdao.cmpe235_project.util.Config;
+import com.kdao.cmpe235_project.util.Utility;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -42,6 +43,13 @@ public class SensorsListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensors_list);
+        try {
+            Bundle extras = getIntent().getExtras();
+            String msg = extras.getString(Config.SENSOR_ACTIVITY).toString();
+            if (!Utility.isEmptyString(msg)) {
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            }
+        } catch(Exception ex) {}
         getSensors();
     }
 
