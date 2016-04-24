@@ -192,9 +192,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageButton
-            android:layout_width="358dp"
-            android:layout_height="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:id="@+id/tree_like_count"
+            android:background="@drawable/tree_facebook"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="15dp"/>
         <Button
