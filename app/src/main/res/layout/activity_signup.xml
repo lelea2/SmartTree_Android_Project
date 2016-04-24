@@ -16,9 +16,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="100dp" >
-
-        <!-- View Title Label -->
-
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="0dp"
@@ -28,10 +25,6 @@
             android:fontFamily="Helvetica Neue"
             android:textColor="#FFF"
             android:layout_weight="1" />
-        <!-- Name Label -->
-
-        <!-- Name TextField -->
-
         <EditText
             android:id="@+id/registerFirstName"
             android:hint="First Name"
@@ -48,9 +41,6 @@
             android:layout_marginBottom="10dp"
             android:singleLine="true"
             android:layout_weight="1" />
-
-        <!-- Phone Label -->
-        <!-- Phone textfield -->
         <EditText
             android:id="@+id/registerLastName"
             android:hint="Last Name"
@@ -67,11 +57,6 @@
             android:layout_marginBottom="10dp"
             android:singleLine="true"
             android:layout_weight="1" />
-
-        <!-- Email Label -->
-
-        <!-- Email TextField -->
-
         <EditText
             android:id="@+id/registerEmail"
             android:hint="Email"
@@ -89,11 +74,6 @@
             android:layout_marginBottom="10dp"
             android:singleLine="true"
             android:layout_weight="1" />
-
-        <!-- Password Label -->
-
-        <!-- Password TextField -->
-
         <EditText
             android:id="@+id/registerPhone"
             android:hint="Phone"
@@ -111,10 +91,8 @@
             android:textSize="19sp"
             android:layout_marginBottom="10dp"
             android:singleLine="true"
-            android:layout_weight="1" />
-
-        <!-- Error message -->
-
+            android:layout_weight="1"
+            android:maxLength="14"/>
         <EditText
             android:id="@+id/registerPwd"
             android:hint="Password"
@@ -132,7 +110,6 @@
             android:layout_marginBottom="10dp"
             android:singleLine="true"
             android:layout_weight="1" />
-
         <EditText
             android:id="@+id/registerRepwd"
             android:hint="Re-Password"
@@ -170,7 +147,6 @@
                     android:text="Submit"
                     android:textColor="#FFF"
                     style="?android:attr/borderlessButtonStyle" />
-
                 <Button
                     android:id="@+id/btnRegister"
                     android:layout_width="0dp"

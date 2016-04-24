@@ -39,13 +39,13 @@
         android:layout_height="50dp"
         android:layout_below="@id/sensor_tree_deploy"
         android:background="@drawable/border_default"
-        android:id="@+id/layout1"
+        android:id="@+id/sensor_on_off"
         android:layout_marginBottom="15dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Light Turn ON/OFF"
+            android:text="Sensor Turn ON/OFF"
             android:textColor="#FFF"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
@@ -60,19 +60,18 @@
             android:id="@+id/toggleButton"
             android:layout_marginRight="10dp"
             android:text=""
-            android:textOff=""
-            android:textOn=""
+            android:textOff="ON"
+            android:textOn="OFF"
             style="?android:attr/borderlessButtonStyle"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true" />
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/layout1"
-        android:id="@+id/layout2"
+        android:layout_below="@id/sensor_on_off"
+        android:id="@+id/light_sensor"
         android:background="@drawable/border_default"
         android:layout_marginBottom="15dp">
         <TextView
@@ -99,7 +98,7 @@
         android:id="@+id/button_grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/layout2"
+        android:layout_below="@id/light_sensor"
         android:layout_marginTop="20dp"
         android:stretchColumns="2">
         <TableRow

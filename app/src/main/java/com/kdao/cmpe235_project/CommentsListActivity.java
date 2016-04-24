@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.kdao.cmpe235_project.data.Comment;
 import com.kdao.cmpe235_project.util.Config;
+import com.kdao.cmpe235_project.util.PreferenceData;
 import com.kdao.cmpe235_project.util.Utility;
 
 import org.apache.http.HttpResponse;
@@ -177,14 +178,21 @@ public class CommentsListActivity extends AppCompatActivity {
      * @method addComment
      */
     public void addComment(View view) {
-        if (Utility.isEmptyString(sessionTreeId)) {
-            Intent newIntent = new Intent(getApplicationContext(), TreesListActivity.class);
-            newIntent.putExtra(Config.TREE_ACTIVITY, Config.COMMENT_PER_TREE);
+        boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
+        if (userLoggedIn == false) { //If user not log in then cannot add comment
+            Intent newIntent = new Intent(getApplicationContext(), SigninActivity.class);
+            newIntent.putExtra(Config.SIGN_IN_REQUIRED, Config.COMMENT_NO_SIGNIN);
             startActivity(newIntent);
         } else {
-            Intent newIntent = new Intent(getApplicationContext(), CommentActivity.class);
-            newIntent.putExtra(Config.TREE_SESSION_ID, sessionTreeId);
-            startActivity(newIntent);
+            if (Utility.isEmptyString(sessionTreeId)) {
+                Intent newIntent = new Intent(getApplicationContext(), TreesListActivity.class);
+                newIntent.putExtra(Config.TREE_ACTIVITY, Config.COMMENT_PER_TREE);
+                startActivity(newIntent);
+            } else {
+                Intent newIntent = new Intent(getApplicationContext(), CommentActivity.class);
+                newIntent.putExtra(Config.TREE_SESSION_ID, sessionTreeId);
+                startActivity(newIntent);
+            }
         }
     }
 

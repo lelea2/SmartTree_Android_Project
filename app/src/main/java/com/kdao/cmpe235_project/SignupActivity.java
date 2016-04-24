@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.view.View;
 import android.widget.Toast;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 
 import com.kdao.cmpe235_project.util.Config;
 import com.kdao.cmpe235_project.util.Utility;
@@ -61,6 +62,8 @@ public class SignupActivity extends AppCompatActivity {
         phoneInput = (EditText)findViewById(R.id.registerPhone);
         pwdInput = (EditText)findViewById(R.id.registerPwd);
         confirmPwdInput = (EditText) findViewById(R.id.registerRepwd);
+        //Format phone
+        phoneInput.addTextChangedListener(new PhoneNumberFormattingTextWatcher("US"));
     }
 
     /**

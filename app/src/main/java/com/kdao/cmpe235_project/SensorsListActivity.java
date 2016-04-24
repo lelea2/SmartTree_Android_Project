@@ -39,17 +39,24 @@ public class SensorsListActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private ListView sensorList;
     private List<Sensor> sensors = new ArrayList<Sensor>();
-    private static String GEL_SENSORS_URL = Config.BASE_URL + "/sensors";
+    private static String GET_SENSORS_URL = Config.BASE_URL + "/sensors";
+    private String treeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensors_list);
+        Bundle extras = getIntent().getExtras();
         try {
-            Bundle extras = getIntent().getExtras();
             String msg = extras.getString(Config.SENSOR_ACTIVITY).toString();
             if (!Utility.isEmptyString(msg)) {
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            }
+        } catch(Exception ex) {}
+        try {
+            treeId = extras.getString(Config.TREE_SESSION_ID);
+            if (treeId != null) {
+                GET_SENSORS_URL += "?treeId=" + treeId;
             }
         } catch(Exception ex) {}
         getSensors();
@@ -60,7 +67,7 @@ public class SensorsListActivity extends AppCompatActivity {
             try {
                 JSONObject object = (JSONObject) arrObj.get(i);
                 SensorType type = new SensorType(Integer.parseInt(object.get("sensorType").toString()));
-                boolean isDeploy = false;
+                boolean isDeploy = (treeId != null) ? true : false;
                 try {
                     if (!object.get("treeId").toString().isEmpty()) {
                         isDeploy = true;
@@ -81,6 +88,7 @@ public class SensorsListActivity extends AppCompatActivity {
         if (selItem.isDeploy()) { //If sensor is deployed
             Intent newIntent = new Intent(getApplicationContext(), SensorActivity.class);
             newIntent.putExtra(Config.SENSOR_SESSION_ID, sensorId);
+            newIntent.putExtra(Config.SENSOR_SESSION_TYPE, selItem.getType().toString());
             newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(newIntent);
         } else {
@@ -116,7 +124,7 @@ public class SensorsListActivity extends AppCompatActivity {
             @Override
             protected String doInBackground(String... params) {
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(GEL_SENSORS_URL);
+                HttpGet httpGet = new HttpGet(GET_SENSORS_URL);
                 try {
                     try {
                         HttpResponse httpResponse = httpClient.execute(httpGet);

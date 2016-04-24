@@ -8,14 +8,19 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Toast;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
+import com.kdao.cmpe235_project.data.SensorType;
 import com.kdao.cmpe235_project.util.Config;
+import com.kdao.cmpe235_project.data.Sensor;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
@@ -25,8 +30,14 @@ import java.io.InputStreamReader;
 public class SensorActivity extends AppCompatActivity {
 
     private String sensorId;
+    private String sensorType;
     private ProgressDialog progressDialog;
     private static String GET_SENSOR_URL = Config.BASE_URL + "/sensor/";
+    private Sensor sensor;
+    private SensorType type;
+
+    private TextView sensorDeploy;
+    private ToggleButton btnToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +46,15 @@ public class SensorActivity extends AppCompatActivity {
         try {
             Bundle extras = getIntent().getExtras();
             sensorId = extras.getString(Config.SENSOR_SESSION_ID);
-            if (sensorId != null) {
+            sensorType = extras.getString(Config.SENSOR_SESSION_TYPE);
+            //Generate getSensor URL
+            getElem();
+            if (sensorId != null && sensorType != null) {
+                GET_SENSOR_URL += "type/" + sensorType + "/" + sensorId;
+                getSensor();
+            } else  if (sensorId != null) {
                 GET_SENSOR_URL += sensorId;
-                getSensor(sensorId);
+                getSensor();
             } else { //return to treeId list if treeId in session not available
                 navigateToSensorsList();
             }
@@ -47,7 +64,12 @@ public class SensorActivity extends AppCompatActivity {
         }
     }
 
-    private void getSensor(String id) {
+    private void getElem() {
+        sensorDeploy = (TextView) findViewById(R.id.sensor_tree_deploy);
+        btnToggle = (ToggleButton) findViewById(R.id.toggleButton);
+    }
+
+    private void getSensor() {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
             protected void onPreExecute() {
@@ -85,14 +107,32 @@ public class SensorActivity extends AppCompatActivity {
                 super.onPostExecute(result);
                 progressDialog.dismiss();
                 try {
-                    JSONArray arrayObj = null;
+                    JSONObject obj = null;
                     JSONParser jsonParser = new JSONParser();
+                    obj = (JSONObject) jsonParser.parse(result);
+                    createSensorView(obj);
+                    generateSensorView(obj);
                 } catch(Exception ex) {
                 }
             }
         }
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
         sendPostReqAsyncTask.execute();
+    }
+
+    private void generateSensorView(JSONObject obj) {
+        sensorDeploy.setText("Tree Deployed: " + obj.get("treeId").toString());
+        if (sensor.isDeploy() == true) {
+            btnToggle.setTextOn("ON");
+        } else {
+            btnToggle.setTextOff("OFF");
+        }
+    }
+
+    private void createSensorView(JSONObject obj) {
+        boolean isDeploy = (obj.get("treeId") != null) ? true : false;
+        type = new SensorType(Integer.parseInt(sensorType), "");
+        sensor = new Sensor(obj.get("id").toString(), obj.get("name").toString(), type, isDeploy);
     }
 
     private void navigateToSensorsList() {

@@ -33,6 +33,8 @@ public class Config {
             "choose another one";
     public static final String DEPLOY_ERR = "Please choose a tree and sensor before you could " +
             "execute deployment";
+    public static final String COMMENT_NO_SIGNIN = "Please sign in to your account to be able to " +
+            "add comemnt";
 
     //Configuration for informative msg
     public static final String NEW_TREE_CREATED = "New tree created";
@@ -52,6 +54,7 @@ public class Config {
     public static final String GET_SENSOR = "Getting Sensor detail...";
     public static final String GET_COMMENTS = "Getting Comments...";
     public static final String DEPLOY_TREE = "Deploy sensor to tree...";
+    public static final String UPDATE_SENSOR = "Update sensor...";
 
     //FLAG key configuration
     public static final String SIGN_IN_WITH_BARCODE = "SIGN_IN_WITH_BARCODE";
@@ -60,6 +63,7 @@ public class Config {
     public static final String TREE_SESSION_ID = "TREE_SESSION_ID";
     public static final String TREE_SESSION_NAME = "TREE_SESSION_NAME";
     public static final String SENSOR_SESSION_ID = "SENSOR_SESSION_ID";
+    public static final String SENSOR_SESSION_TYPE = "SENSOR_SESSION_TYPE";
     public static final String SENSOR_SESSION_NAME = "SENSOR_SESSION_NAME";
     public static final String COMMENT_SESSION_ID = "COMMENT_SESSION_ID";
     public static final String SIGN_IN_REQUIRED = "SIGN_IN_REQUIRED";
