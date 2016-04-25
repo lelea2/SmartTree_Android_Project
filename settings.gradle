@@ -1,1 +1,3 @@
-include ':app'
+include ':app', ':actionbarsherlock', ':library'
+project(':actionbarsherlock').projectDir = new File('app/libs/actionbarsherlock')
+project(':library').projectDir = new File('app/libs/library')

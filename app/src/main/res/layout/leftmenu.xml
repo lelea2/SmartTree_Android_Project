@@ -1,100 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                 android:layout_width="210dp"
-                 android:layout_height="fill_parent"
-                 android:background="@drawable/border_leftmenu_default">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="left|top">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="210dp"
+             android:layout_height="fill_parent"
+             android:background="@drawable/border_leftmenu_default">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top">
 
-            <TextClock
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textClock"
-                style="@style/TextClock"
-                android:format12Hour="MMM dd yyyy"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp" />
-            <TextClock
-                style="@style/TextClock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textClock2"
-                android:format12Hour="HH:mm"
-                android:layout_marginLeft="20dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Fuyao Zhang"
-                android:id="@+id/textView26"
-                android:layout_marginLeft="20dp"
-                android:textSize="30sp"
-                android:textColor="#FFF"
-                android:layout_marginBottom="30dp" />
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:text="All Tree"
-                android:id="@+id/button7"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#FFF"
-                style="?android:attr/borderlessButtonStyle"
-                android:background="@drawable/border_leftmenu_default"
-                android:textSize="20dp"
-                android:textAllCaps="false" />
-            <Button
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:text="Scan"
-                android:id="@+id/button8"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#FFF"
-                android:background="@drawable/border_leftmenu_default"
-                android:textSize="20dp"
-                android:textAllCaps="false"/>
-            <Button
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:text="Photo"
-                android:id="@+id/button9"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#FFF"
-                android:background="@drawable/border_leftmenu_default"
-                android:textSize="20dp"
-                android:textAllCaps="false"/>
-            <Button
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:text="Comment"
-                android:id="@+id/button10"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#FFF"
-                android:background="@drawable/border_leftmenu_default"
-                android:textSize="20dp"
-                android:textAllCaps="false"/>
-            <Button
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:text="Logout"
-                android:id="@+id/button11"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#FFF"
-                android:background="@drawable/border_leftmenu_default"
-                android:textSize="20dp"
-                android:textAllCaps="false"/>
-        </LinearLayout>
-    </FrameLayout>
-</android.support.v4.widget.DrawerLayout>
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textClock"
+            style="@style/TextClock"
+            android:format12Hour="MMM dd yyyy"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp" />
+        <TextClock
+            style="@style/TextClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textClock2"
+            android:format12Hour="HH:mm"
+            android:layout_marginLeft="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Fuyao Zhang"
+            android:id="@+id/textView26"
+            android:layout_marginLeft="20dp"
+            android:textSize="30sp"
+            android:textColor="#FFF"
+            android:layout_marginBottom="30dp" />
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:text="All Tree"
+            android:id="@+id/button7"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#FFF"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/border_leftmenu_default"
+            android:textSize="20dp"
+            android:textAllCaps="false" />
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:text="Scan"
+            android:id="@+id/button8"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#FFF"
+            android:background="@drawable/border_leftmenu_default"
+            android:textSize="20dp"
+            android:textAllCaps="false"/>
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:text="Photo"
+            android:id="@+id/button9"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#FFF"
+            android:background="@drawable/border_leftmenu_default"
+            android:textSize="20dp"
+            android:textAllCaps="false"/>
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:text="Comment"
+            android:id="@+id/button10"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#FFF"
+            android:background="@drawable/border_leftmenu_default"
+            android:textSize="20dp"
+            android:textAllCaps="false"/>
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:text="Logout"
+            android:id="@+id/button11"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#FFF"
+            android:background="@drawable/border_leftmenu_default"
+            android:textSize="20dp"
+            android:textAllCaps="false"/>
+    </LinearLayout>
+</FrameLayout>
