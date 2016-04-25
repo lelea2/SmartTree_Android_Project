@@ -18,14 +18,13 @@
         android:id="@+id/tree_list_heading"
         android:textColor="@color/colorTextMainColor"
         android:textSize="30dp"
-        android:layout_marginLeft="27dp"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:fontFamily="Helvetica Neue" />
-
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="450dp"
+        android:layout_below="@id/tree_list_heading"
         android:background="@color/colorBackgroundLight"
         android:id="@+id/treeListView"
         android:layout_centerVertical="true"
