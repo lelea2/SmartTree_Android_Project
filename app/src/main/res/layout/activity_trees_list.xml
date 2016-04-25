@@ -25,11 +25,11 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tree_list_heading"
-        android:layout_marginTop="10dp"
+        android:layout_height="400dp"
         android:background="@color/colorBackgroundLight"
-        android:id="@+id/treeListView" />
+        android:id="@+id/treeListView"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:id="@+id/btn_back"

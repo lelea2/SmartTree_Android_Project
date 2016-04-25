@@ -38,7 +38,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-public class TreesListActivity extends AppCompatActivity {
+public class TreesListActivity extends MyActivity {
 
     private ProgressDialog progressDialog;
     private ListView treeList;
