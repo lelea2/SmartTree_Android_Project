@@ -52,6 +52,7 @@
     <string name="upload_image">upload image</string>
     <string name="upload_video">upload video</string>
     <string name="upload_audio">upload audio</string>
+    <string name="view_tree_list">Tree List</string>
 
     <string name="intro_message">
         <![CDATA[

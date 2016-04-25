@@ -46,7 +46,7 @@ public class TreesListActivity extends MyActivity {
     private static String GEL_TREES_URL = Config.BASE_URL + "/trees";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trees_list);
         try {
