@@ -13,6 +13,8 @@ public class PreferenceData {
     static final String PREF_LOGGEDIN_USER_ROLE = "logged_in_role";
     static final String PREF_USER_LOGGEDIN_STATUS = "logged_in_status";
     static final String PREF_LOGGEDIN_USER_ID = "logged_in_id";
+    static final String PREF_LOGGEDIN_USER_FULLNAME = "logged_in_fullname";
+
 
     /**
      * Get SharePreferences object
@@ -34,6 +36,12 @@ public class PreferenceData {
         editor.commit();
     }
 
+    public static void setLoggedInUserFullName(Context ctx, String firstName, String lastName) {
+        Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString(PREF_LOGGEDIN_USER_FULLNAME, firstName + " " + lastName);
+        editor.commit();
+    }
+
     public static void setLoggedInRole(Context ctx, int roleId) {
         Editor editor = getSharedPreferences(ctx).edit();
         editor.putInt(PREF_LOGGEDIN_USER_ROLE, roleId);
@@ -51,6 +59,10 @@ public class PreferenceData {
      */
     public static String getLoggedInEmailUser(Context ctx) {
         return getSharedPreferences(ctx).getString(PREF_LOGGEDIN_USER_EMAIL, "");
+    }
+
+    public static String getLoggedInUserFullname(Context ctx) {
+        return getSharedPreferences(ctx).getString(PREF_LOGGEDIN_USER_FULLNAME, "");
     }
 
     /**

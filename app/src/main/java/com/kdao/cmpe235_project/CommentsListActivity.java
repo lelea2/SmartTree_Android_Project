@@ -32,7 +32,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentsListActivity extends AppCompatActivity {
+public class CommentsListActivity extends MyActivity {
 
     private ListView commentList;
     private List<Comment> comments = new ArrayList<Comment>();
@@ -41,7 +41,7 @@ public class CommentsListActivity extends AppCompatActivity {
     private String sessionTreeId = "";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments_list);
         try {

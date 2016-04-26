@@ -1,8 +1,10 @@
 package com.kdao.cmpe235_project;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,39 +12,35 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SampleListFragment extends ListFragment {
+import com.kdao.cmpe235_project.util.PreferenceData;
+
+public class SampleListFragment extends Fragment implements View.OnClickListener {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.list, null);
+        View rootView = inflater.inflate(R.layout.list, container, false);
+        return rootView;
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        SampleAdapter adapter = new SampleAdapter(getActivity());
-        for (int i = 0; i < 20; i++) {
-            adapter.add(new SampleItem("Sample List", android.R.drawable.ic_menu_search));
-        }
-        setListAdapter(adapter);
     }
 
-    private class SampleItem {
-        public String tag;
-        public int iconRes;
-        public SampleItem(String tag, int iconRes) {
-            this.tag = tag;
-            this.iconRes = iconRes;
+    @Override
+    public void onClick(View v) {
+        //do what you want to do when button is clicked
+        switch (v.getId()) {
+            case R.id.register_link:
+                navRegistration();
+                break;
         }
     }
 
-    public class SampleAdapter extends ArrayAdapter<SampleItem> {
-
-        public SampleAdapter(Context context) {
-            super(context, 0);
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            return convertView;
-        }
-
+    private void navRegistration() {
+        /*if (userLoggedIn == true) {
+            PreferenceData.clearLoggedInEmailAddress(getApplicationContext());
+        }*/
+        Intent launchActivity = new Intent(getContext(), SigninActivity.class);
+        launchActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(launchActivity);
     }
 }

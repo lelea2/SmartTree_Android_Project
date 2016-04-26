@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Fuyao Zhang"
+            android:text=""
             android:id="@+id/nav_fullName"
             android:layout_marginLeft="20dp"
             android:textSize="30sp"
@@ -46,6 +46,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:background="@drawable/border_leftmenu_default"
             android:textSize="20dp"
+            android:clickable="true"
             android:textAllCaps="false" />
         <Button
             style="?android:attr/borderlessButtonStyle"
@@ -53,35 +54,35 @@
             android:layout_height="50dp"
             android:text="Scan"
             android:id="@+id/button8"
-            android:onClick="navScan"
             android:layout_gravity="center_horizontal"
             android:textColor="#FFF"
             android:background="@drawable/border_leftmenu_default"
             android:textSize="20dp"
+            android:clickable="true"
             android:textAllCaps="false"/>
         <Button
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:text="Photo"
-            android:onClick="navPhoto"
             android:id="@+id/button9"
             android:layout_gravity="center_horizontal"
             android:textColor="#FFF"
             android:background="@drawable/border_leftmenu_default"
             android:textSize="20dp"
+            android:clickable="true"
             android:textAllCaps="false"/>
         <Button
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:text="Logout"
-            android:onClick="navLogout"
-            android:id="@+id/button11"
+            android:id="@+id/register_link"
             android:layout_gravity="center_horizontal"
             android:textColor="#FFF"
             android:background="@drawable/border_leftmenu_default"
             android:textSize="20dp"
+            android:clickable="true"
             android:textAllCaps="false"/>
     </LinearLayout>
 </FrameLayout>

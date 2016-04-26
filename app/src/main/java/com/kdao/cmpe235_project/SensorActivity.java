@@ -27,7 +27,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class SensorActivity extends AppCompatActivity {
+public class SensorActivity extends MyActivity {
 
     private String sensorId;
     private String sensorType;
@@ -40,7 +40,7 @@ public class SensorActivity extends AppCompatActivity {
     private ToggleButton btnToggle;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor);
         try {

@@ -23,7 +23,7 @@ import android.graphics.drawable.BitmapDrawable;
 import com.kdao.cmpe235_project.util.Config;
 import com.kdao.cmpe235_project.util.PreferenceData;
 
-public class CameraActivity extends AppCompatActivity {
+public class CameraActivity extends MyActivity {
 
     //Pre-select option for photo taking
     static CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
@@ -40,7 +40,7 @@ public class CameraActivity extends AppCompatActivity {
     ImageView viewImage;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
         if (userLoggedIn == false) { //navigate to signin page if user is not signin yet*/

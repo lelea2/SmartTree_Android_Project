@@ -156,6 +156,8 @@ public class SigninActivity extends AppCompatActivity {
                         PreferenceData.setLoggedInUserId(getApplication(), userId);
                         PreferenceData.setLoggedInRole(getApplication(), Integer.parseInt(jObject.get
                                 ("roleId").toString()));
+                        PreferenceData.setLoggedInUserFullName(getApplication(), jObject.get
+                                ("firstName").toString(), jObject.get("lastName").toString());
                         _nagivateToMainActivity();
                     } else {
                         Toast.makeText(getApplicationContext(), Config.LOGIN_ERR, Toast.LENGTH_LONG).show();

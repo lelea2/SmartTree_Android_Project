@@ -27,7 +27,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class CommentActivity extends AppCompatActivity {
+public class CommentActivity extends MyActivity {
     private String sessionTreeId;
     private String userId;
     private EditText commentText;
@@ -35,7 +35,7 @@ public class CommentActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
         commentText = (EditText) findViewById(R.id.comment_text);

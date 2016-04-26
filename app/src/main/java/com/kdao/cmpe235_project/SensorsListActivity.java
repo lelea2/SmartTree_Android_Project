@@ -35,7 +35,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SensorsListActivity extends AppCompatActivity {
+public class SensorsListActivity extends MyActivity {
     private ProgressDialog progressDialog;
     private ListView sensorList;
     private List<Sensor> sensors = new ArrayList<Sensor>();
@@ -43,7 +43,7 @@ public class SensorsListActivity extends AppCompatActivity {
     private String treeId;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensors_list);
         Bundle extras = getIntent().getExtras();

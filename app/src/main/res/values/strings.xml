@@ -43,6 +43,7 @@
     <string name="pwd">Password</string>
     <string name="confirm_pwd">Confirm Password</string>
     <string name="register_btn">Register</string>
+    <string name="login_btn">Log In</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
     <string name="cancel">Cancel</string>
