@@ -21,7 +21,8 @@
         android:textSize="30dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
-        android:fontFamily="Helvetica Neue" />
+        android:fontFamily="Helvetica Neue"
+        android:layout_gravity="left" />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="340dp"
