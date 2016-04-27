@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/LeonZhang/Desktop/SJSU/CMPE235/Team Project/SmartTree_Android_Project/app/libs/actionbarsherlock/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/Users/LeonZhang/Desktop/SJSU/CMPE235/Team Project/SmartTree_Android_Project/app/libs/actionbarsherlock/src/debug/jniLibs"/></dataSet></merger>

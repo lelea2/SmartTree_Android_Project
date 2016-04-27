@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/kdao/AndroidStudioProjects/CMPE235_Project/app/libs/library/assets"/></dataSet><dataSet config="release"><source path="/Users/kdao/AndroidStudioProjects/CMPE235_Project/app/libs/library/src/release/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/LeonZhang/Desktop/SJSU/CMPE235/Team Project/SmartTree_Android_Project/app/libs/library/assets"/></dataSet><dataSet config="release"><source path="/Users/LeonZhang/Desktop/SJSU/CMPE235/Team Project/SmartTree_Android_Project/app/libs/library/src/release/assets"/></dataSet></merger>

@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "/Users/LeonZhang/Desktop/SJSU/CMPE235/Team Project/SmartTree_Android_Project/app/libs/actionbarsherlock/build/intermediates/res/merged/androidTest/debug/values-w360dp-v13/values-w360dp-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 55,
+                    "endOffset": 106
+                },
+                "from": {
+                    "file": "/Users/LeonZhang/Desktop/SJSU/CMPE235/Team Project/SmartTree_Android_Project/app/libs/actionbarsherlock/build/intermediates/bundles/debug/res/values-w360dp-v13/values-w360dp-v13.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 55,
+                        "endOffset": 106
+                    }
+                }
+            }
+        ]
+    }
+]
