@@ -32,7 +32,7 @@
                     android:layout_weight="1"
                     android:id="@+id/imageButton"
                     android:scaleType="fitXY"
-                    android:background="@drawable/main_image3" />
+                    android:background="@drawable/main_image1" />
             </TableRow>
             <TableRow
                 android:gravity="center"
@@ -42,7 +42,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:id="@+id/imageView2"
-                    android:background="@drawable/main_image3" />
+                    android:background="@drawable/main_image2" />
                 <ImageButton
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -76,7 +76,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:id="@+id/imageView4"
-                    android:background="@drawable/main_image3" />
+                    android:background="@drawable/main_image4" />
                 <ImageButton
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
