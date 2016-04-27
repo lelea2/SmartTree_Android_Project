@@ -1,98 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/colorBackground"
-            android:scaleType = "centerCrop"
-            tools:context="com.kdao.cmpe235_project.MainActivity">
-
     <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorBackground"
+        android:scaleType = "centerCrop"
+        tools:context="com.kdao.cmpe235_project.MainActivity">
         <TableLayout
             android:id="@+id/gridview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:stretchColumns="*">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:stretchColumns="0">
             <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp">
+                android:layout_weight="1"
+                android:gravity="center">
                 <ImageButton
-                    android:layout_width="0dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:layout_height="165dp"
                     android:id="@+id/btn_viewTree"
                     android:background="@drawable/main_ico_view_tree"
                     android:onClick="navigateToAllTree"
                     android:scaleType="fitXY" />
                 <ImageButton
-                    android:layout_width="0dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:layout_height="165dp"
                     android:id="@+id/btn_createTree"
                     android:onClick="navigateToCreateTree"
                     android:background="@drawable/main_ico_create_tree" />
             </TableRow>
             <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp">
+                android:gravity="center"
+                android:layout_weight="1">
                 <ImageButton
-                    android:layout_width="0dp"
+                    android:layout_width="fill_parent"
                     android:layout_weight="1"
-                    android:layout_height="165dp"
+                    android:layout_height="fill_parent"
                     android:id="@+id/btn_scan"
                     android:onClick="navigateToBarCode"
                     android:background="@drawable/main_ico_scan" />
                 <ImageButton
-                    android:layout_width="0dp"
+                    android:layout_width="fill_parent"
                     android:layout_weight="1"
-                    android:layout_height="165dp"
+                    android:layout_height="fill_parent"
                     android:id="@+id/btn_createSensor"
                     android:onClick="navigateToCreateSensor"
                     android:background="@drawable/main_ico_create_sensor" />
             </TableRow>
             <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp">
+                android:gravity="center"
+                android:layout_weight="1">
                 <ImageButton
-                    android:layout_width="0dp"
+                    android:layout_width="fill_parent"
                     android:layout_weight="1"
-                    android:layout_height="165dp"
+                    android:layout_height="fill_parent"
                     android:id="@+id/btn_photo"
                     android:onClick="navigateToPhoto"
                     android:background="@drawable/main_ico_photo" />
                 <ImageButton
-                    android:layout_width="0dp"
+                    android:layout_width="fill_parent"
                     android:layout_weight="1"
-                    android:layout_height="165dp"
+                    android:layout_height="fill_parent"
                     android:id="@+id/btn_deploy"
                     android:onClick="navigateToDeployTree"
                     android:background="@drawable/main_ico_deploy" />
             </TableRow>
             <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp">
+                android:gravity="center"
+                android:layout_weight="1">
                 <ImageButton
-                    android:layout_width="0dp"
+                    android:layout_width="fill_parent"
                     android:layout_weight="1"
-                    android:layout_height="165dp"
+                    android:layout_height="fill_parent"
                     android:id="@+id/btn_comment"
                     android:onClick="navigateToComment"
                     android:background="@drawable/main_ico_comment" />
                 <ImageButton
-                    android:layout_width="0dp"
+                    android:layout_width="fill_parent"
                     android:layout_weight="1"
-                    android:layout_height="165dp"
+                    android:layout_height="fill_parent"
                     android:id="@+id/btn_status"
                     android:onClick="navigateToStatus"
                     android:background="@drawable/main_ico_status" />
             </TableRow>
         </TableLayout>
     </RelativeLayout>
-</ScrollView>
+
