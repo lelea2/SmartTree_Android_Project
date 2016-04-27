@@ -107,6 +107,7 @@ public class CameraActivity extends AppCompatActivity {
         audioButton = (Button)findViewById(R.id.audio_btn);
         shareButton = (Button) findViewById(R.id.image_share_btn);
         uploadButton = (Button) findViewById(R.id.upload_btn);
+        viewImage = (ImageView) findViewById(R.id.viewImage);
     }
 
     /**

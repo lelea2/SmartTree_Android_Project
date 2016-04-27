@@ -45,20 +45,24 @@
             android:layout_below="@id/button_table"
             android:layout_marginTop="20px"
             android:layout_centerHorizontal="true" />
-    <Button
-        android:id="@+id/image_share_btn"
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20px"
-        android:text="@string/message_sharing"/>
-    <Button
-        android:id="@+id/upload_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/image_share_btn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20px"
-        android:text="@string/message_upload"/>
-
+        android:layout_below="@id/viewImage"
+        android:stretchColumns="*">
+        <TableRow>
+            <Button
+                android:id="@+id/image_share_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/message_sharing"/>
+            <Button
+                android:id="@+id/upload_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/message_upload"/>
+        </TableRow>
+    </TableLayout>
 </RelativeLayout>
