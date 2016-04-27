@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="210dp"
-             android:layout_height="fill_parent"
+             android:layout_height="match_parent"
              android:id="@+id/menu_frame"
              android:background="@drawable/border_leftmenu_default">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
         android:layout_gravity="left|top">
 
         <TextClock
@@ -39,8 +40,7 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:text="All Tree"
-            android:id="@+id/button7"
-            android:onClick="navAllTree"
+            android:id="@+id/nav_alltree"
             android:layout_gravity="center_horizontal"
             android:textColor="#FFF"
             style="?android:attr/borderlessButtonStyle"
@@ -53,7 +53,7 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:text="Scan"
-            android:id="@+id/button8"
+            android:id="@+id/nav_scan"
             android:layout_gravity="center_horizontal"
             android:textColor="#FFF"
             android:background="@drawable/border_leftmenu_default"
@@ -65,7 +65,7 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:text="Photo"
-            android:id="@+id/button9"
+            android:id="@+id/nav_photo"
             android:layout_gravity="center_horizontal"
             android:textColor="#FFF"
             android:background="@drawable/border_leftmenu_default"
@@ -77,7 +77,7 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:text="Logout"
-            android:id="@+id/register_link"
+            android:id="@+id/nav_register_link"
             android:layout_gravity="center_horizontal"
             android:textColor="#FFF"
             android:background="@drawable/border_leftmenu_default"

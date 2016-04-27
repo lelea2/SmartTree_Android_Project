@@ -1,7 +1,5 @@
 package com.kdao.cmpe235_project;
 
-
-
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,7 +21,7 @@ import android.graphics.drawable.BitmapDrawable;
 import com.kdao.cmpe235_project.util.Config;
 import com.kdao.cmpe235_project.util.PreferenceData;
 
-public class CameraActivity extends MyActivity {
+public class CameraActivity extends AppCompatActivity {
 
     //Pre-select option for photo taking
     static CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
