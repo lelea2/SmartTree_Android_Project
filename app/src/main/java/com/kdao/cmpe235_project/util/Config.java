@@ -24,7 +24,8 @@ public class Config {
     public static final String CREATE_TREE_ERR = "Error creating new tree. Please try again!";
     public static final String CREATE_SENSOR_ERR = "Error creating new sensor. Please try again!";
     public static final String COMMENT_PER_TREE = "Please select a specific tree to view comment";
-    public static final String NO_COMMENTS = "No comment available for the current tree";
+    public static final String NO_COMMENTS = "No comments available for the current tree";
+    public static final String NO_SENSORS = "No sensors available for the current tree";
     public static final String SENSOR_NO_DEPLOY = "Please deploy sensor before you could interact" +
             " with it";
     public static final String SENSOR_NO_AVAIL = "Sensor you choose is not available. Please try " +

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.view.View;
@@ -41,6 +40,7 @@ public class SensorsListActivity extends MyActivity {
     private List<Sensor> sensors = new ArrayList<Sensor>();
     private static String GET_SENSORS_URL = Config.BASE_URL + "/sensors";
     private String treeId;
+    private String treeName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,14 +55,20 @@ public class SensorsListActivity extends MyActivity {
         } catch(Exception ex) {}
         try {
             treeId = extras.getString(Config.TREE_SESSION_ID);
+            treeName = extras.getString(Config.TREE_SESSION_NAME);
             if (treeId != null) {
-                GET_SENSORS_URL += "?treeId=" + treeId;
+                GET_SENSORS_URL = Config.BASE_URL + "/sensors?treeId=" + treeId;
             }
         } catch(Exception ex) {}
         getSensors();
     }
 
     private void populateSensors(JSONArray arrObj) {
+        System.out.println(arrObj);
+        if (arrObj.size() == 0) {
+            Toast.makeText(getApplicationContext(), Config.NO_SENSORS, Toast.LENGTH_LONG).show();
+            return;
+        }
         for (int i = 0; i < arrObj.size(); i++) {
             try {
                 JSONObject object = (JSONObject) arrObj.get(i);
@@ -88,8 +94,9 @@ public class SensorsListActivity extends MyActivity {
         if (selItem.isDeploy()) { //If sensor is deployed
             Intent newIntent = new Intent(getApplicationContext(), SensorActivity.class);
             newIntent.putExtra(Config.SENSOR_SESSION_ID, sensorId);
-            newIntent.putExtra(Config.SENSOR_SESSION_TYPE, selItem.getType().toString());
-            newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            newIntent.putExtra(Config.SENSOR_SESSION_TYPE, Integer.toString(selItem.getType()
+                    .getId()));
+            newIntent.putExtra(Config.TREE_SESSION_NAME, treeName);
             startActivity(newIntent);
         } else {
             Toast.makeText(getApplicationContext(), Config.SENSOR_NO_DEPLOY, Toast.LENGTH_LONG).show();
@@ -125,6 +132,7 @@ public class SensorsListActivity extends MyActivity {
             protected String doInBackground(String... params) {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(GET_SENSORS_URL);
+                System.out.println(">>>> SensorsURL: " + GET_SENSORS_URL);
                 try {
                     try {
                         HttpResponse httpResponse = httpClient.execute(httpGet);
@@ -157,6 +165,7 @@ public class SensorsListActivity extends MyActivity {
                     populateSensors(arrayObj);
                     populateSensorsView();
                 } catch(Exception ex) {
+                    System.out.println(">>>>>>> Sensor list exception <<<<<<");
                     System.out.println(ex);
                     Toast.makeText(getApplicationContext(), Config.SCAN_ERR, Toast.LENGTH_LONG).show();
                 }
@@ -193,7 +202,6 @@ public class SensorsListActivity extends MyActivity {
     //Public function navigate back to main activity page
     public void navigateToMainActivity(View v) {
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainIntent);
     }
 }

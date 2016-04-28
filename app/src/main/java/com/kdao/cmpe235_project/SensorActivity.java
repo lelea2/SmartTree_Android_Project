@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.kdao.cmpe235_project.data.SensorType;
+import com.kdao.cmpe235_project.data.SensorHelper;
 import com.kdao.cmpe235_project.util.Config;
 import com.kdao.cmpe235_project.data.Sensor;
 
@@ -35,6 +36,9 @@ public class SensorActivity extends MyActivity {
     private static String GET_SENSOR_URL = Config.BASE_URL + "/sensor/";
     private Sensor sensor;
     private SensorType type;
+    private SensorHelper sensorHelper;
+    private String treeName;
+    private String treeId;
 
     private TextView sensorDeploy;
     private ToggleButton btnToggle;
@@ -50,10 +54,13 @@ public class SensorActivity extends MyActivity {
             //Generate getSensor URL
             getElem();
             if (sensorId != null && sensorType != null) {
-                GET_SENSOR_URL += "type/" + sensorType + "/" + sensorId;
+                treeName = extras.getString(Config.TREE_SESSION_NAME);
+                GET_SENSOR_URL =  Config.BASE_URL + "/sensor/type/" + sensorType + "/" + sensorId;
+                System.out.println(GET_SENSOR_URL);
                 getSensor();
             } else  if (sensorId != null) {
-                GET_SENSOR_URL += sensorId;
+                GET_SENSOR_URL =  Config.BASE_URL + "/sensor/" + sensorId;
+                System.out.println(GET_SENSOR_URL);
                 getSensor();
             } else { //return to treeId list if treeId in session not available
                 navigateToSensorsList();
@@ -81,6 +88,7 @@ public class SensorActivity extends MyActivity {
             protected String doInBackground(String... params) {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(GET_SENSOR_URL);
+                System.out.println("Do get sensors >>>>>");
                 try {
                     try {
                         HttpResponse httpResponse = httpClient.execute(httpGet);
@@ -107,12 +115,14 @@ public class SensorActivity extends MyActivity {
                 super.onPostExecute(result);
                 progressDialog.dismiss();
                 try {
-                    JSONObject obj = null;
+                    JSONArray arrayObj = null;
                     JSONParser jsonParser = new JSONParser();
-                    obj = (JSONObject) jsonParser.parse(result);
+                    arrayObj= (JSONArray) jsonParser.parse(result);
+                    JSONObject obj = (JSONObject) arrayObj.get(0);
                     createSensorView(obj);
                     generateSensorView(obj);
                 } catch(Exception ex) {
+                    System.out.println("Error while generate sensor view");
                 }
             }
         }
@@ -121,11 +131,17 @@ public class SensorActivity extends MyActivity {
     }
 
     private void generateSensorView(JSONObject obj) {
-        sensorDeploy.setText("Tree Deployed: " + obj.get("treeId").toString());
-        if (sensor.isDeploy() == true) {
-            btnToggle.setTextOn("ON");
+        treeId = obj.get("treeId").toString();
+        if (treeName != null) {
+            sensorDeploy.setText("Tree Deployed: " + treeName);
         } else {
-            btnToggle.setTextOff("OFF");
+            sensorDeploy.setText("Tree Deployed: " + treeId);
+        }
+        try {
+            boolean selected = sensorHelper.getSensorState();
+            btnToggle.setSelected(selected);
+        } catch(Exception ex) {
+
         }
     }
 
@@ -133,6 +149,7 @@ public class SensorActivity extends MyActivity {
         boolean isDeploy = (obj.get("treeId") != null) ? true : false;
         type = new SensorType(Integer.parseInt(sensorType), "");
         sensor = new Sensor(obj.get("id").toString(), obj.get("name").toString(), type, isDeploy);
+        sensorHelper = new SensorHelper(type, obj);
     }
 
     private void navigateToSensorsList() {
@@ -143,7 +160,7 @@ public class SensorActivity extends MyActivity {
 
     public void navigateToSensorsList(View v) {
         Intent launchActivity = new Intent(getApplicationContext(), SensorsListActivity.class);
-        launchActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        launchActivity.putExtra(Config.TREE_SESSION_ID, treeId);
         startActivity(launchActivity);
     }
 

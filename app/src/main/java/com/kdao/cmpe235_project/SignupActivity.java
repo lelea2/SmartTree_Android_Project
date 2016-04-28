@@ -203,7 +203,6 @@ public class SignupActivity extends AppCompatActivity {
      */
     private void navigateToMainActivity() {
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainIntent);
     }
 }

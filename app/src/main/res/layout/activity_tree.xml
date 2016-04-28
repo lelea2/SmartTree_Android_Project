@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="A rooted tree is a tree in which one vertex has been designated the root. The edges of a rooted tree can be assigned a natural orientation, either away from or towards the root, in which case the structure becomes a directed rooted tree. When a directed rooted tree has an orientation away from the root, it is called an arborescence, branching, or out-tree; when it has an orientation towards the root, it is called an anti-arborescence or in-tree. The tree-order is the partial ordering on the vertices of a tree with u &lt; v if and only if the unique path from the root to v passes through u. A rooted tree which is a subgraph of some graph G is a normal tree if the ends of every edge in G are "
+            android:text=""
             android:id="@+id/tree_description"
             android:textColor="@color/colorTextMainColor"
             android:layout_marginBottom="15dp"/>
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:paddingRight="5dp"
-                    android:text="Address: 9780 Lucretia Ave, San Jose, CA 95122"
+                    android:text=""
                     android:id="@+id/tree_address"
                     android:textColor="@color/colorTextMainColor" />
                 <Button

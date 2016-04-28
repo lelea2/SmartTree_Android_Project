@@ -130,7 +130,7 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                     createCurrentTreeView(obj);
                     initializeYoutubeVideo();
                 } catch(Exception ex) {
-                    System.out.println(ex);
+                    //System.out.println(ex);
                     showAlertDialog();
                     navigateToTreesList();
                 }
@@ -138,6 +138,29 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         }
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
         sendPostReqAsyncTask.execute(treeId);
+    }
+
+    public void handleViewComment(View v) {
+        Intent launchActivity = new Intent(TreeActivity.this, CommentsListActivity.class);
+        launchActivity.putExtra(Config.TREE_SESSION_ID, currentTree.getId());
+        launchActivity.putExtra(Config.TREE_SESSION_NAME, currentTree.getLocation().getName());
+        startActivity(launchActivity);
+    }
+
+    public void handleViewSensor(View v) {
+        Intent launchActivity = new Intent(TreeActivity.this, SensorsListActivity.class);
+        launchActivity.putExtra(Config.TREE_SESSION_ID, currentTree.getId());
+        launchActivity.putExtra(Config.TREE_SESSION_NAME, currentTree.getLocation().getName());
+        startActivity(launchActivity);
+    }
+
+    public void handleViewMap(View v) {
+        Intent launchActivity = new Intent(TreeActivity.this, MapsActivity.class);
+        launchActivity.putExtra("longitude", currentTree.getLocation().getLongitude());
+        launchActivity.putExtra("latitude", currentTree.getLocation().getLatitude());
+        launchActivity.putExtra("name", currentTree.getLocation().getName());
+        launchActivity.putExtra("address", currentTree.getLocation().getAddress());
+        startActivity(launchActivity);
     }
 
     //private function generate tree view
@@ -163,9 +186,7 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
             sensorBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent launchActivity = new Intent(TreeActivity.this, SensorsListActivity.class);
-                    launchActivity.putExtra(Config.TREE_SESSION_ID, currentTree.getId());
-                    startActivity(launchActivity);
+                    handleViewSensor(v);
                 }
             });
         }
@@ -176,9 +197,7 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         commentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent launchActivity = new Intent(TreeActivity.this, CommentsListActivity.class);
-                launchActivity.putExtra(Config.TREE_SESSION_ID, currentTree.getId());
-                startActivity(launchActivity);
+                handleViewComment(v);
             }
         });
         treeName.setText(location.getName());
@@ -189,12 +208,7 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         viewLoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent launchActivity = new Intent(TreeActivity.this, MapsActivity.class);
-                launchActivity.putExtra("longitude", currentTree.getLocation().getLongitude());
-                launchActivity.putExtra("latitude", currentTree.getLocation().getLatitude());
-                launchActivity.putExtra("name", currentTree.getLocation().getName());
-                launchActivity.putExtra("address", currentTree.getLocation().getAddress());
-                startActivity(launchActivity);
+                handleViewMap(v);
             }
         });
     }
@@ -214,7 +228,6 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
     private void navigateToTreesList() {
         Intent mainIntent = new Intent(getApplicationContext(), TreesListActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainIntent);
     }
 

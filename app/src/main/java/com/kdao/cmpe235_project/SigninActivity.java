@@ -205,7 +205,6 @@ public class SigninActivity extends AppCompatActivity {
     private void _nagivateToMainActivity() {
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
         Log.i(TAG, "Navigate to main page as anonymous user");
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainIntent);
     }
 }

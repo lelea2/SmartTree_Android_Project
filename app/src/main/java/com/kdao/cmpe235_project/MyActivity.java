@@ -1,24 +1,11 @@
 package com.kdao.cmpe235_project;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.support.v4.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
-
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.view.MenuItem;
-import android.content.Context;
-import android.content.DialogInterface.OnClickListener;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
-import com.kdao.cmpe235_project.util.PreferenceData;
 
 public class MyActivity extends SlidingFragmentActivity {
 
