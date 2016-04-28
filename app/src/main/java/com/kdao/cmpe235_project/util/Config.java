@@ -42,6 +42,7 @@ public class Config {
     public static final String NEW_SENSOR_CREATED = "New sensor created";
     public static final String NEW_COMMENT_CREATED = "Comment added";
     public static final String TREE_DEPLOYED = "Sensor deployed to tree";
+    public static final String SENSOR_UPDATED = "Sensor is updated successfully";
 
 
     //Configuration for loading msg

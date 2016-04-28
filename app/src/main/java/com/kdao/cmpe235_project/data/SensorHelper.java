@@ -20,6 +20,7 @@ public class SensorHelper {
     public boolean getSensorState() {
         int sensorType = type.getId();
         int state = 0;
+        System.out.println(data);
         switch(sensorType) {
             case 1:
                 state = Integer.parseInt(data.get("wateron").toString());
@@ -36,6 +37,8 @@ public class SensorHelper {
             default:
                 break;
         }
+        //System.out.println(">>>>>> State=" + state);
+        //System.out.println(">>>>>> State=" + (state != 0));
         return (state != 0);
     }
 }

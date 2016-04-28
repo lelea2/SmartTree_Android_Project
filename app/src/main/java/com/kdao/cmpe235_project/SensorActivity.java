@@ -19,7 +19,10 @@ import com.kdao.cmpe235_project.data.Sensor;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -139,6 +142,7 @@ public class SensorActivity extends MyActivity {
         }
         try {
             boolean selected = sensorHelper.getSensorState();
+            System.out.println(">>>> sensor on=" + selected);
             btnToggle.setSelected(selected);
         } catch(Exception ex) {
 
@@ -165,6 +169,64 @@ public class SensorActivity extends MyActivity {
     }
 
     public void updateSensor(View v) {
+        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(SensorActivity.this, "", Config.UPDATE_SENSOR);
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                String state = params[0];
+                String value = params[1];
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpPut httpPut = new HttpPut(Config.BASE_URL + "/sensor/update" + sensorType + "/" + sensorId);
+                org.json.JSONObject json = new org.json.JSONObject();
+                try {
+                    json.put("on", state);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    StringEntity se = new StringEntity(json.toString());
+                    se.setContentEncoding("UTF-8");
+                    httpPut.setEntity(se);
+                    try {
+                        HttpResponse httpResponse = httpClient.execute(httpPut);
+                        InputStream inputStream = httpResponse.getEntity().getContent();
+                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                        StringBuilder stringBuilder = new StringBuilder();
+                        String bufferedStrChunk = null;
+                        while((bufferedStrChunk = bufferedReader.readLine()) != null) {
+                            stringBuilder.append(bufferedStrChunk);
+                        }
+                        return stringBuilder.toString();
+                    } catch (Exception e) {
+                        System.out.println("An Exception given because of UrlEncodedFormEntity " +
+                                "argument :" + e);
+                        e.printStackTrace();
+                    }
+                } catch (Exception uee) {
+                    System.out.println("An Exception given because of UrlEncodedFormEntity argument :" + uee);
+                    uee.printStackTrace();
+                }
+                return "error";
+            }
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+                progressDialog.dismiss();
+                if (result == "error") { //error case
+                    Toast.makeText(getApplicationContext(), Config.SERVER_ERR, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), Config.SENSOR_UPDATED, Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+        sendPostReqAsyncTask.execute();
 
     }
 }
