@@ -1,11 +1,13 @@
 package com.kdao.cmpe235_project;
 
 import android.app.ProgressDialog;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 import android.view.View;
@@ -33,6 +35,9 @@ public class CommentActivity extends MyActivity {
     private EditText commentText;
     private RatingBar ratingBar;
     private ProgressDialog progressDialog;
+    private ImageView likeIcon;
+
+    private String isLike = "1";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class CommentActivity extends MyActivity {
         setContentView(R.layout.activity_comment);
         commentText = (EditText) findViewById(R.id.comment_text);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        likeIcon = (ImageView) findViewById(R.id.likeIcon);
         userId = PreferenceData.getLoggedInUserId(getApplicationContext());
         try {
             Bundle extras = getIntent().getExtras();
@@ -60,7 +66,7 @@ public class CommentActivity extends MyActivity {
         if (Utility.isEmptyString(comment)) {
             Toast.makeText(CommentActivity.this, Config.VALID_FORM, Toast.LENGTH_LONG).show();
         } else {
-            addCommentToDB(rateValue, comment, userId, sessionTreeId, true);
+            addCommentToDB(rateValue, comment);
         }
     }
 
@@ -68,8 +74,7 @@ public class CommentActivity extends MyActivity {
      * Private function update new comment to DB
      * @method addCommentToDB
      */
-    private void addCommentToDB(String rateValue, String comment, String userId, String
-            treeId, boolean isLike) {
+    private void addCommentToDB(String rateValue, String comment) {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
             protected void onPreExecute() {
@@ -143,7 +148,7 @@ public class CommentActivity extends MyActivity {
             }
         }
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
-        sendPostReqAsyncTask.execute(rateValue, comment, userId, sessionTreeId, String.valueOf(isLike));
+        sendPostReqAsyncTask.execute(rateValue, comment, userId, sessionTreeId, isLike);
     }
 
     //private function create comment per tree
@@ -159,4 +164,14 @@ public class CommentActivity extends MyActivity {
         startActivity(newIntent);
     }
 
+    //public function handle view for like button
+    public void handleLike(View v) {
+        if (isLike == "1") {
+            isLike = "0";
+            likeIcon.setBackgroundResource(R.drawable.like_selecter);
+        } else {
+            isLike = "1";
+            likeIcon.setBackgroundResource(R.drawable.comment_ico_like);
+        }
+    }
 }

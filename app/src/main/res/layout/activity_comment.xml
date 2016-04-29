@@ -76,13 +76,14 @@
                 android:layout_height="70dp"
                 android:background="@drawable/border_default"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/relativeLayout">
+                android:layout_toEndOf="@+id/relativeLayout"
+                android:onClick="handleLike">
 
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:id="@+id/imageView8"
-                    android:background="@drawable/like_selecter"
+                    android:id="@+id/likeIcon"
+                    android:background="@drawable/comment_ico_like"
                     android:layout_marginLeft="25dp"
                     android:layout_marginStart="49dp"
                     android:layout_centerVertical="true"
@@ -98,38 +99,47 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="Helvetica Neue"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/imageView8" />
+                    android:layout_toEndOf="@+id/likeIcon" />
             </RelativeLayout>
         </RelativeLayout>
 
     </LinearLayout>
 
-    <Button
-        style="?android:attr/borderlessButtonStyle"
-        android:id="@+id/button2"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:background="#E24F67"
-        android:text="MAIN"
-        android:onClick="navigateToMainActivity"
-        android:textColor="#fff"
-        android:layout_gravity="center"
+    <TableLayout
+        android:id="@+id/button_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/linearLayout2"
-        android:layout_alignStart="@+id/linearLayout2"
-        android:fontFamily="Helvetica Neue" />
+        android:stretchColumns="2">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp">
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@color/colorRed"
+                android:layout_marginRight="5dp"
+                android:text="MAIN"
+                android:onClick="navigateToMainActivity"
+                android:textColor="#fff"
+                android:layout_gravity="center"
+                android:fontFamily="Helvetica Neue" />
 
-    <Button
-        android:id="@+id/button3"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:background="#2AA7AA"
-        android:text="LEAVE FEEDBACK"
-        android:onClick="addComment"
-        android:textColor="#fff"
-        android:layout_gravity="center"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignEnd="@+id/linearLayout2"
-        android:fontFamily="Helvetica Neue" />
-
+            <Button
+                android:id="@+id/button3"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@color/colorGreen"
+                android:text="LEAVE FEEDBACK"
+                android:onClick="addComment"
+                android:textColor="#fff"
+                android:fontFamily="Helvetica Neue" />
+        </TableRow>
+    </TableLayout>
 </RelativeLayout>
