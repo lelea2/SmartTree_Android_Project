@@ -155,7 +155,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:layout_marginRight="5p"
+                android:layout_marginRight="5dp"
                 android:background="#E24F67"
                 android:onClick="navigateToMainActivity"
                 android:text="BACK"
