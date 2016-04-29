@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -15,6 +16,9 @@ import com.kdao.cmpe235_project.data.SensorType;
 import com.kdao.cmpe235_project.data.SensorHelper;
 import com.kdao.cmpe235_project.util.Config;
 import com.kdao.cmpe235_project.data.Sensor;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -26,6 +30,7 @@ import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -42,9 +47,13 @@ public class SensorActivity extends MyActivity {
     private SensorHelper sensorHelper;
     private String treeName;
     private String treeId;
+    private static final CharSequence[] colors = {" Red "," Blue "," Green "," White "};
+
 
     private TextView sensorDeploy;
     private ToggleButton btnToggle;
+    private AlertDialog colorDialog;
+    private FrameLayout colorPalette;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,6 +86,7 @@ public class SensorActivity extends MyActivity {
     private void getElem() {
         sensorDeploy = (TextView) findViewById(R.id.sensor_tree_deploy);
         btnToggle = (ToggleButton) findViewById(R.id.toggleButton);
+        colorPalette = (FrameLayout) findViewById(R.id.light_color);
     }
 
     private void getSensor() {
@@ -228,5 +238,34 @@ public class SensorActivity extends MyActivity {
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
         sendPostReqAsyncTask.execute();
 
+    }
+
+    public void colorPick(View v) {
+        // Creating and Building the Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.color_dialog);
+        builder.setSingleChoiceItems(colors, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int color) {
+                //private static final CharSequence[] colors = {" Red "," Blue "," Green "," White "};
+                switch (color) {
+                    case 0:
+                        colorPalette.setBackgroundColor(Color.RED);
+                        break;
+                    case 1:
+                        colorPalette.setBackgroundColor(Color.BLUE);
+                        break;
+                    case 2:
+                        colorPalette.setBackgroundColor(Color.GREEN);
+                        break;
+                    case 3:
+                        colorPalette.setBackgroundColor(Color.WHITE);
+                        break;
+
+                }
+                colorDialog.dismiss();
+            }
+        });
+        colorDialog = builder.create();
+        colorDialog.show();
     }
 }

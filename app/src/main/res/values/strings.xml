@@ -54,6 +54,7 @@
     <string name="upload_video">upload video</string>
     <string name="upload_audio">upload audio</string>
     <string name="view_tree_list">Tree List</string>
+    <string name="color_dialog">Choose light color</string>
 
     <string name="intro_message">
         <![CDATA[

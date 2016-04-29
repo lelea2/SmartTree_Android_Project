@@ -91,14 +91,47 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:id="@+id/light_color"
+            android:onClick="colorPick"
             android:background="#2AA7AA"
             android:layout_marginRight="15dp"></FrameLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/light_sensor"
+        android:id="@+id/water_sensor"
+        android:background="@drawable/border_default"
+        android:layout_marginBottom="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Water Color"
+            android:textColor="#FFF"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="19dp" />
+        <com.kdao.cmpe235_project.api.CustomedNumberPicker
+            android:id="@+id/numberPicker1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            max="100"
+            min="1" />
     </RelativeLayout>
     <TableLayout
         android:id="@+id/button_grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/light_sensor"
+        android:layout_below="@id/water_sensor"
         android:layout_marginTop="20dp"
         android:stretchColumns="2">
         <TableRow
