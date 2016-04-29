@@ -24,6 +24,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.w3c.dom.Text;
 
 
 import java.io.BufferedReader;
@@ -40,6 +41,10 @@ public class CommentsListActivity extends MyActivity {
     private static String COMMENT_URL = Config.BASE_URL + "/comments";
     private String sessionTreeId = "";
 
+    private TextView commentRate;
+    private TextView commentCount;
+    private TextView commentLikeCount;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +60,17 @@ public class CommentsListActivity extends MyActivity {
             Toast.makeText(getApplicationContext(), "View all comments available", Toast
                     .LENGTH_LONG);
         }
+        getElems();
         getAllComments();
+    }
+
+    /**
+     * Private function to get elements that need dynamic change on page
+     */
+    private void getElems() {
+        commentRate = (TextView) findViewById(R.id.comment_avg_rate);
+        commentCount = (TextView) findViewById(R.id.comment_count);
+        commentLikeCount = (TextView) findViewById(R.id.comment_like_count);
     }
 
     /**
@@ -75,16 +90,32 @@ public class CommentsListActivity extends MyActivity {
     private void populateComments(JSONArray arrayObj) {
         if (arrayObj.size() == 0) {
             Toast.makeText(getApplicationContext(), Config.NO_COMMENTS, Toast.LENGTH_LONG).show();
+            commentCount.setText("0");
+            commentLikeCount.setText("0");
+            commentRate.setText("");
         } else {
             System.out.println(">>>>>>> Comments count:" + arrayObj.size());
+            int avgRating = 0;
+            int likecount = 0;
+            commentCount.setText(arrayObj.size() + "");
             for (int i = 0; i < arrayObj.size(); i++) {
                 try {
                     JSONObject object = (JSONObject) arrayObj.get(i);
-                    comments.add(new Comment(object.get("firstName").toString(), Integer.parseInt(object.get("rating").toString()), object.get("comment").toString(), object.get("ts").toString()));
+                    Comment comment = new Comment(object.get("firstName").toString(), Integer.parseInt
+                            (object.get("rating").toString()), object.get("comment").toString(),
+                            object.get("ts").toString(), Boolean.valueOf(object.get("islike")
+                            .toString()));
+                    comments.add(comment);
+                    avgRating += comment.getRating();
+                    if (comment.getLike() == true) {
+                        likecount += 1;
+                    }
                 } catch (Exception e) {
                     System.out.println(e);
                 }
             }
+            commentLikeCount.setText(likecount + "");
+            commentRate.setText(avgRating/arrayObj.size() + "");
         }
     }
 

@@ -6,16 +6,17 @@ public class Comment {
     private String comment;
     private int rating;
     private String treeId;
-    private boolean like;
+    private boolean islike;
     private String time;
 
     public Comment() {}
 
-    public Comment(String username, int rating, String comment, String time) {
+    public Comment(String username, int rating, String comment, String time, boolean islike) {
         this.username = username;
         this.rating = rating;
         this.comment = comment;
         this.time = time;
+        this.islike = islike;
     }
 
     public int getId() {
@@ -36,12 +37,12 @@ public class Comment {
         this.treeId = treeId;
     }
 
-    public boolean isLike() {
-        return like;
+    public boolean getLike() {
+        return islike;
     }
 
     public void setLike(boolean like) {
-        this.like = like;
+        this.islike = like;
     }
 
     public int getRating() {
