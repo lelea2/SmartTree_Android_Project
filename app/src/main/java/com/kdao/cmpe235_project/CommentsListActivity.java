@@ -101,13 +101,15 @@ public class CommentsListActivity extends MyActivity {
             for (int i = 0; i < arrayObj.size(); i++) {
                 try {
                     JSONObject object = (JSONObject) arrayObj.get(i);
+                    boolean isLike = (Integer.parseInt(object.get("islike").toString()) == 1) ?
+                            true : false;
                     Comment comment = new Comment(object.get("firstName").toString(), Integer.parseInt
                             (object.get("rating").toString()), object.get("comment").toString(),
-                            object.get("ts").toString(), Boolean.valueOf(object.get("islike")
-                            .toString()));
+                            object.get("ts").toString(), isLike);
+                    System.out.println(Boolean.valueOf(object.get("islike").toString()));
                     comments.add(comment);
                     avgRating += comment.getRating();
-                    if (comment.getLike() == true) {
+                    if (isLike) {
                         likecount += 1;
                     }
                 } catch (Exception e) {
