@@ -13,6 +13,7 @@ import android.widget.Toast;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.kdao.cmpe235_project.api.CustomedNumberPicker;
 import com.kdao.cmpe235_project.data.SensorType;
 import com.kdao.cmpe235_project.data.SensorHelper;
 import com.kdao.cmpe235_project.util.Config;
@@ -57,6 +58,9 @@ public class SensorActivity extends MyActivity {
     private FrameLayout colorPalette;
     private RelativeLayout lightSensor;
     private RelativeLayout commonSensor;
+    private CustomedNumberPicker numberPicker;
+    private int colorPicker = Color.WHITE; // default state of color state
+    private boolean sensorState  = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -187,8 +191,13 @@ public class SensorActivity extends MyActivity {
         startActivity(launchActivity);
     }
 
+    //Public function execute when user update sensor
     public void updateSensor(View v) {
+        sensorState = btnToggle.isChecked();
+        if (sensor.getType().getId() == Config.LIGHT_SENSOR) {
+        } else {
 
+        }
     }
 
     //Private function handling update sensors
@@ -251,7 +260,6 @@ public class SensorActivity extends MyActivity {
         }
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
         sendPostReqAsyncTask.execute();
-
     }
 
     public void colorPick(View v) {
@@ -263,19 +271,19 @@ public class SensorActivity extends MyActivity {
                 //private static final CharSequence[] colors = {" Red "," Blue "," Green "," White "};
                 switch (color) {
                     case 0:
-                        colorPalette.setBackgroundColor(Color.RED);
+                        colorPicker = Color.RED;
                         break;
                     case 1:
-                        colorPalette.setBackgroundColor(Color.BLUE);
+                        colorPicker = Color.BLUE;
                         break;
                     case 2:
-                        colorPalette.setBackgroundColor(Color.GREEN);
+                        colorPicker = Color.GREEN;
                         break;
                     case 3:
-                        colorPalette.setBackgroundColor(Color.WHITE);
+                        colorPicker = Color.WHITE;
                         break;
-
                 }
+                colorPalette.setBackgroundColor(colorPicker);
                 colorDialog.dismiss();
             }
         });
