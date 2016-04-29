@@ -1,5 +1,7 @@
 package com.kdao.cmpe235_project.data;
 
+import com.kdao.cmpe235_project.util.Config;
+
 import org.json.simple.JSONObject;
 
 public class SensorHelper {
@@ -22,16 +24,16 @@ public class SensorHelper {
         int state = 0;
         System.out.println(data);
         switch(sensorType) {
-            case 1:
+            case Config.WATER_SENSOR:
                 state = Integer.parseInt(data.get("wateron").toString());
                 break;
-            case 2:
+            case Config.LIGHT_SENSOR:
                 state = Integer.parseInt(data.get("lighton").toString());
                 break;
-            case 3:
+            case Config.SPEED_SENSOR:
                 state = Integer.parseInt(data.get("speedon").toString());
                 break;
-            case 4:
+            case Config.VOICE_SENSOR:
                 state = Integer.parseInt(data.get("voiceon").toString());
                 break;
             default:

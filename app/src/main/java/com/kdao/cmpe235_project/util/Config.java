@@ -76,4 +76,13 @@ public class Config {
     //Config for ROLE
     public static final int ADMIN_ROLE = 1;
     public static final int USER_ROLE = 2;
+
+    //1. water
+    //2. light
+    //3. speed
+    //4. voice
+    public static final int WATER_SENSOR = 1;
+    public static final int LIGHT_SENSOR = 2;
+    public static final int SPEED_SENSOR = 3;
+    public static final int VOICE_SENSOR = 4;
 }

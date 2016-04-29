@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -54,6 +55,8 @@ public class SensorActivity extends MyActivity {
     private ToggleButton btnToggle;
     private AlertDialog colorDialog;
     private FrameLayout colorPalette;
+    private RelativeLayout lightSensor;
+    private RelativeLayout commonSensor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,8 @@ public class SensorActivity extends MyActivity {
         sensorDeploy = (TextView) findViewById(R.id.sensor_tree_deploy);
         btnToggle = (ToggleButton) findViewById(R.id.toggleButton);
         colorPalette = (FrameLayout) findViewById(R.id.light_color);
+        lightSensor = (RelativeLayout) findViewById(R.id.light_sensor);
+        commonSensor = (RelativeLayout) findViewById(R.id.common_sensor);
     }
 
     private void getSensor() {
@@ -152,10 +157,14 @@ public class SensorActivity extends MyActivity {
         }
         try {
             boolean selected = sensorHelper.getSensorState();
-            System.out.println(">>>> sensor on=" + selected);
+            //System.out.println(">>>> sensor on=" + selected);
             btnToggle.setSelected(selected);
+            if (sensor.getType().getId() == Config.LIGHT_SENSOR) {
+                commonSensor.setVisibility(View.GONE);
+            } else {
+                lightSensor.setVisibility(View.GONE);
+            }
         } catch(Exception ex) {
-
         }
     }
 
@@ -179,6 +188,11 @@ public class SensorActivity extends MyActivity {
     }
 
     public void updateSensor(View v) {
+
+    }
+
+    //Private function handling update sensors
+    private void _updateSensor() {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
             protected void onPreExecute() {

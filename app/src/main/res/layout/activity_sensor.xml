@@ -100,7 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/light_sensor"
-        android:id="@+id/water_sensor"
+        android:id="@+id/common_sensor"
         android:background="@drawable/border_default"
         android:layout_marginBottom="15dp">
         <TextView
@@ -122,6 +122,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:solidColor="@color/colorOrange"
             android:layout_gravity="center"
             android:orientation="vertical"
             max="100"
@@ -131,7 +132,7 @@
         android:id="@+id/button_grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/water_sensor"
+        android:layout_below="@id/common_sensor"
         android:layout_marginTop="20dp"
         android:stretchColumns="2">
         <TableRow
