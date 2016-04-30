@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+import android.content.Context;
+import android.widget.Button;
 
 import com.kdao.cmpe235_project.api.CustomedNumberPicker;
 import com.kdao.cmpe235_project.data.SensorType;
@@ -34,6 +36,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 
+import com.kdao.cmpe235_project.util.PreferenceData;
 import com.orbotix.ConvenienceRobot;
 import com.orbotix.DualStackDiscoveryAgent;
 import com.orbotix.common.DiscoveryException;
@@ -57,7 +60,7 @@ public class SensorActivity extends MyActivity {
     private String treeName;
     private String treeId;
     private static final CharSequence[] colors = {" Red "," Blue "," Green "," White "};
-
+    final Context context = this;
 
     private TextView sensorDeploy;
     private ToggleButton btnToggle;
@@ -65,14 +68,20 @@ public class SensorActivity extends MyActivity {
     private FrameLayout colorPalette;
     private RelativeLayout lightSensor;
     private RelativeLayout commonSensor;
+    private Button undeployBtn;
     private CustomedNumberPicker numberPicker;
     private int colorPicker = Color.WHITE; // default state of color state
     private boolean sensorState  = false;
+    private boolean userLoggedIn = false;
+    private int userRole = 2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor);
+        userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
+        userRole = PreferenceData.getLoggedInRole(getApplicationContext());
+
         try {
             Bundle extras = getIntent().getExtras();
             sensorId = extras.getString(Config.SENSOR_SESSION_ID);
@@ -103,6 +112,11 @@ public class SensorActivity extends MyActivity {
         colorPalette = (FrameLayout) findViewById(R.id.light_color);
         lightSensor = (RelativeLayout) findViewById(R.id.light_sensor);
         commonSensor = (RelativeLayout) findViewById(R.id.common_sensor);
+        undeployBtn = (Button) findViewById(R.id.btn_disconnect);
+        //Hide undeploy btn if user is not admin
+        if (userLoggedIn == false || userRole != Config.ADMIN_ROLE) {
+            undeployBtn.setVisibility(View.GONE);
+        }
     }
 
     private void getSensor() {
@@ -195,16 +209,56 @@ public class SensorActivity extends MyActivity {
     public void navigateToSensorsList(View v) {
         Intent launchActivity = new Intent(getApplicationContext(), SensorsListActivity.class);
         launchActivity.putExtra(Config.TREE_SESSION_ID, treeId);
+        launchActivity.putExtra(Config.TREE_SESSION_NAME, treeName);
         startActivity(launchActivity);
     }
 
     //Public function execute when user update sensor
     public void updateSensor(View v) {
-        sensorState = btnToggle.isChecked();
-        if (sensor.getType().getId() == Config.LIGHT_SENSOR) {
+        if (userLoggedIn == true) { //user only able to interact with tree when they log in
+            sensorState = btnToggle.isChecked();
+            if (sensor.getType().getId() == Config.LIGHT_SENSOR) { //update light sensor
+            } else { //update other sensor
+            }
         } else {
-
+            showAlertDialog(Config.SENSOR_TITLE, Config.SENSOR_UPDATE_REQUIRED, Config.DIALOG_TRY_AGAIN);
         }
+    }
+
+    private void showAlertDialog(String title, String message, String tryText) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        // set title
+        alertDialogBuilder.setTitle(title);
+        // set dialog message
+        alertDialogBuilder
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton(tryText, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Navigate back to barcode page
+                        if (userLoggedIn == false) {
+                            Intent activity;
+                            activity = new Intent(SensorActivity.this, SigninActivity.class);
+                            startActivity(activity);
+                        } else {
+                            _undeploySensor();
+                        }
+                    }
+                });
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.show();
+    }
+
+    //Public function to handle un-deploy sensor
+    public void undeploySensor(View v) {
+        showAlertDialog(Config.SENSOR_UNDEPLOY_TITLE, Config.SENSOR_UNDEPLOY_CHECK, Config.DIALOG_TRY_AGAIN);
+    }
+
+    //function undeploy sensor
+    private void _undeploySensor() {
+
     }
 
     //Private function handling update sensors
@@ -221,10 +275,12 @@ public class SensorActivity extends MyActivity {
                 String state = params[0];
                 String value = params[1];
                 HttpClient httpClient = new DefaultHttpClient();
+                //update sensor URL: /sensor/update/:type/:id
                 HttpPut httpPut = new HttpPut(Config.BASE_URL + "/sensor/update" + sensorType + "/" + sensorId);
                 org.json.JSONObject json = new org.json.JSONObject();
                 try {
                     json.put("on", state);
+                    json.put("data", value);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

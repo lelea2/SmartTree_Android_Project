@@ -73,6 +73,17 @@ public class Config {
     public static final String SENSOR_ACTIVITY = "SENSOR_ACTIVITY";
     public static final String TREE_DEPLOY_ACTIVITY = "TREE_DEPLOY_ACTIVITY";
 
+    //Title for sensor dialog box
+    public static final String SENSOR_TITLE = "Sensor update";
+    public static final String SENSOR_UPDATE_REQUIRED = "Please log in to be able to update sensor";
+    public static final String DIALOG_TRY_AGAIN = "Try again";
+
+    public static final String TREE_TITLE = "Tree Information View";
+    public static final String TREE_NO_EXIST = "No information for tree exist. Please try again";
+
+    public static final String SENSOR_UNDEPLOY_TITLE = "Undeploy Sensor";
+    public static final String SENSOR_UNDEPLOY_CHECK = "Are you sure to undeploy your tree?";
+
     //Config for ROLE
     public static final int ADMIN_ROLE = 1;
     public static final int USER_ROLE = 2;

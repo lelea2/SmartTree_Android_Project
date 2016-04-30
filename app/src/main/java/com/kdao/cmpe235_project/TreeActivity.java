@@ -235,15 +235,14 @@ public class TreeActivity extends YouTubeBaseActivity implements YouTubePlayer.O
      * Helper function to show alert box
      */
     private void showAlertDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                context);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         // set title
-        alertDialogBuilder.setTitle("Tree Information View");
+        alertDialogBuilder.setTitle(Config.TREE_TITLE);
         // set dialog message
         alertDialogBuilder
-                .setMessage("No information for tree exist. Please try again")
+                .setMessage(Config.TREE_NO_EXIST)
                 .setCancelable(false)
-                .setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+                .setPositiveButton(Config.DIALOG_TRY_AGAIN, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //Navigate back to barcode page
                         Intent activity = new Intent(TreeActivity.this, TreesListActivity.class);

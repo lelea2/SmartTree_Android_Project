@@ -41,14 +41,20 @@ public class CameraActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
+        int loggedInRole = PreferenceData.getLoggedInRole(getApplicationContext());
         if (userLoggedIn == false) { //navigate to signin page if user is not signin yet*/
             Intent signinIntent = new Intent(CameraActivity.this, SigninActivity.class);
             signinIntent.putExtra(Config.SIGN_IN_REQUIRED, Config.REQUIRE_SIGNIN);
             startActivity(signinIntent);
             return;
         }
+
         setContentView(R.layout.activity_camera);
         getElements();
+        if (loggedInRole == Config.USER_ROLE) {
+            //If user log in as normal user, then don't show upload btn
+            uploadButton.setVisibility(View.GONE);
+        }
         handleCameraButton();
         handleVideoButton();
         handleAudioButton();
