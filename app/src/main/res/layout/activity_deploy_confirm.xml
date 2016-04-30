@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
         <Button
-            android:layout_width="175dp"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:text="BACK"
             android:onClick="navigateBackToSensor"
@@ -115,7 +115,7 @@
             style="?android:attr/borderlessButtonStyle"/>
 
         <Button
-            android:layout_width="175dp"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:text="CONFIRM"
             android:onClick="deployTree"

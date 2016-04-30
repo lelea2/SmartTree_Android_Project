@@ -115,7 +115,8 @@
                 android:text="BACK"
                 android:textColor="@color/colorTextMainColor"
                 android:textSize="15sp"
-                style="?android:attr/borderlessButtonStyle"/>
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_marginRight="5dp" />
             <Button
                 android:id="@+id/btnLinkToRegisterScreen"
                 android:layout_width="0dp"
@@ -126,7 +127,8 @@
                 android:text="SAVE CHANGES"
                 android:textSize="15sp"
                 android:textColor="@color/colorTextMainColor"
-                style="?android:attr/borderlessButtonStyle" />
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_marginLeft="5dp" />
         </TableRow>
     </TableLayout>
 </RelativeLayout>
