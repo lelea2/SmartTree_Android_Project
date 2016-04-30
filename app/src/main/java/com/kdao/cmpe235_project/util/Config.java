@@ -43,6 +43,7 @@ public class Config {
     public static final String NEW_COMMENT_CREATED = "Comment added";
     public static final String TREE_DEPLOYED = "Sensor deployed to tree";
     public static final String SENSOR_UPDATED = "Sensor is updated successfully";
+    public static final String SENSOR_DELETED = "Sensor is undeployed from tree";
 
 
     //Configuration for loading msg
@@ -57,6 +58,7 @@ public class Config {
     public static final String GET_COMMENTS = "Getting Comments...";
     public static final String DEPLOY_TREE = "Deploy sensor to tree...";
     public static final String UPDATE_SENSOR = "Update sensor...";
+    public static final String UNDEPLOY_SENSOR = "Undeploying sensor...";
 
     //FLAG key configuration
     public static final String SIGN_IN_WITH_BARCODE = "SIGN_IN_WITH_BARCODE";

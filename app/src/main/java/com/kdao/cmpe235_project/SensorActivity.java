@@ -26,6 +26,7 @@ import android.graphics.Color;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
@@ -258,7 +259,59 @@ public class SensorActivity extends MyActivity {
 
     //function undeploy sensor
     private void _undeploySensor() {
+        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(SensorActivity.this, "", Config.UNDEPLOY_SENSOR);
+            }
 
+            @Override
+            protected String doInBackground(String... params) {
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpDelete httpDelete = new HttpDelete(Config.BASE_URL + "/tree/" + treeId + "/sensor");
+                org.json.JSONObject json = new org.json.JSONObject();
+                try {
+                    json.put("sensorId", sensorId);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    try {
+                        HttpResponse httpResponse = httpClient.execute(httpDelete);
+                        InputStream inputStream = httpResponse.getEntity().getContent();
+                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                        StringBuilder stringBuilder = new StringBuilder();
+                        String bufferedStrChunk = null;
+                        while((bufferedStrChunk = bufferedReader.readLine()) != null) {
+                            stringBuilder.append(bufferedStrChunk);
+                        }
+                        return stringBuilder.toString();
+                    } catch (Exception e) {
+                        System.out.println("An Exception given because of UrlEncodedFormEntity " +
+                                "argument :" + e);
+                        e.printStackTrace();
+                    }
+                } catch (Exception uee) {
+                    System.out.println("An Exception given because of UrlEncodedFormEntity argument :" + uee);
+                    uee.printStackTrace();
+                }
+                return "error";
+            }
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+                progressDialog.dismiss();
+                if (result == "error") { //error case
+                    Toast.makeText(getApplicationContext(), Config.SERVER_ERR, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), Config.SENSOR_DELETED, Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+        sendPostReqAsyncTask.execute();
     }
 
     //Private function handling update sensors
