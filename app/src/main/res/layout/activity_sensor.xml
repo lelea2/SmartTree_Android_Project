@@ -127,7 +127,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginStart="19dp" />
         <com.kdao.cmpe235_project.api.CustomedNumberPicker
-            android:id="@+id/numberPicker1"
+            android:id="@+id/numberPicker"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"

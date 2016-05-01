@@ -131,6 +131,8 @@ public class DeployConfirmActivity extends AppCompatActivity {
     private void navigateToSensorList() {
         Intent launchActivity = new Intent(getApplicationContext(), SensorsListActivity.class);
         launchActivity.putExtra(Config.SENSOR_ACTIVITY, Config.TREE_DEPLOYED);
+        launchActivity.putExtra(Config.TREE_SESSION_ID, treeId);
+        launchActivity.putExtra(Config.TREE_SESSION_NAME, treeName);
         startActivity(launchActivity);
     }
 

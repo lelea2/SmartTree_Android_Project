@@ -94,8 +94,7 @@ public class SensorsListActivity extends MyActivity {
         if (selItem.isDeploy()) { //If sensor is deployed
             Intent newIntent = new Intent(getApplicationContext(), SensorActivity.class);
             newIntent.putExtra(Config.SENSOR_SESSION_ID, sensorId);
-            newIntent.putExtra(Config.SENSOR_SESSION_TYPE, Integer.toString(selItem.getType()
-                    .getId()));
+            newIntent.putExtra(Config.SENSOR_SESSION_TYPE, Integer.toString(selItem.getType().getId()));
             newIntent.putExtra(Config.TREE_SESSION_NAME, treeName);
             startActivity(newIntent);
         } else {

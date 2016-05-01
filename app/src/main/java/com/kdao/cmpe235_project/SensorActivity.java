@@ -72,7 +72,8 @@ public class SensorActivity extends MyActivity {
     private RelativeLayout commonSensor;
     private Button undeployBtn;
     private CustomedNumberPicker numberPicker;
-    private int colorPicker = Color.WHITE; // default state of color state
+    private int DEFAULT_COLOR = Color.WHITE;
+    private int colorPicker = DEFAULT_COLOR; // default state of color state
     private boolean sensorState  = false;
     private boolean userLoggedIn = false;
     private int userRole = 2;
@@ -115,6 +116,7 @@ public class SensorActivity extends MyActivity {
         lightSensor = (RelativeLayout) findViewById(R.id.light_sensor);
         commonSensor = (RelativeLayout) findViewById(R.id.common_sensor);
         undeployBtn = (Button) findViewById(R.id.btn_disconnect);
+        numberPicker = (CustomedNumberPicker) findViewById(R.id.numberPicker);
         //Hide undeploy btn if user is not admin
         if (userLoggedIn == false || userRole != Config.ADMIN_ROLE) {
             undeployBtn.setVisibility(View.GONE);
@@ -177,6 +179,7 @@ public class SensorActivity extends MyActivity {
 
     private void generateSensorView(JSONObject obj) {
         treeId = obj.get("treeId").toString();
+        System.out.println(obj);
         if (treeName != null) {
             sensorDeploy.setText("Tree Deployed: " + treeName);
         } else {
@@ -186,13 +189,37 @@ public class SensorActivity extends MyActivity {
             boolean selected = sensorHelper.getSensorState();
             //System.out.println(">>>> sensor on=" + selected);
             btnToggle.setSelected(selected);
-            if (sensor.getType().getId() == Config.LIGHT_SENSOR) {
+            if (sensor.getType().getId() == Config.LIGHT_SENSOR) { //light sensor
                 commonSensor.setVisibility(View.GONE);
-            } else {
+                //colorPalette.setBackgroundColor(Integer.parseInt());
+                int colorInt = DEFAULT_COLOR;
+                try {
+                    colorInt = Integer.parseInt(obj.get("lightcolor").toString());
+                } catch(Exception ex) {}
+                colorPalette.setBackgroundColor(colorInt);
+            } else { //set color for other sensor
                 lightSensor.setVisibility(View.GONE);
+                try {
+                    int data = Integer.parseInt(getCommonSensorData(obj));
+                    numberPicker.setValue(data);
+                } catch(Exception ex) {}
             }
-        } catch(Exception ex) {
+        } catch(Exception ex) {}
+    }
+
+    //Private helper function getting data of sensor
+    private String getCommonSensorData(JSONObject obj) {
+        String data = "60";
+        //[{"treeId":"8f14886c-d267-44b8-8518-8cf363634929","sensorType":"3","name":"speed sensor","id":null,"wateron":null,"watertemp":null,"ts":null,"voiceon":null,"volume":null,"speedon":null,"speedlimit":null,"lighton":null,"lightcolor":null}]
+        int typeInt = sensor.getType().getId();
+        if (typeInt == Config.WATER_SENSOR) {
+            data = obj.get("watertemp").toString();
+        } else if (typeInt == Config.VOICE_SENSOR) {
+            data = obj.get("volume").toString();
+        } else if (typeInt == Config.SPEED_SENSOR) {
+            data = obj.get("speedlimit").toString();
         }
+        return data;
     }
 
     private void createSensorView(JSONObject obj) {
@@ -217,11 +244,15 @@ public class SensorActivity extends MyActivity {
 
     //Public function execute when user update sensor
     public void updateSensor(View v) {
+        String sensorValue;
         if (userLoggedIn == true) { //user only able to interact with tree when they log in
             sensorState = btnToggle.isChecked();
             if (sensor.getType().getId() == Config.LIGHT_SENSOR) { //update light sensor
+                sensorValue = colorPicker + "";
             } else { //update other sensor
+                sensorValue = numberPicker.getValue() + "";
             }
+            _updateSensor(sensorValue);
         } else {
             showAlertDialog(Config.SENSOR_TITLE, Config.SENSOR_UPDATE_REQUIRED, Config.DIALOG_TRY_AGAIN);
         }
@@ -270,13 +301,9 @@ public class SensorActivity extends MyActivity {
             @Override
             protected String doInBackground(String... params) {
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpDelete httpDelete = new HttpDelete(Config.BASE_URL + "/tree/" + treeId + "/sensor");
-                org.json.JSONObject json = new org.json.JSONObject();
-                try {
-                    json.put("sensorId", sensorId);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                HttpDelete httpDelete = new HttpDelete(Config.BASE_URL + "/tree/" + treeId + "/sensor/" + sensorId);
+                //System.out.println(Config.BASE_URL + "/tree/" + treeId + "/sensor");
+                //System.out.println(">>>> sensorId:" + sensorId + "<<<<<<<<");
                 try {
                     try {
                         HttpResponse httpResponse = httpClient.execute(httpDelete);
@@ -317,7 +344,7 @@ public class SensorActivity extends MyActivity {
     }
 
     //Private function handling update sensors
-    private void _updateSensor() {
+    private void _updateSensor(String sensorValue) {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
             protected void onPreExecute() {
@@ -327,14 +354,13 @@ public class SensorActivity extends MyActivity {
 
             @Override
             protected String doInBackground(String... params) {
-                String state = params[0];
-                String value = params[1];
+                String value = params[0];
                 HttpClient httpClient = new DefaultHttpClient();
                 //update sensor URL: /sensor/update/:type/:id
-                HttpPut httpPut = new HttpPut(Config.BASE_URL + "/sensor/update" + sensorType + "/" + sensorId);
+                HttpPut httpPut = new HttpPut(Config.BASE_URL + "/sensor/update/" + sensorType + "/" + sensorId);
                 org.json.JSONObject json = new org.json.JSONObject();
                 try {
-                    json.put("on", state);
+                    json.put("on", (sensorState == true) ? 1 : 0);
                     json.put("data", value);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -377,7 +403,7 @@ public class SensorActivity extends MyActivity {
             }
         }
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
-        sendPostReqAsyncTask.execute();
+        sendPostReqAsyncTask.execute(sensorValue);
     }
 
     //Navigate back to tree
