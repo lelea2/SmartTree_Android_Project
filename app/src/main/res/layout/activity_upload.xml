@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    android:orientation="vertical" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackground"
+                android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/pauseCancelAllLayout"
@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorOrange"
             android:text="@string/pause_all" />
 
         <Button
@@ -24,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorRed"
             android:text="@string/cancel_all" />
     </LinearLayout>
 
@@ -75,6 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorGreen"
             android:text="@string/upload_video" />
 
         <Button
@@ -82,12 +85,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorBlueLight"
             android:text="@string/upload_image" />
         <Button
             android:id="@+id/buttonUploadAudio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorOrange"
             android:text="@string/upload_audio" />
     </LinearLayout>
 
