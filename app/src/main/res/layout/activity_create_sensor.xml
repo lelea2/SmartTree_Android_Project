@@ -59,31 +59,40 @@
         android:textColor="@color/colorTextMainColor"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dp" />
-    <RelativeLayout
+    <TableLayout
+        android:id="@+id/button_grid_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-        <Button
-            android:layout_width="175dp"
-            android:layout_height="50dp"
-            android:text="BACK"
-            android:background="#E24F67"
-            android:onClick="navigateToMainActivity"
-            android:id="@+id/btn_back"
-            android:textColor="#fff"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:layout_width="175dp"
-            android:layout_height="50dp"
-            android:text="CREATE NEW TREE"
-            android:id="@+id/btn_create_tree"
-            android:onClick="navigateToCreateTree"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:background="#2AA7AA"
-            android:textColor="#fff"/>
-    </RelativeLayout>
-
+        android:layout_height="match_parent"
+        android:stretchColumns="2">
+         <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="BACK"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/colorRed"
+                    android:onClick="navigateToMainActivity"
+                    android:id="@+id/btn_back"
+                    android:textColor="#fff"
+                    style="?android:attr/borderlessButtonStyle"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:text="CREATE NEW TREE"
+                    android:id="@+id/btn_create_tree"
+                    android:onClick="navigateToCreateTree"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="#2AA7AA"
+                    android:textColor="#fff"/>
+         </TableRow>
+    </TableLayout>
 </LinearLayout>

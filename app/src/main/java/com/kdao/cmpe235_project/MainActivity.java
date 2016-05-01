@@ -46,8 +46,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(launchActivity);
     }
 
-    public void navigateToComment(View v) {
-        Toast.makeText(getApplicationContext(), Config.COMMENT_PER_TREE, Toast.LENGTH_LONG).show();
+    public void navigateToAudio(View v) {
+        Intent launchActivity = new Intent(getApplicationContext(), AudioActivity.class);
+        Log.i(TAG, "Navigate to audio activity");
+        startActivity(launchActivity);
     }
 
     public void navigateToCreateTree(View v) {

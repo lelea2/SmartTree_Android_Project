@@ -28,7 +28,7 @@
         android:layout_height="50dp"
         android:id="@+id/new_tree_title"
         android:layout_gravity="center"
-        android:background="@drawable/border_default"
+        android:background="@drawable/border_selecter"
         android:hint="Tree Name"
         android:textSize="19dp"
         android:textColorHint="@color/colorTextHint"
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/new_tree_address"
-        android:background="@drawable/border_default"
+        android:background="@drawable/border_selecter"
         android:hint="Address"
         android:textSize="19dp"
         android:textColorHint="@color/colorTextHint"
@@ -70,7 +70,7 @@
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/border_default"
+        android:background="@drawable/border_selecter"
         android:layout_gravity="center" />
 
     <!--<RelativeLayout
@@ -111,7 +111,7 @@
         android:layout_height="50dp"
         android:id="@+id/new_tree_youtubeId"
         android:layout_gravity="center"
-        android:background="@drawable/border_default"
+        android:background="@drawable/border_selecter"
         android:hint="YoutubeId"
         android:textSize="19dp"
         android:textColorHint="@color/colorTextHint"
@@ -122,30 +122,40 @@
         android:layout_marginBottom="43dp"
         android:singleLine="true" />
 
-    <RelativeLayout
+    <TableLayout
+        android:id="@+id/button_grid_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-        <Button
-            android:layout_width="175dp"
-            android:layout_height="50dp"
-            android:text="BACK"
-            android:background="#E24F67"
-            android:id="@+id/btn_back"
-            android:onClick="navigateToMainActivity"
-            android:textColor="#fff"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:layout_width="175dp"
-            android:layout_height="50dp"
-            android:text="CREATE NEW TREE"
-            android:id="@+id/btn_create_tree"
-            android:onClick="createNewTree"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:background="#2AA7AA"
-            android:textColor="#fff"/>
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:stretchColumns="2">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp">
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:text="BACK"
+                android:background="@color/colorRed"
+                android:id="@+id/btn_back"
+                android:onClick="navigateToMainActivity"
+                android:textColor="#fff"
+                style="?android:attr/borderlessButtonStyle"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:text="CREATE NEW TREE"
+                android:id="@+id/btn_create_tree"
+                android:onClick="createNewTree"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="#2AA7AA"
+                android:textColor="#fff"/>
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

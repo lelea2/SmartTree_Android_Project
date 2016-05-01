@@ -78,6 +78,7 @@
                 android:layout_weight="1"
                 android:layout_height="fill_parent"
                 android:id="@+id/btn_audio"
+                android:onClick="navigateToAudio"
                 android:background="@drawable/main_ico_audio" />
             <ImageButton
                 android:layout_width="fill_parent"

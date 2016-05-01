@@ -57,7 +57,6 @@ public class CameraActivity extends AppCompatActivity {
         }
         handleCameraButton();
         handleVideoButton();
-        handleAudioButton();
         handleSharePhoto();
         handleUpload();
     }
@@ -72,20 +71,6 @@ public class CameraActivity extends AppCompatActivity {
                 Log.i(TAG, "Video action");
                 Intent videoView = new Intent(CameraActivity.this, VideoActivity.class);
                 startActivity(videoView);
-            }
-        });
-    }
-
-    /**
-     * Private function to handle Audio Button
-     */
-    private void handleAudioButton() {
-        audioButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "Audio action");
-                Intent audioView = new Intent(CameraActivity.this, AudioActivity.class);
-                startActivity(audioView);
             }
         });
     }
@@ -110,7 +95,6 @@ public class CameraActivity extends AppCompatActivity {
     private void getElements() {
         cameraButton = (Button)findViewById(R.id.camera_btn);
         videoButton = (Button)findViewById(R.id.video_btn);
-        audioButton = (Button)findViewById(R.id.audio_btn);
         shareButton = (Button) findViewById(R.id.image_share_btn);
         uploadButton = (Button) findViewById(R.id.upload_btn);
         viewImage = (ImageView) findViewById(R.id.viewImage);

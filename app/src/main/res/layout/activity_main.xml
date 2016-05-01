@@ -82,6 +82,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:id="@+id/btn_audio"
+                android:onClick="navigateToAudio"
                 android:background="@drawable/main_ico_audio" />
         </TableRow>
     </TableLayout>
