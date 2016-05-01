@@ -25,9 +25,10 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="490dp"
         android:layout_below="@id/comment_list_title"
-        android:id="@+id/commentList" />
+        android:id="@+id/commentList"
+       />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -51,7 +52,7 @@
             android:layout_height="match_parent">
 
             <RelativeLayout
-                android:layout_width="119dp"
+                android:layout_width="127dp"
                 android:layout_height="52dp"
                 android:background="@drawable/border_default"
                 android:id="@+id/relativeLayout">
@@ -79,7 +80,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="119dp"
+                android:layout_width="125dp"
                 android:layout_height="52dp"
                 android:background="@drawable/border_default"
                 android:layout_alignParentTop="true"
@@ -109,7 +110,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="120dp"
+                android:layout_width="130dp"
                 android:layout_height="52dp"
                 android:background="@drawable/border_default"
                 android:layout_alignParentTop="true"
@@ -163,7 +164,8 @@
                 android:layout_below="@+id/linearLayout2"
                 android:layout_alignStart="@+id/linearLayout2"
                 android:layout_alignParentBottom="true"
-                android:fontFamily="Helvetica Neue" />
+                android:fontFamily="Helvetica Neue"
+                android:layout_marginRight="5dp" />
 
             <Button
                 android:id="@+id/button3"
@@ -179,7 +181,8 @@
                 android:layout_below="@+id/linearLayout2"
                 android:layout_alignEnd="@+id/linearLayout2"
                 android:layout_alignParentBottom="true"
-                android:fontFamily="Helvetica Neue" />
+                android:fontFamily="Helvetica Neue"
+                android:layout_marginLeft="5dp" />
         </TableRow>
     </TableLayout>
 </RelativeLayout>

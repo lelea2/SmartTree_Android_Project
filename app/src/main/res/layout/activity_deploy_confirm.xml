@@ -34,24 +34,6 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="Helvetica Neue"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tree name: "
-        android:id="@+id/tree_name"
-        android:textColor="#FFF"
-        android:textSize="16sp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="Helvetica Neue"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sensor name: "
-        android:id="@+id/sensor_name"
-        android:textColor="#FFF"
-        android:textSize="16sp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="Helvetica Neue"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -79,6 +61,17 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/deploy_ico_sensor"
                 android:layout_marginTop="20dp" />
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/sensor_name"
+                android:textColor="#FFF"
+                android:textSize="16sp"
+                android:fontFamily="Helvetica Neue"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -97,6 +90,17 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/deploy_ico_tree"
                 android:layout_marginTop="20dp" />
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tree_name"
+                android:textColor="#FFF"
+                android:textSize="16sp"
+                android:fontFamily="Helvetica Neue"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -105,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
         <Button
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="50dp"
             android:text="BACK"
             android:onClick="navigateBackToSensor"
@@ -115,7 +119,7 @@
             style="?android:attr/borderlessButtonStyle"/>
 
         <Button
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="50dp"
             android:text="CONFIRM"
             android:onClick="deployTree"

@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
         <Button
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="50dp"
             android:maxHeight="50dp"
             android:minHeight="50dp"

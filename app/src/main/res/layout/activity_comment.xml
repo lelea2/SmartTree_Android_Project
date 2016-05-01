@@ -24,14 +24,14 @@
         android:fontFamily="Helvetica Neue" />
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="490dp"
         android:inputType="textMultiLine"
         android:gravity="left|top"
         android:ems="10"
         android:id="@+id/comment_text"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
-        android:background="@drawable/border_default"
+        android:background="@drawable/border_selecter"
         android:layout_below="@+id/comment_leavefeedback"
         android:layout_alignStart="@+id/comment_leavefeedback" />
     <LinearLayout
@@ -56,7 +56,7 @@
             android:layout_height="match_parent">
 
             <RelativeLayout
-                android:layout_width="164dp"
+                android:layout_width="190dp"
                 android:layout_height="70dp"
                 android:background="@drawable/border_default"
                 android:id="@+id/relativeLayout">
@@ -107,7 +107,7 @@
     <Button
         style="?android:attr/borderlessButtonStyle"
         android:id="@+id/button2"
-        android:layout_width="150dp"
+        android:layout_width="175dp"
         android:layout_height="50dp"
         android:background="#E24F67"
         android:text="MAIN"
@@ -121,7 +121,7 @@
     <Button
         android:id="@+id/button3"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="150dp"
+        android:layout_width="175dp"
         android:layout_height="50dp"
         android:background="#2AA7AA"
         android:text="LEAVE FEEDBACK"

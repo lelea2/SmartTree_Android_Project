@@ -28,7 +28,7 @@
         android:layout_height="50dp"
         android:id="@+id/new_tree_title"
         android:layout_gravity="center"
-        android:background="@drawable/border_default"
+        android:background="@drawable/border_selecter"
         android:hint="Tree Name"
         android:textSize="19dp"
         android:textColorHint="@color/colorTextHint"
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/new_tree_address"
-        android:background="@drawable/border_default"
+        android:background="@drawable/border_selecter"
         android:hint="Address"
         android:textSize="19dp"
         android:textColorHint="@color/colorTextHint"
@@ -70,7 +70,7 @@
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/border_default"
+        android:background="@drawable/border_selecter"
         android:layout_gravity="center" />
 
     <!--<RelativeLayout
@@ -111,7 +111,7 @@
         android:layout_height="50dp"
         android:id="@+id/new_tree_youtubeId"
         android:layout_gravity="center"
-        android:background="@drawable/border_default"
+        android:background="@drawable/border_selecter"
         android:hint="YoutubeId"
         android:textSize="19dp"
         android:textColorHint="@color/colorTextHint"
@@ -127,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
         <Button
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="50dp"
             android:text="BACK"
             android:background="#E24F67"
@@ -136,7 +136,7 @@
             android:textColor="#fff"
             style="?android:attr/borderlessButtonStyle"/>
         <Button
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="50dp"
             android:text="CREATE NEW TREE"
             android:id="@+id/btn_create_tree"
