@@ -307,8 +307,7 @@ public class SensorActivity extends MyActivity {
                 if (result == "error") { //error case
                     Toast.makeText(getApplicationContext(), Config.SERVER_ERR, Toast.LENGTH_LONG).show();
                 } else {
-                    //Toast.makeText(getApplicationContext(), Config.SENSOR_DELETED, Toast
-                            .LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), Config.SENSOR_DELETED, Toast.LENGTH_LONG).show();
                     _navigateBackToTree();
                 }
             }
