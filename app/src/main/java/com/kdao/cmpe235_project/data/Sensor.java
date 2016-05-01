@@ -46,4 +46,9 @@ public class Sensor {
     public void setType(SensorType type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return this.name;            // What to display in the Spinner list.
+    }
 }

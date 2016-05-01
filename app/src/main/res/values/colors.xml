@@ -12,6 +12,8 @@
     <color name="colorTextMainColor">#fff</color>
     <color name="colorTextHint">#AEAAA9</color>
     <color name="colorAccent">#fff</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorGrey">#808080</color>
     <color name="transparent">@android:color/transparent</color>
 </resources>
 

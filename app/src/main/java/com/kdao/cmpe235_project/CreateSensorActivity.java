@@ -49,8 +49,7 @@ public class CreateSensorActivity extends AppCompatActivity {
         list.add("Water Sensor");
         list.add("Speed Sensor");
         list.add("Voice Sensor");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout
-                .simple_spinner_item, list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sensorType.setAdapter(dataAdapter);
     }

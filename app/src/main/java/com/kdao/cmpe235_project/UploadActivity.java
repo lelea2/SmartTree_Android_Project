@@ -18,10 +18,12 @@ package com.kdao.cmpe235_project;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,12 +32,15 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Spinner;
+import android.view.View.OnClickListener;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
@@ -43,12 +48,14 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferType;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -80,6 +87,19 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferType;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+import com.kdao.cmpe235_project.data.Location;
+import com.kdao.cmpe235_project.data.Sensor;
+import com.kdao.cmpe235_project.data.Tree;
+import com.kdao.cmpe235_project.util.Config;
+import com.kdao.cmpe235_project.api.SpinAdapter;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -110,6 +130,14 @@ public class UploadActivity extends ListActivity {
     private Button btnPauseAll;
     private Button btnCancelAll;
 
+    //Set up for tree dropdown
+    private Spinner treeListSpinner;
+    private SpinAdapter adapter;
+    private ProgressDialog progressDialog;
+    private List<Tree> trees = new ArrayList<Tree>();
+    private static String GEL_TREES_URL = Config.BASE_URL + "/trees";
+
+
     // The TransferUtility is the primary class for managing transfer to S3
     private TransferUtility transferUtility;
 
@@ -134,6 +162,8 @@ public class UploadActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
 
+        treeListSpinner = (Spinner) findViewById(R.id.tree_list_selection);
+        getAllTrees();
         // Initializes TransferUtility, always do this before using it.
         transferUtility = Agent.getTransferUtility(this);
         checkedIndex = INDEX_NOT_CHECKED;
@@ -600,5 +630,94 @@ public class UploadActivity extends ListActivity {
             Log.d(TAG, "onStateChanged: " + id + ", " + newState);
             updateList();
         }
+    }
+
+    private void getAllTrees() {
+        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(UploadActivity.this, "", Config.GET_TREES);
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpGet httpGet = new HttpGet(GEL_TREES_URL);
+                try {
+                    try {
+                        HttpResponse httpResponse = httpClient.execute(httpGet);
+                        InputStream inputStream = httpResponse.getEntity().getContent();
+                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                        StringBuilder stringBuilder = new StringBuilder();
+                        String bufferedStrChunk = null;
+                        while((bufferedStrChunk = bufferedReader.readLine()) != null) {
+                            stringBuilder.append(bufferedStrChunk);
+                        }
+                        return stringBuilder.toString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception uee) {
+                    System.out.println("An Exception given because of UrlEncodedFormEntity argument :" + uee);
+                    uee.printStackTrace();
+                }
+                return null;
+            }
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+                progressDialog.dismiss();
+                try {
+                    JSONArray arrayObj = null;
+                    JSONParser jsonParser = new JSONParser();
+                    arrayObj= (JSONArray) jsonParser.parse(result);
+                    populateTrees(arrayObj);
+                    createTreeDrodown();
+                } catch(Exception ex) {
+                    System.out.println(ex);
+                    Toast.makeText(getApplicationContext(), Config.SCAN_ERR, Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+        sendPostReqAsyncTask.execute();
+    }
+
+    /**
+     * Private function to populate comments
+     * @method populateTrees
+     */
+    private void populateTrees(JSONArray arrayObj) {
+        //System.out.println(arrayObj.size());
+        for (int i = 0; i < arrayObj.size(); i++) {
+            try {
+                JSONObject object = (JSONObject) arrayObj.get(i);
+                Location location = new Location(Double.parseDouble(object.get("longitude").toString()),
+                        Double.parseDouble(object.get("latitude").toString()), object.get
+                        ("address").toString(), object.get("title").toString());
+                Sensor sensor = new Sensor();
+                trees.add(new Tree(object.get("id").toString(), object.get("description")
+                        .toString(), "", object.get("youtubeId").toString(), location, sensor));
+            } catch(Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    private void createTreeDrodown() {
+        adapter = new SpinAdapter(UploadActivity.this, R.layout.spinner_item, trees);
+        treeListSpinner.setAdapter(adapter);
+        treeListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                // Here you get the current item (a User object) that is selected by its position
+                Tree tree = (Tree) adapter.getItem(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapter) {
+            }
+        });
     }
 }

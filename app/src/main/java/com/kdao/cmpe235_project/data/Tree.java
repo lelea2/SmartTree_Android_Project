@@ -97,4 +97,9 @@ public class Tree {
     public void setLikecount(int likecount) {
         this.likecount = likecount;
     }
+
+    @Override
+    public String toString() {
+        return this.location.getName().toString();            // What to display in the Spinner list.
+    }
 }
