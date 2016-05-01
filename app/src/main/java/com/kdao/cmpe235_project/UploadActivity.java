@@ -136,6 +136,7 @@ public class UploadActivity extends ListActivity {
     private ProgressDialog progressDialog;
     private List<Tree> trees = new ArrayList<Tree>();
     private static String GEL_TREES_URL = Config.BASE_URL + "/trees";
+    private String treeId;
 
 
     // The TransferUtility is the primary class for managing transfer to S3
@@ -704,6 +705,9 @@ public class UploadActivity extends ListActivity {
                 System.out.println(e);
             }
         }
+        if (arrayObj.size() > 0) {
+            treeId = trees.get(0).getId();
+        }
     }
 
     private void createTreeDrodown() {
@@ -714,6 +718,7 @@ public class UploadActivity extends ListActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 // Here you get the current item (a User object) that is selected by its position
                 Tree tree = (Tree) adapter.getItem(position);
+                treeId = tree.getId();
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapter) {

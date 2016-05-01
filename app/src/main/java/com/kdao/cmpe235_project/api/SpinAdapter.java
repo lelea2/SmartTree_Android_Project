@@ -34,7 +34,6 @@ public class SpinAdapter<T> extends ArrayAdapter<T> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.BLACK);
         label.setText(values.toArray(new Object[values.size()])[position].toString());
         return label;
     }
@@ -42,7 +41,6 @@ public class SpinAdapter<T> extends ArrayAdapter<T> {
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         TextView label = new TextView(context);
-        label.setTextColor(Color.BLACK);
         label.setText(values.toArray(new Object[values.size()])[position].toString());
         return label;
     }
