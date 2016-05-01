@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -306,7 +307,9 @@ public class SensorActivity extends MyActivity {
                 if (result == "error") { //error case
                     Toast.makeText(getApplicationContext(), Config.SERVER_ERR, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), Config.SENSOR_DELETED, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), Config.SENSOR_DELETED, Toast
+                            .LENGTH_LONG).show();
+                    _navigateBackToTree();
                 }
             }
         }
@@ -376,6 +379,13 @@ public class SensorActivity extends MyActivity {
         }
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
         sendPostReqAsyncTask.execute();
+    }
+
+    //Navigate back to tree
+    private void _navigateBackToTree() {
+        Intent launchActivity = new Intent(getApplicationContext(), TreesListActivity.class);
+        launchActivity.putExtra(Config.TREE_ACTIVITY, Config.SENSOR_DELETED);
+        startActivity(launchActivity);
     }
 
     public void colorPick(View v) {
