@@ -12,9 +12,9 @@
     <string name="title_activity_maps">Map</string>
     <string name="scan_title">Scan for tree information</string>
     <string name="scan_message">Scan</string>
-    <string name="camera_btn">Take Photo!</string>
-    <string name="video_btn">Video!</string>
-    <string name="audio_btn">Audio!</string>
+    <string name="camera_btn">Take Photo</string>
+    <string name="video_btn">Video</string>
+    <string name="audio_btn">Audio</string>
     <string name="menu_settings">Settings</string>
     <string name="toggle_turn_on">On</string>
     <string name="toggle_turn_off">Off</string>

@@ -81,9 +81,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:id="@+id/btn_comment"
-                    android:onClick="navigateToComment"
-                    android:background="@drawable/main_ico_comment" />
+                    android:id="@+id/btn_audio"
+                    android:background="@drawable/main_ico_audio" />
             </TableRow>
         </TableLayout>
 
