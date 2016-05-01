@@ -205,6 +205,7 @@
             android:onClick="navigateToAllTree"
             android:layout_width="184dp"
             android:layout_height="50dp"
+            android:layout_marginTop="20dp"
             android:background="#E24F67"
             android:text="BACK"
             android:textColor="#fff"

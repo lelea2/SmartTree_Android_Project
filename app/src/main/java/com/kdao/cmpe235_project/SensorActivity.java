@@ -187,8 +187,11 @@ public class SensorActivity extends MyActivity {
         }
         try {
             boolean selected = sensorHelper.getSensorState();
-            //System.out.println(">>>> sensor on=" + selected);
+            System.out.println(">>>> sensor on=" + selected);
+            //setSelected() doesn't change the toggle state. According to google it does the following: Changes the selection state of this view. A view can be selected or not. Note that selection is not the same as focus. Views are typically selected in the context of an AdapterView like ListView or GridView; the selected view is the view that is highlighted.
             btnToggle.setSelected(selected);
+            btnToggle.setChecked(selected);
+            //btnToggle.forceLayout(); //update state
             if (sensor.getType().getId() == Config.LIGHT_SENSOR) { //light sensor
                 commonSensor.setVisibility(View.GONE);
                 //colorPalette.setBackgroundColor(Integer.parseInt());
@@ -247,6 +250,7 @@ public class SensorActivity extends MyActivity {
         String sensorValue;
         if (userLoggedIn == true) { //user only able to interact with tree when they log in
             sensorState = btnToggle.isChecked();
+            System.out.println(">>> sensorState:<<<<" + sensorState);
             if (sensor.getType().getId() == Config.LIGHT_SENSOR) { //update light sensor
                 sensorValue = colorPicker + "";
             } else { //update other sensor

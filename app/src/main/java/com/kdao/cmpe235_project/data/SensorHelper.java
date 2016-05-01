@@ -15,32 +15,31 @@ public class SensorHelper {
         this.type = type;
     }
 
+    public SensorType getType() {
+        return type;
+    }
+
+    public void setType(SensorType type) {
+        this.type = type;
+    }
+
+    public JSONObject getData() {
+        return data;
+    }
+
+    public void setData(JSONObject data) {
+        this.data = data;
+    }
+
     //1. water
     //2. light
     //3. speed
     //4. voice
     public boolean getSensorState() {
-        int sensorType = type.getId();
         int state = 0;
-        System.out.println(data);
-        switch(sensorType) {
-            case Config.WATER_SENSOR:
-                state = Integer.parseInt(data.get("wateron").toString());
-                break;
-            case Config.LIGHT_SENSOR:
-                state = Integer.parseInt(data.get("lighton").toString());
-                break;
-            case Config.SPEED_SENSOR:
-                state = Integer.parseInt(data.get("speedon").toString());
-                break;
-            case Config.VOICE_SENSOR:
-                state = Integer.parseInt(data.get("voiceon").toString());
-                break;
-            default:
-                break;
-        }
-        //System.out.println(">>>>>> State=" + state);
-        //System.out.println(">>>>>> State=" + (state != 0));
+        state = Integer.parseInt(data.get("onoff").toString());
+        System.out.println(">>>>>> State=" + state);
+        System.out.println(">>>>>> State checked=" + (state != 0));
         return (state != 0);
     }
 }
