@@ -1,8 +1,13 @@
 package com.kdao.cmpe235_project;
 
+import android.*;
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -49,8 +54,10 @@ import com.orbotix.le.RobotLE;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SensorActivity extends MyActivity {
+public class SensorActivity extends MyActivity implements RobotChangedStateListener {
 
     private String sensorId;
     private String sensorType;
@@ -58,10 +65,12 @@ public class SensorActivity extends MyActivity {
     private static String GET_SENSOR_URL = Config.BASE_URL + "/sensor/";
     private Sensor sensor;
     private SensorType type;
+    private int typeInt;
     private SensorHelper sensorHelper;
     private String treeName;
     private String treeId;
-    private static final CharSequence[] colors = {" Red "," Blue "," Green "," White "};
+    private static final CharSequence[] colors = {" Red "," Blue "," Green "," White ", " Yellow " +
+            "", " Pink "};
     final Context context = this;
 
     private TextView sensorDeploy;
@@ -71,12 +80,21 @@ public class SensorActivity extends MyActivity {
     private RelativeLayout lightSensor;
     private RelativeLayout commonSensor;
     private Button undeployBtn;
+    private Button spheroBtn;
+
     private CustomedNumberPicker numberPicker;
-    private int DEFAULT_COLOR = Color.WHITE;
+    private int DEFAULT_COLOR = Color.BLUE;
     private int colorPicker = DEFAULT_COLOR; // default state of color state
     private boolean sensorState  = false;
     private boolean userLoggedIn = false;
     private int userRole = 2;
+
+    private static final int REQUEST_CODE_LOCATION_PERMISSION = 42;
+    private static final float ROBOT_VELOCITY = 0.6f;
+
+    private ConvenienceRobot mRobot;
+
+    private static String TAG = "Sphero";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,6 +125,28 @@ public class SensorActivity extends MyActivity {
             //catching
             navigateToSensorsList();
         }
+
+        /*
+            Associate a listener for robot state changes with the DualStackDiscoveryAgent.
+            DualStackDiscoveryAgent checks for both Bluetooth Classic and Bluetooth LE.
+            DiscoveryAgentClassic checks only for Bluetooth Classic robots.
+            DiscoveryAgentLE checks only for Bluetooth LE robots.
+       */
+        DualStackDiscoveryAgent.getInstance().addRobotStateListener( this );
+
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
+            int hasLocationPermission = checkSelfPermission( android.Manifest.permission.ACCESS_COARSE_LOCATION );
+            if( hasLocationPermission != PackageManager.PERMISSION_GRANTED ) {
+                Log.e(TAG, Config.SPHERO_NOT_GRANTED);
+                Toast.makeText(getApplicationContext(), Config.SPHERO_NOT_GRANTED, Toast.LENGTH_LONG).show();
+                List<String> permissions = new ArrayList<String>();
+                permissions.add( Manifest.permission.ACCESS_COARSE_LOCATION);
+                requestPermissions(permissions.toArray(new String[permissions.size()] ), REQUEST_CODE_LOCATION_PERMISSION );
+            } else {
+                Log.d(TAG, Config.SPHERO_GRANTED);
+                Toast.makeText(getApplicationContext(), Config.SPHERO_GRANTED, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void getElem() {
@@ -117,9 +157,21 @@ public class SensorActivity extends MyActivity {
         commonSensor = (RelativeLayout) findViewById(R.id.common_sensor);
         undeployBtn = (Button) findViewById(R.id.btn_disconnect);
         numberPicker = (CustomedNumberPicker) findViewById(R.id.numberPicker);
+        spheroBtn = (Button) findViewById(R.id.btn_interact);
         //Hide undeploy btn if user is not admin
         if (userLoggedIn == false || userRole != Config.ADMIN_ROLE) {
             undeployBtn.setVisibility(View.GONE);
+        }
+    }
+
+    //Public function dealing with sensor interact
+    public void spheroInteract(View v) {
+        if (typeInt == Config.LIGHT_SENSOR) {
+            blink();
+        } else if (typeInt == Config.SPEED_SENSOR) {
+            robotDrive();
+        } else {
+            Toast.makeText(getApplicationContext(), Config.ROBOT_NO_INTERACT, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -130,7 +182,6 @@ public class SensorActivity extends MyActivity {
                 super.onPreExecute();
                 progressDialog = ProgressDialog.show(SensorActivity.this, "", Config.GET_SENSOR);
             }
-
             @Override
             protected String doInBackground(String... params) {
                 HttpClient httpClient = new DefaultHttpClient();
@@ -177,6 +228,17 @@ public class SensorActivity extends MyActivity {
         sendPostReqAsyncTask.execute();
     }
 
+    private void setBtnInteract() {
+        //Hide interact button if not correct sensor
+        try {
+            if (typeInt != Config.SPEED_SENSOR && typeInt != Config.LIGHT_SENSOR) {
+                spheroBtn.setVisibility(View.GONE);
+            }
+        } catch(Exception ex) {
+            spheroBtn.setVisibility(View.GONE);
+        }
+    }
+
     private void generateSensorView(JSONObject obj) {
         treeId = obj.get("treeId").toString();
         System.out.println(obj);
@@ -192,7 +254,8 @@ public class SensorActivity extends MyActivity {
             btnToggle.setSelected(selected);
             btnToggle.setChecked(selected);
             //btnToggle.forceLayout(); //update state
-            if (sensor.getType().getId() == Config.LIGHT_SENSOR) { //light sensor
+            typeInt = sensor.getType().getId();
+            if (typeInt == Config.LIGHT_SENSOR) { //light sensor
                 commonSensor.setVisibility(View.GONE);
                 //colorPalette.setBackgroundColor(Integer.parseInt());
                 int colorInt = DEFAULT_COLOR;
@@ -207,6 +270,7 @@ public class SensorActivity extends MyActivity {
                     numberPicker.setValue(data);
                 } catch(Exception ex) {}
             }
+            setBtnInteract();
         } catch(Exception ex) {}
     }
 
@@ -437,6 +501,12 @@ public class SensorActivity extends MyActivity {
                     case 3:
                         colorPicker = Color.WHITE;
                         break;
+                    case 4:
+                        colorPicker = Color.YELLOW;
+                        break;
+                    case 5:
+                        colorPicker = Color.rgb(240, 167, 235);
+                        break;
                 }
                 colorPalette.setBackgroundColor(colorPicker);
                 colorDialog.dismiss();
@@ -444,5 +514,136 @@ public class SensorActivity extends MyActivity {
         });
         colorDialog = builder.create();
         colorDialog.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch ( requestCode ) {
+            case REQUEST_CODE_LOCATION_PERMISSION: {
+                for( int i = 0; i < permissions.length; i++ ) {
+                    if( grantResults[i] == PackageManager.PERMISSION_GRANTED ) {
+                        startDiscovery();
+                        Log.d( "Permissions", "Permission Granted: " + permissions[i] );
+                    } else if( grantResults[i] == PackageManager.PERMISSION_DENIED ) {
+                        Log.d( "Permissions", "Permission Denied: " + permissions[i] );
+                    }
+                }
+            }
+            break;
+            default: {
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            }
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        try {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M
+                    || checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                startDiscovery();
+            }
+        } catch(Exception ex) {}
+    }
+
+    private void startDiscovery() {
+        //If the DiscoveryAgent is not already looking for robots, start discovery.
+        if( !DualStackDiscoveryAgent.getInstance().isDiscovering() ) {
+            try {
+                DualStackDiscoveryAgent.getInstance().startDiscovery( this );
+            } catch (DiscoveryException e) {
+                Log.e(TAG, "DiscoveryException: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        //If the DiscoveryAgent is in discovery mode, stop it.
+        if( DualStackDiscoveryAgent.getInstance().isDiscovering() ) {
+            DualStackDiscoveryAgent.getInstance().stopDiscovery();
+        }
+
+        //If a robot is connected to the device, disconnect it
+        if( mRobot != null ) {
+            mRobot.disconnect();
+            mRobot = null;
+        }
+
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DualStackDiscoveryAgent.getInstance().addRobotStateListener(null);
+    }
+
+    private void robotDrive() {
+        //If the robot is null, then it is probably not connected and nothing needs to be done
+        if( mRobot == null ) {
+            Toast.makeText(getApplicationContext(), Config.ROBOT_NOT_ONLINE, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        //Forward
+        mRobot.drive( 0.0f, ROBOT_VELOCITY );
+        //To the right
+        //mRobot.drive( 90.0f, ROBOT_VELOCITY );
+        //Backward
+        //mRobot.drive( 180.0f, ROBOT_VELOCITY );
+        //To the left
+        //mRobot.drive( 270.0f, ROBOT_VELOCITY );
+    }
+
+    @Override
+    public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationType type) {
+        switch (type) {
+            case Online: {
+                //If robot uses Bluetooth LE, Developer Mode can be turned on.
+                //This turns off DOS protection. This generally isn't required.
+                if( robot instanceof RobotLE) {
+                    ( (RobotLE) robot ).setDeveloperMode( true );
+                }
+                //Save the robot as a ConvenienceRobot for additional utility methods
+                mRobot = new ConvenienceRobot(robot);
+                break;
+            }
+            case Disconnected: {
+                Toast.makeText(getApplicationContext(), Config.ROBOT_DISCONNECTED, Toast.LENGTH_LONG).show();
+                break;
+            }
+        }
+    }
+
+    //Turn the robot LED on or off every two seconds
+    private void blink() {
+        if (mRobot == null || btnToggle.isChecked() == false) {
+            Toast.makeText(getApplicationContext(), Config.ROBOT_NOT_ONLINE, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Toast.makeText(getApplicationContext(), Config.SET_LED, Toast.LENGTH_LONG).show();
+
+        if (colorPicker == Color.BLUE) {
+            mRobot.setLed(0.0f, 0.0f, 1.0f);
+        } else if (colorPicker == Color.RED) {
+            mRobot.setLed(1.0f, 0.0f, 0.0f);
+        } else if (colorPicker == Color.GREEN) {
+            mRobot.setLed(0.0f, 1.0f, 0.0f);
+        } else if (colorPicker == Color.YELLOW) {
+            mRobot.setLed(1.0f, 1.0f, 0.0f);
+        } else if (colorPicker == Color.rgb(240, 167, 235)) {
+            mRobot.setLed(0.9f, 0.6f, 0.9f);
+        } else {
+            mRobot.setLed(0.5f, 0.5f, 0.5f);
+        }
+        /*final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                blink();
+            }
+        }, 2000);*/
     }
 }

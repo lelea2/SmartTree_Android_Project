@@ -85,10 +85,18 @@ public class Config {
 
     public static final String SENSOR_UNDEPLOY_TITLE = "Undeploy Sensor";
     public static final String SENSOR_UNDEPLOY_CHECK = "Are you sure to undeploy your tree?";
+    public static final String ROBOT_NOT_ONLINE = "Robot is not online";
+    public static final String ROBOT_DISCONNECTED = "Robot is disconnected";
+    public static final String ROBOT_NO_INTERACT = "No interaction corresponding to this sensor";
+    public static final String SET_LED = "Light up sphero";
 
     //Config for ROLE
     public static final int ADMIN_ROLE = 1;
     public static final int USER_ROLE = 2;
+
+    //Sphero configuration
+    public static final String SPHERO_NOT_GRANTED = "Location permission has not already been granted";
+    public static final String SPHERO_GRANTED = "Location permission already granted";
 
     //1. water
     //2. light

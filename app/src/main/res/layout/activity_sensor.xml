@@ -34,22 +34,44 @@
         android:layout_marginBottom="10dp"
         android:layout_below="@id/sensor_detail_heading"
         android:fontFamily="Helvetica Neue"/>
-    <Button
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:id="@+id/interact_grid_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"
-        android:background="@color/colorRed"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/btn_disconnect"
-        android:text="Disconnect"
-        android:onClick="undeploySensor"
-        android:layout_below="@id/sensor_tree_deploy" />
+        android:layout_below="@id/sensor_tree_deploy"
+        android:stretchColumns="2">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp">
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="20dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/colorBlueLight"
+                android:id="@+id/btn_interact"
+                android:text="Blink LED"
+                android:onClick="spheroInteract" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="20dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/colorRed"
+                android:id="@+id/btn_disconnect"
+                android:text="Disconnect"
+                android:onClick="undeploySensor" />
+        </TableRow>
+    </TableLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/btn_disconnect"
+        android:layout_below="@id/interact_grid_view"
         android:background="@drawable/border_default"
         android:id="@+id/sensor_on_off"
         android:layout_marginBottom="15dp">
@@ -143,7 +165,7 @@
     <TableLayout
         android:id="@+id/button_grid_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/common_sensor"
         android:layout_marginTop="20dp"
         android:stretchColumns="2">
