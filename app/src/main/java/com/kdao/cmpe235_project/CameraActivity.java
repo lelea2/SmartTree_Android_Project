@@ -1,25 +1,30 @@
 package com.kdao.cmpe235_project;
 
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
-import android.provider.MediaStore;
-import java.io.*;
-import android.os.Environment;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.kdao.cmpe235_project.util.Config;
 import com.kdao.cmpe235_project.util.PreferenceData;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -51,10 +56,10 @@ public class CameraActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_camera);
         getElements();
-        if (loggedInRole == Config.USER_ROLE) {
-            //If user log in as normal user, then don't show upload btn
-            uploadButton.setVisibility(View.GONE);
-        }
+//        if (loggedInRole == Config.USER_ROLE) {
+//            //If user log in as normal user, then don't show upload btn
+//            uploadButton.setVisibility(View.GONE);
+//        }
         handleCameraButton();
         handleVideoButton();
         handleSharePhoto();
