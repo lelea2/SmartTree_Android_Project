@@ -17,6 +17,7 @@ public class Config {
     public static final String LOGIN_BARCODE_ERR = "Invalid barcode for login. Please try a " +
             "different one";
     public static final String SCAN_ERR = "No scan data received!";
+    public static final String UPLOAD_NOTREE_ERR = "Please select a tree!";
     public static final String URL_ENCODE_ERR = "An Exception given because of " +
             "UrlEncodedFormEntity argument :";
     public static final String SERVER_ERR = "Technical difficulty. Please try again!";
@@ -44,6 +45,7 @@ public class Config {
     public static final String TREE_DEPLOYED = "Sensor deployed to tree";
     public static final String SENSOR_UPDATED = "Sensor is updated successfully";
     public static final String SENSOR_DELETED = "Sensor is undeployed from tree";
+    public static final String DB_WRITE_SUCCEED = "File is uploaded to database successfully!";
 
 
     //Configuration for loading msg
@@ -53,12 +55,15 @@ public class Config {
     public static final String CREATE_TREE = "Generate New Tree...";
     public static final String CREATE_SENSOR = "Generate New Sensor...";
     public static final String CREATE_COMMENT = "Create comment...";
+    public static final String SAVE_TO_DB = "Uploading to database...";
     public static final String GET_SENSORS = "Getting All Sensors...";
     public static final String GET_SENSOR = "Getting Sensor detail...";
     public static final String GET_COMMENTS = "Getting Comments...";
     public static final String DEPLOY_TREE = "Deploy sensor to tree...";
     public static final String UPDATE_SENSOR = "Update sensor...";
     public static final String UNDEPLOY_SENSOR = "Undeploying sensor...";
+
+    public static final String APIurl = "APIurl";
 
     //FLAG key configuration
     public static final String SIGN_IN_WITH_BARCODE = "SIGN_IN_WITH_BARCODE";

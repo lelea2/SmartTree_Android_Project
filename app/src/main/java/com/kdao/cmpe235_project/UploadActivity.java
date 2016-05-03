@@ -32,76 +32,41 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Spinner;
-import android.view.View.OnClickListener;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferType;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+import com.kdao.cmpe235_project.api.SpinAdapter;
+import com.kdao.cmpe235_project.data.Location;
+import com.kdao.cmpe235_project.data.Sensor;
+import com.kdao.cmpe235_project.data.Tree;
+import com.kdao.cmpe235_project.util.Config;
+import com.kdao.cmpe235_project.util.PreferenceData;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ListActivity;
-import android.content.ContentUris;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.SimpleAdapter;
-import android.widget.SimpleAdapter.ViewBinder;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferType;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
-import com.kdao.cmpe235_project.data.Location;
-import com.kdao.cmpe235_project.data.Sensor;
-import com.kdao.cmpe235_project.data.Tree;
-import com.kdao.cmpe235_project.util.Config;
-import com.kdao.cmpe235_project.api.SpinAdapter;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
-import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -137,6 +102,10 @@ public class UploadActivity extends ListActivity {
     private List<Tree> trees = new ArrayList<Tree>();
     private static String GEL_TREES_URL = Config.BASE_URL + "/trees";
     private String treeId;
+    private String userId;
+    private String uploadFileName;
+    private String APIurl;
+    private boolean isTreeSelected = false;
 
 
     // The TransferUtility is the primary class for managing transfer to S3
@@ -169,6 +138,7 @@ public class UploadActivity extends ListActivity {
         transferUtility = Agent.getTransferUtility(this);
         checkedIndex = INDEX_NOT_CHECKED;
         transferRecordMaps = new ArrayList<HashMap<String, Object>>();
+        userId = PreferenceData.getLoggedInUserId(getApplicationContext());
         initUI();
     }
 
@@ -300,21 +270,26 @@ public class UploadActivity extends ListActivity {
         btnUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isTreeSelected) {
+                    Intent intent = new Intent();
+                    if (Build.VERSION.SDK_INT >= 19) {
+                        // For Android versions of KitKat or later, we use a
+                        // different intent to ensure
+                        // we can get the file path from the returned intent URI
+                        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+                        intent.addCategory(Intent.CATEGORY_OPENABLE);
+                        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                        APIurl = "/tree/"+treeId+"/photo";
+                    } else {
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                    }
 
-                Intent intent = new Intent();
-                if (Build.VERSION.SDK_INT >= 19) {
-                    // For Android versions of KitKat or later, we use a
-                    // different intent to ensure
-                    // we can get the file path from the returned intent URI
-                    intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                } else {
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, 0);
                 }
-
-                intent.setType("image/*");
-                startActivityForResult(intent, 0);
+                else {
+                    Toast.makeText(getApplicationContext(), Config.UPLOAD_NOTREE_ERR, Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -322,43 +297,54 @@ public class UploadActivity extends ListActivity {
         btnUploadAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isTreeSelected) {
+                    Intent intent = new Intent();
+                    if (Build.VERSION.SDK_INT >= 19) {
+                        // For Android versions of KitKat or later, we use a
+                        // different intent to ensure
+                        // we can get the file path from the returned intent URI
+                        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+                        intent.addCategory(Intent.CATEGORY_OPENABLE);
+                        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                        APIurl = "/tree/"+treeId+"/audio";
+                    } else {
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                    }
 
-                Intent intent = new Intent();
-                if (Build.VERSION.SDK_INT >= 19) {
-                    // For Android versions of KitKat or later, we use a
-                    // different intent to ensure
-                    // we can get the file path from the returned intent URI
-                    intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                } else {
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("audio/*");
+                    startActivityForResult(intent, 0);
                 }
-
-                intent.setType("audio/*");
-                startActivityForResult(intent, 0);
+                else {
+                    Toast.makeText(getApplicationContext(), Config.UPLOAD_NOTREE_ERR, Toast.LENGTH_LONG).show();
+                }
             }
+
         });
 
 
         btnUploadVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isTreeSelected) {
+                    Intent intent = new Intent();
+                    if (Build.VERSION.SDK_INT >= 19) {
+                        // For Android versions of KitKat or later, we use a
+                        // different intent to ensure
+                        // we can get the file path from the returned intent URI
+                        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+                        intent.addCategory(Intent.CATEGORY_OPENABLE);
+                        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                        APIurl = "/tree/"+treeId+"/video";
+                    } else {
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                    }
 
-                Intent intent = new Intent();
-                if (Build.VERSION.SDK_INT >= 19) {
-                    // For Android versions of KitKat or later, we use a
-                    // different intent to ensure
-                    // we can get the file path from the returned intent URI
-                    intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                } else {
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("video/*");
+                    startActivityForResult(intent, 0);
                 }
-
-                intent.setType("video/*");
-                startActivityForResult(intent, 0);
+                else {
+                    Toast.makeText(getApplicationContext(), Config.UPLOAD_NOTREE_ERR, Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -491,10 +477,14 @@ public class UploadActivity extends ListActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
-
             try {
                 String path = getPath(uri);
-                beginUpload(path);
+
+                boolean isCompleted = beginUpload(path);
+                if (isCompleted) {
+                    File file = new File(path);
+                    addUploadedFIleToDB(APIurl, treeId, file.getName());
+                }
             } catch (URISyntaxException e) {
                 Toast.makeText(this,
                         "Unable to get the file from the given URI.  See error log for details",
@@ -504,18 +494,86 @@ public class UploadActivity extends ListActivity {
         }
     }
 
+
+    private void addUploadedFIleToDB(final String APIurl, String treeId, String fileName) {
+        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(UploadActivity.this, "", Config.SAVE_TO_DB);
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                String uploadFileName = params[0];
+                String userId = params[1];
+                String treeId = params[2];
+                String APIurl = params[3];
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpPut httpPut = new HttpPut(Config.BASE_URL + APIurl);
+                org.json.JSONObject json = new org.json.JSONObject();
+                try {
+                    json.put("uploadFileName", uploadFileName);
+                    json.put("userId", userId);
+                    json.put("treeId", treeId);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    StringEntity se = new StringEntity(json.toString());
+                    se.setContentEncoding("UTF-8");
+                    httpPut.setEntity(se);
+                    try {
+                        HttpResponse httpResponse = httpClient.execute(httpPut);
+                        InputStream inputStream = httpResponse.getEntity().getContent();
+                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                        StringBuilder stringBuilder = new StringBuilder();
+                        String bufferedStrChunk = null;
+                        while((bufferedStrChunk = bufferedReader.readLine()) != null) {
+                            stringBuilder.append(bufferedStrChunk);
+                        }
+                        return stringBuilder.toString();
+                    } catch (Exception e) {
+                        System.out.println("An Exception given because of UrlEncodedFormEntity " +
+                                "argument :" + e);
+                        e.printStackTrace();
+                    }
+                } catch (Exception uee) {
+                    System.out.println("An Exception given because of UrlEncodedFormEntity argument :" + uee);
+                    uee.printStackTrace();
+                }
+                return "error";
+            }
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+                progressDialog.dismiss();
+                if (result == "error") { //error case
+                    Toast.makeText(getApplicationContext(), Config.SERVER_ERR, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), Config.DB_WRITE_SUCCEED,
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+        sendPostReqAsyncTask.execute(fileName, userId, treeId, APIurl);
+    }
     /*
      * Begins to upload the file specified by the file path.
      */
-    private void beginUpload(String filePath) {
+    private boolean beginUpload(String filePath) {
         if (filePath == null) {
-            Toast.makeText(this, "Could not find the filepath of the selected file",
-                    Toast.LENGTH_LONG).show();
-            return;
+            Toast.makeText(this, "Could not find the filepath of the selected file", Toast.LENGTH_LONG).show();
+            return false;
         }
         File file = new File(filePath);
         TransferObserver observer = transferUtility.upload(getString(R.string.BUCKET_NAME), file.getName(),
                 file);
+        while (observer.getState() != TransferState.FAILED && observer.getState() != TransferState.COMPLETED
+                && observer.getState() != TransferState.CANCELED){}
+        return observer.getState() == TransferState.COMPLETED;
         /*
          * Note that usually we set the transfer listener after initializing the
          * transfer. However it isn't required in this sample app. The flow is
@@ -719,9 +777,11 @@ public class UploadActivity extends ListActivity {
                 // Here you get the current item (a User object) that is selected by its position
                 Tree tree = (Tree) adapter.getItem(position);
                 treeId = tree.getId();
+                isTreeSelected = true;
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapter) {
+                isTreeSelected = false;
             }
         });
     }

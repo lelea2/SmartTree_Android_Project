@@ -32,6 +32,7 @@
     <string name="homeIcon">Home Page</string>
     <string name="COGNITO_POOL_ID">us-east-1:d697056a-be38-4a11-a44d-456dff57792a</string>
     <string name="BUCKET_NAME">smarttreebucket1</string>
+    <string name="google_app_id">AIzaSyBhy-ej1Fo7fZ85_LWoJ1APY8OJ6yzNhzc</string>
 
     <!-- String for registration -->
     <string name="register_title">REGISTER NEW ACCOUNT</string>
