@@ -127,6 +127,8 @@ public class UploadActivity extends ListActivity {
     // Which row in the UI is currently checked (if any)
     private int checkedIndex;
 
+    private static String LOCAL_FOLDER_PATH = "content://downloads/public_downloads";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +146,7 @@ public class UploadActivity extends ListActivity {
 
     @Override
     protected void onResume() {
+        System.out.println(">>> On resume upload <<<<");
         super.onResume();
         // Get the data from any transfer's that have already happened,
         initData();
@@ -269,6 +272,7 @@ public class UploadActivity extends ListActivity {
             @Override
             public void onClick(View v) {
                 if (isTreeSelected) {
+                    System.out.println(">>>>> Start uploading photos... <<<<<<<");
                     Intent intent = new Intent();
                     if (Build.VERSION.SDK_INT >= 19) {
                         // For Android versions of KitKat or later, we use a
@@ -277,10 +281,10 @@ public class UploadActivity extends ListActivity {
                         intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
                         intent.addCategory(Intent.CATEGORY_OPENABLE);
                         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                        APIurl = "/tree/"+treeId+"/photo";
                     } else {
                         intent.setAction(Intent.ACTION_GET_CONTENT);
                     }
+                    APIurl = "/tree/"+treeId+"/photo";
                     intent.setType("image/*");
                     startActivityForResult(intent, 0);
                 } else {
@@ -301,11 +305,10 @@ public class UploadActivity extends ListActivity {
                         intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
                         intent.addCategory(Intent.CATEGORY_OPENABLE);
                         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                        APIurl = "/tree/"+treeId+"/audio";
                     } else {
                         intent.setAction(Intent.ACTION_GET_CONTENT);
                     }
-
+                    APIurl = "/tree/"+treeId+"/audio";
                     intent.setType("audio/*");
                     startActivityForResult(intent, 0);
                 } else {
@@ -328,10 +331,10 @@ public class UploadActivity extends ListActivity {
                         intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
                         intent.addCategory(Intent.CATEGORY_OPENABLE);
                         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                        APIurl = "/tree/"+treeId+"/video";
                     } else {
                         intent.setAction(Intent.ACTION_GET_CONTENT);
                     }
+                    APIurl = "/tree/"+treeId+"/video";
                     intent.setType("video/*");
                     startActivityForResult(intent, 0);
                 } else {
@@ -353,10 +356,7 @@ public class UploadActivity extends ListActivity {
                      * canceled).
                      */
                     if (!paused) {
-                        Toast.makeText(
-                                UploadActivity.this,
-                                "Cannot pause transfer.  You can only pause transfers in a IN_PROGRESS or WAITING state.",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UploadActivity.this, Config.UPLOAD_PAUSE_ERR, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -378,10 +378,7 @@ public class UploadActivity extends ListActivity {
                      * running).
                      */
                     if (resumed == null) {
-                        Toast.makeText(
-                                UploadActivity.this,
-                                "Cannot resume transfer.  You can only resume transfers in a PAUSED state.",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UploadActivity.this, Config.UPLOAD_RESUME_ERR, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -398,10 +395,7 @@ public class UploadActivity extends ListActivity {
                      * transfer is already canceled
                      */
                     if (!canceled) {
-                        Toast.makeText(
-                                UploadActivity.this,
-                                "Cannot cancel transfer.  You can only resume transfers in a PAUSED, WAITING, or IN_PROGRESS state.",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UploadActivity.this, Config.UPLOAD_TRANSFER_ERR, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -466,6 +460,7 @@ public class UploadActivity extends ListActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println(">>>> On activity result: " + resultCode + "<<<<<<<<");
         if (resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
             try {
@@ -476,14 +471,13 @@ public class UploadActivity extends ListActivity {
                     addUploadedFIleToDB(APIurl, treeId, file.getName());
                 }
             } catch (URISyntaxException e) {
-                Toast.makeText(this,
-                        "Unable to get the file from the given URI.  See error log for details",
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(this, Config.UPLOAD_ERROR, Toast.LENGTH_LONG).show();
                 Log.e(TAG, "Unable to upload file from the given uri", e);
             }
         }
     }
 
+    //private function upload image to DB
     private void addUploadedFIleToDB(final String APIurl, String treeId, String fileName) {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
@@ -539,8 +533,7 @@ public class UploadActivity extends ListActivity {
                 if (result == "error") { //error case
                     Toast.makeText(getApplicationContext(), Config.SERVER_ERR, Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), Config.DB_WRITE_SUCCEED,
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), Config.DB_WRITE_SUCCEED, Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -552,7 +545,7 @@ public class UploadActivity extends ListActivity {
      */
     private boolean beginUpload(String filePath) {
         if (filePath == null) {
-            Toast.makeText(this, "Could not find the filepath of the selected file", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, Config.UPLOAD_PATH_ERR, Toast.LENGTH_LONG).show();
             return false;
         }
         File file = new File(filePath);
@@ -588,8 +581,7 @@ public class UploadActivity extends ListActivity {
                 return Environment.getExternalStorageDirectory() + "/" + split[1];
             } else if (isDownloadsDocument(uri)) {
                 final String id = DocumentsContract.getDocumentId(uri);
-                uri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                uri = ContentUris.withAppendedId(Uri.parse(LOCAL_FOLDER_PATH), Long.valueOf(id));
             } else if (isMediaDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
@@ -750,11 +742,13 @@ public class UploadActivity extends ListActivity {
                 System.out.println(e);
             }
         }
-        if (arrayObj.size() > 0) {
+        if (arrayObj.size() > 0) { //get treeId on initial load
             treeId = trees.get(0).getId();
+            APIurl = "/tree/"+treeId+"/photo";
         }
     }
 
+    //private helper creating tree dropdown list
     private void createTreeDrodown() {
         adapter = new SpinAdapter(UploadActivity.this, R.layout.spinner_item, trees);
         treeListSpinner.setAdapter(adapter);

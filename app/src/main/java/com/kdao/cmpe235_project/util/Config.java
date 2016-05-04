@@ -36,7 +36,17 @@ public class Config {
     public static final String DEPLOY_ERR = "Please choose a tree and sensor before you could " +
             "execute deployment";
     public static final String COMMENT_NO_SIGNIN = "Please sign in to your account to be able to " +
-            "add comemnt";
+            "add comment";
+
+    public static final String UPLOAD_ERROR = "Unable to get the file from the given URI. Please " +
+            "try again";
+    public static final String UPLOAD_PATH_ERR = "Could not find the filepath of the selected file";
+    public static final String UPLOAD_RESUME_ERR = "Cannot resume transfer.  You can only resume " +
+            "transfers in a PAUSED state.";
+    public static final String UPLOAD_PAUSE_ERR = "Cannot pause transfer.  You can only pause " +
+            "transfers in a IN_PROGRESS or WAITING state.";
+    public static final String UPLOAD_TRANSFER_ERR = "Cannot cancel transfer.  You can only " +
+            "resume transfers in a PAUSED, WAITING, or IN_PROGRESS state.";
 
     //Configuration for informative msg
     public static final String NEW_TREE_CREATED = "New tree created";
@@ -102,6 +112,8 @@ public class Config {
     //Sphero configuration
     public static final String SPHERO_NOT_GRANTED = "Location permission has not already been granted";
     public static final String SPHERO_GRANTED = "Location permission already granted";
+
+
 
     //1. water
     //2. light

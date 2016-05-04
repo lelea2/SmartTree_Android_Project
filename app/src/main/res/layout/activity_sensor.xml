@@ -41,7 +41,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"
         android:layout_below="@id/sensor_tree_deploy"
-        android:stretchColumns="2">
+        android:stretchColumns="3">
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,8 +54,19 @@
                 android:layout_marginRight="5dp"
                 android:background="@color/colorBlueLight"
                 android:id="@+id/btn_interact"
-                android:text="Blink LED"
+                android:text="Led"
                 android:onClick="spheroInteract" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/colorGreen"
+                android:id="@+id/btn_blink"
+                android:text="Blink"
+                android:onClick="spheroBlink" />
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

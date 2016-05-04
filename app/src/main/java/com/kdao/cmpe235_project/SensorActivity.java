@@ -81,6 +81,7 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
     private RelativeLayout commonSensor;
     private Button undeployBtn;
     private Button spheroBtn;
+    private Button spheroBlink;
 
     private CustomedNumberPicker numberPicker;
     private int DEFAULT_COLOR = Color.BLUE;
@@ -91,6 +92,7 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
 
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 42;
     private static final float ROBOT_VELOCITY = 0.6f;
+    private boolean initialLit = true;
 
     private ConvenienceRobot mRobot;
 
@@ -158,6 +160,7 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
         undeployBtn = (Button) findViewById(R.id.btn_disconnect);
         numberPicker = (CustomedNumberPicker) findViewById(R.id.numberPicker);
         spheroBtn = (Button) findViewById(R.id.btn_interact);
+        spheroBlink = (Button) findViewById(R.id.btn_blink);
         //Hide undeploy btn if user is not admin
         if (userLoggedIn == false || userRole != Config.ADMIN_ROLE) {
             undeployBtn.setVisibility(View.GONE);
@@ -167,12 +170,18 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
     //Public function dealing with sensor interact
     public void spheroInteract(View v) {
         if (typeInt == Config.LIGHT_SENSOR) {
-            blink();
+            blink(true, false); //lit all the time
         } else if (typeInt == Config.SPEED_SENSOR) {
             robotDrive();
         } else {
             Toast.makeText(getApplicationContext(), Config.ROBOT_NO_INTERACT, Toast.LENGTH_LONG).show();
         }
+    }
+
+    //Public function setting blinking
+    public void spheroBlink(View v) {
+        System.out.println(">>> Set blinking led <<<<");
+        blink(true, true); //lit all the time
     }
 
     private void getSensor() {
@@ -233,9 +242,11 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
         try {
             if (typeInt != Config.SPEED_SENSOR && typeInt != Config.LIGHT_SENSOR) {
                 spheroBtn.setVisibility(View.GONE);
+                spheroBlink.setVisibility(View.GONE);
             }
         } catch(Exception ex) {
             spheroBtn.setVisibility(View.GONE);
+            spheroBlink.setVisibility(View.GONE);
         }
     }
 
@@ -262,6 +273,7 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
                 try {
                     colorInt = Integer.parseInt(obj.get("lightcolor").toString());
                 } catch(Exception ex) {}
+                colorPicker = colorInt;
                 colorPalette.setBackgroundColor(colorInt);
             } else { //set color for other sensor
                 lightSensor.setVisibility(View.GONE);
@@ -419,7 +431,6 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
                 super.onPreExecute();
                 progressDialog = ProgressDialog.show(SensorActivity.this, "", Config.UPDATE_SENSOR);
             }
-
             @Override
             protected String doInBackground(String... params) {
                 String value = params[0];
@@ -467,6 +478,9 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
                     Toast.makeText(getApplicationContext(), Config.SERVER_ERR, Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), Config.SENSOR_UPDATED, Toast.LENGTH_LONG).show();
+                    if (sensorState == false && sensor.getType().getId() == Config.LIGHT_SENSOR) { //turn off the light
+                        blink(false, false);
+                    }
                 }
             }
         }
@@ -618,32 +632,37 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
     }
 
     //Turn the robot LED on or off every two seconds
-    private void blink() {
+    private void blink(final boolean lit, final boolean blinking) {
         if (mRobot == null || btnToggle.isChecked() == false) {
             Toast.makeText(getApplicationContext(), Config.ROBOT_NOT_ONLINE, Toast.LENGTH_LONG).show();
             return;
         }
 
         Toast.makeText(getApplicationContext(), Config.SET_LED, Toast.LENGTH_LONG).show();
-
-        if (colorPicker == Color.BLUE) {
-            mRobot.setLed(0.0f, 0.0f, 1.0f);
-        } else if (colorPicker == Color.RED) {
-            mRobot.setLed(1.0f, 0.0f, 0.0f);
-        } else if (colorPicker == Color.GREEN) {
-            mRobot.setLed(0.0f, 1.0f, 0.0f);
-        } else if (colorPicker == Color.YELLOW) {
-            mRobot.setLed(1.0f, 1.0f, 0.0f);
-        } else if (colorPicker == Color.rgb(240, 167, 235)) {
-            mRobot.setLed(0.9f, 0.6f, 0.9f);
+        if (lit == false) {
+            mRobot.setLed(0.0f, 0.0f, 0.0f);
         } else {
-            mRobot.setLed(0.5f, 0.5f, 0.5f);
-        }
-        /*final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                blink();
+            if (colorPicker == Color.BLUE) {
+                mRobot.setLed(0.0f, 0.0f, 1.0f);
+            } else if (colorPicker == Color.RED) {
+                mRobot.setLed(1.0f, 0.0f, 0.0f);
+            } else if (colorPicker == Color.GREEN) {
+                mRobot.setLed(0.0f, 1.0f, 0.0f);
+            } else if (colorPicker == Color.YELLOW) {
+                mRobot.setLed(1.0f, 1.0f, 0.0f);
+            } else if (colorPicker == Color.rgb(240, 167, 235)) {
+                mRobot.setLed(0.9f, 0.6f, 0.9f);
+            } else {
+                mRobot.setLed(0.5f, 0.5f, 0.5f);
             }
-        }, 2000);*/
+        }
+        if (blinking == true) {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    blink(!lit, blinking);
+                }
+            }, 2000);
+        }
     }
 }
