@@ -75,7 +75,7 @@
                 android:layout_marginLeft="5dp"
                 android:background="@color/colorRed"
                 android:id="@+id/btn_disconnect"
-                android:text="Disconnect"
+                android:text="Undeploy"
                 android:onClick="undeploySensor" />
         </TableRow>
     </TableLayout>
@@ -152,7 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Water Color"
+            android:text="Water temperature"
             android:textColor="#FFF"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"

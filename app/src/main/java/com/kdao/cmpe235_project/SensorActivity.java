@@ -605,7 +605,7 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
 
     private void robotDrive() {
         //If the robot is null, then it is probably not connected and nothing needs to be done
-        if( mRobot == null ) {
+        if( mRobot == null || btnToggle.isChecked() == false) {
             Toast.makeText(getApplicationContext(), Config.ROBOT_NOT_ONLINE, Toast.LENGTH_LONG).show();
             return;
         }
