@@ -50,7 +50,6 @@ import com.kdao.cmpe235_project.data.Location;
 import com.kdao.cmpe235_project.data.Sensor;
 import com.kdao.cmpe235_project.data.Tree;
 import com.kdao.cmpe235_project.util.Config;
-import com.kdao.cmpe235_project.util.PreferenceData;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -549,11 +548,12 @@ public class UploadActivity extends ListActivity {
             return false;
         }
         File file = new File(filePath);
+        Log.w(TAG, "YU CHENG ARRIVE HERE 1.");
         TransferObserver observer = transferUtility.upload(getString(R.string.BUCKET_NAME), file.getName(),
                 file);
-        while (observer.getState() != TransferState.FAILED && observer.getState() != TransferState.COMPLETED
-                && observer.getState() != TransferState.CANCELED){}
-        return observer.getState() == TransferState.COMPLETED;
+
+        Log.w(TAG, "YU CHENG ARRIVE HERE 2.");
+        return true;
         /*
          * Note that usually we set the transfer listener after initializing the
          * transfer. However it isn't required in this sample app. The flow is
