@@ -102,7 +102,7 @@ public class UploadActivity extends ListActivity {
     private List<Tree> trees = new ArrayList<Tree>();
     private static String GEL_TREES_URL = Config.BASE_URL + "/trees";
     private String treeId;
-    private String userId;
+    //private String userId;
     private String uploadFileName;
     private String APIurl;
     private boolean isTreeSelected = false;
@@ -138,7 +138,7 @@ public class UploadActivity extends ListActivity {
         transferUtility = Agent.getTransferUtility(this);
         checkedIndex = INDEX_NOT_CHECKED;
         transferRecordMaps = new ArrayList<HashMap<String, Object>>();
-        userId = PreferenceData.getLoggedInUserId(getApplicationContext());
+        //userId = PreferenceData.getLoggedInUserId(getApplicationContext());
         initUI();
     }
 
@@ -265,8 +265,6 @@ public class UploadActivity extends ListActivity {
         btnPauseAll = (Button) findViewById(R.id.buttonPauseAll);
         btnCancelAll = (Button) findViewById(R.id.buttonCancelAll);
 
-
-
         btnUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -283,16 +281,13 @@ public class UploadActivity extends ListActivity {
                     } else {
                         intent.setAction(Intent.ACTION_GET_CONTENT);
                     }
-
                     intent.setType("image/*");
                     startActivityForResult(intent, 0);
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), Config.UPLOAD_NOTREE_ERR, Toast.LENGTH_LONG).show();
                 }
             }
         });
-
 
         btnUploadAudio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -313,8 +308,7 @@ public class UploadActivity extends ListActivity {
 
                     intent.setType("audio/*");
                     startActivityForResult(intent, 0);
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), Config.UPLOAD_NOTREE_ERR, Toast.LENGTH_LONG).show();
                 }
             }
@@ -338,11 +332,9 @@ public class UploadActivity extends ListActivity {
                     } else {
                         intent.setAction(Intent.ACTION_GET_CONTENT);
                     }
-
                     intent.setType("video/*");
                     startActivityForResult(intent, 0);
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), Config.UPLOAD_NOTREE_ERR, Toast.LENGTH_LONG).show();
                 }
             }
@@ -459,7 +451,6 @@ public class UploadActivity extends ListActivity {
             Agent.fillMap(map, observer, i == checkedIndex);
         }
         simpleAdapter.notifyDataSetChanged();
-
     }
 
     /*
@@ -479,7 +470,6 @@ public class UploadActivity extends ListActivity {
             Uri uri = data.getData();
             try {
                 String path = getPath(uri);
-
                 boolean isCompleted = beginUpload(path);
                 if (isCompleted) {
                     File file = new File(path);
@@ -493,7 +483,6 @@ public class UploadActivity extends ListActivity {
             }
         }
     }
-
 
     private void addUploadedFIleToDB(final String APIurl, String treeId, String fileName) {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {

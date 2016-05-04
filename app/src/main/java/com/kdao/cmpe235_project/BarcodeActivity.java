@@ -73,6 +73,7 @@ public class BarcodeActivity extends AppCompatActivity {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanningResult != null) {
             String scanContent = scanningResult.getContents();
+            System.out.println("Scan content=" + scanContent);
             if (signinWithBarCode.equals("1")) {
                 logUserIn(scanContent);
             } else {
@@ -88,7 +89,7 @@ public class BarcodeActivity extends AppCompatActivity {
      * Private function to log user in
      */
     private void logUserIn(String userId) {
-        //scanBtn.setImageResource(R.drawable.progressbar);
+        System.out.println("userId passed=" + userId);
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
             protected void onPreExecute() {
@@ -98,6 +99,7 @@ public class BarcodeActivity extends AppCompatActivity {
             @Override
             protected String doInBackground(String... params) {
                 String id = params[0];
+                System.out.println("UserId on post:" + id);
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(Config.BASE_URL + "/user/"+ id);
                 try {
@@ -129,16 +131,21 @@ public class BarcodeActivity extends AppCompatActivity {
                 try {
                     JSONObject jObject  = new JSONObject(result);
                     userId = (String) jObject.get("userId");
+                    if(!Utility.isEmptyString(userId)){
+                        PreferenceData.setUserLoggedInStatus(getApplication(), true);
+                        PreferenceData.setLoggedInUserId(getApplication(), userId);
+                        PreferenceData.setLoggedInRole(getApplication(), Integer.parseInt(jObject.get
+                                ("roleId").toString()));
+                        PreferenceData.setLoggedInUserFullName(getApplication(), jObject.get
+                                ("firstName").toString(), jObject.get("lastName").toString());
+                        navigateToMainActivity();
+                    } else {
+                        navigateToSignInActivity();
+                    }
                 } catch(Exception ex) {
-                }
-                if(!Utility.isEmptyString(userId)){
-                    PreferenceData.setUserLoggedInStatus(getApplication(), true);
-                    PreferenceData.setLoggedInUserId(getApplication(), userId);
-                    navigateToMainActivity();
-                } else {
-                    Log.e(TAG, "Signin with barcode failed");
                     navigateToSignInActivity();
                 }
+
             }
         }
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();

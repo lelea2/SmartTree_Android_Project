@@ -69,7 +69,6 @@ public class Agent {
             sTransferUtility = new TransferUtility(getS3Client(context.getApplicationContext()),
                     context.getApplicationContext());
         }
-
         return sTransferUtility;
     }
 

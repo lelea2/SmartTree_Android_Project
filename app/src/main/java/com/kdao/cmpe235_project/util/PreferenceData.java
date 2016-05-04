@@ -114,6 +114,7 @@ public class PreferenceData {
         editor.remove(PREF_LOGGEDIN_USER_EMAIL);
         editor.remove(PREF_USER_LOGGEDIN_STATUS);
         editor.remove(PREF_LOGGEDIN_USER_ROLE);
+        editor.remove(PREF_LOGGEDIN_USER_FULLNAME);
         editor.commit();
     }
 }

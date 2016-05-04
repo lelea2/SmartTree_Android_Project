@@ -26,7 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class CameraActivity extends AppCompatActivity {
+public class CameraActivity extends MyActivity {
 
     //Pre-select option for photo taking
     static CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
