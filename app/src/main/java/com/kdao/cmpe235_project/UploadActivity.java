@@ -548,11 +548,8 @@ public class UploadActivity extends ListActivity {
             return false;
         }
         File file = new File(filePath);
-        Log.w(TAG, "YU CHENG ARRIVE HERE 1.");
         TransferObserver observer = transferUtility.upload(getString(R.string.BUCKET_NAME), file.getName(),
                 file);
-
-        Log.w(TAG, "YU CHENG ARRIVE HERE 2.");
         return true;
         /*
          * Note that usually we set the transfer listener after initializing the
