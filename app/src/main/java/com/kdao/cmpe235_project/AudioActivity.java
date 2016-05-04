@@ -28,7 +28,7 @@ import com.kdao.cmpe235_project.util.PreferenceData;
 
 import java.io.IOException;
 
-public class AudioActivity extends AppCompatActivity {
+public class AudioActivity extends MyActivity {
 
     Button playBtn,stopBtn,recordBtn;
     private MediaRecorder myAudioRecorder;
@@ -37,8 +37,9 @@ public class AudioActivity extends AppCompatActivity {
     private static String TAG = "AudioActivity";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_audio);
         boolean userLoggedIn = PreferenceData.getUserLoggedInStatus(getApplicationContext());
         if (userLoggedIn == false) { //navigate to signin page if user is not signin yet*/
             Intent signinIntent = new Intent(AudioActivity.this, SigninActivity.class);
@@ -46,8 +47,6 @@ public class AudioActivity extends AppCompatActivity {
             startActivity(signinIntent);
             return;
         }
-        setContentView(R.layout.activity_audio);
-
         playBtn = (Button) findViewById(R.id.button_play);
         stopBtn = (Button) findViewById(R.id.button_stop);
         recordBtn = (Button) findViewById(R.id.button_record);

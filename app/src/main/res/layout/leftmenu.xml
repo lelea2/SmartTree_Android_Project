@@ -76,6 +76,18 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
+            android:text="Audio"
+            android:id="@+id/nav_audio"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#FFF"
+            android:background="@drawable/border_leftmenu_default"
+            android:textSize="20dp"
+            android:clickable="true"
+            android:textAllCaps="false"/>
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
             android:text="Logout"
             android:id="@+id/nav_register_link"
             android:layout_gravity="center_horizontal"

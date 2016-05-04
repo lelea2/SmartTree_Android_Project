@@ -21,6 +21,7 @@ public class SampleListFragment extends Fragment implements View.OnClickListener
     private Button nav_alltree;
     private Button nav_scan;
     private Button nav_photo;
+    private Button nav_audio;
 
     private TextView fullName;
     private boolean userLoggedIn;
@@ -32,11 +33,13 @@ public class SampleListFragment extends Fragment implements View.OnClickListener
         nav_alltree = (Button) view.findViewById(R.id.nav_alltree);
         nav_scan = (Button) view.findViewById(R.id.nav_scan);
         nav_photo = (Button) view.findViewById(R.id.nav_photo);
+        nav_audio = (Button) view.findViewById(R.id.nav_audio);
         fullName = (TextView) view.findViewById(R.id.nav_fullName);
         register_link.setOnClickListener(this);
         nav_alltree.setOnClickListener(this);
         nav_scan.setOnClickListener(this);
         nav_photo.setOnClickListener(this);
+        nav_audio.setOnClickListener(this);
         if (userLoggedIn == true) { //user logged in
             fullName.setText(PreferenceData.getLoggedInUserFullname(getActivity().getApplicationContext()));
         } else {
@@ -62,6 +65,9 @@ public class SampleListFragment extends Fragment implements View.OnClickListener
             case R.id.nav_photo:
                 navPhoto(v);
                 break;
+            case R.id.nav_audio:
+                navAudio(v);
+                break;
             default:
                 break;
         }
@@ -82,6 +88,12 @@ public class SampleListFragment extends Fragment implements View.OnClickListener
 
     private void navPhoto(View v) {
         Intent launchActivity = new Intent(getActivity().getApplicationContext(), CameraActivity.class);
+        launchActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(launchActivity);
+    }
+
+    private void navAudio(View v) {
+        Intent launchActivity = new Intent(getActivity().getApplicationContext(), AudioActivity.class);
         launchActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(launchActivity);
     }
