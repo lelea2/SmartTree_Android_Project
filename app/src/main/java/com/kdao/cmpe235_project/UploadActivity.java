@@ -506,15 +506,13 @@ public class UploadActivity extends ListActivity {
             @Override
             protected String doInBackground(String... params) {
                 String uploadFileName = params[0];
-                String userId = params[1];
-                String treeId = params[2];
-                String APIurl = params[3];
+                String treeId = params[1];
+                String APIurl = params[2];
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPut httpPut = new HttpPut(Config.BASE_URL + APIurl);
                 org.json.JSONObject json = new org.json.JSONObject();
                 try {
-                    json.put("uploadFileName", uploadFileName);
-                    json.put("userId", userId);
+                    json.put("filename", uploadFileName);
                     json.put("treeId", treeId);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -558,7 +556,7 @@ public class UploadActivity extends ListActivity {
             }
         }
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
-        sendPostReqAsyncTask.execute(fileName, userId, treeId, APIurl);
+        sendPostReqAsyncTask.execute(fileName, treeId, APIurl);
     }
     /*
      * Begins to upload the file specified by the file path.
