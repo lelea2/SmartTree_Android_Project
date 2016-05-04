@@ -172,6 +172,9 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
         if (typeInt == Config.LIGHT_SENSOR) {
             blink(true, false); //lit all the time
         } else if (typeInt == Config.SPEED_SENSOR) {
+            colorPicker = Color.MAGENTA;
+            blink(true, false);
+            //drive robot
             robotDrive();
         } else {
             Toast.makeText(getApplicationContext(), Config.ROBOT_NO_INTERACT, Toast.LENGTH_LONG).show();
@@ -240,6 +243,7 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
     private void setBtnInteract() {
         //Hide interact button if not correct sensor
         try {
+            spheroBtn.setText("Led");
             if (typeInt != Config.SPEED_SENSOR && typeInt != Config.LIGHT_SENSOR) {
                 spheroBtn.setVisibility(View.GONE);
                 spheroBlink.setVisibility(View.GONE);
@@ -247,6 +251,11 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
         } catch(Exception ex) {
             spheroBtn.setVisibility(View.GONE);
             spheroBlink.setVisibility(View.GONE);
+        }
+        //Handle speed sensors
+        if (typeInt == Config.SPEED_SENSOR) {
+            spheroBlink.setVisibility(View.GONE);
+            spheroBtn.setText("Run");
         }
     }
 
