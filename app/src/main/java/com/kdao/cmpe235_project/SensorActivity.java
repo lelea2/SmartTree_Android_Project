@@ -298,7 +298,7 @@ public class SensorActivity extends MyActivity implements RobotChangedStateListe
     //Private helper function getting data of sensor
     private String getCommonSensorData(JSONObject obj) {
         String data = "60";
-        //[{"treeId":"8f14886c-d267-44b8-8518-8cf363634929","sensorType":"3","name":"speed sensor","id":null,"wateron":null,"watertemp":null,"ts":null,"voiceon":null,"volume":null,"speedon":null,"speedlimit":null,"lighton":null,"lightcolor":null}]
+        //[{"treeId":"8f14886c-d267-44b8-8518-8cf363634929","sensorType":"3","name":"speed sensor","id":null,"ateron":null,"watertemp":null,"ts":null,"voiceon":null,"volume":null,"speedon":null,"speedlimit":null,"lighton":null,"lightcolor":null}]
         int typeInt = sensor.getType().getId();
         if (typeInt == Config.WATER_SENSOR) {
             data = obj.get("watertemp").toString();
