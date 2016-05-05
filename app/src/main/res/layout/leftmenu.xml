@@ -39,6 +39,18 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="50dp"
+            android:text="Home"
+            android:id="@+id/nav_home"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#FFF"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/border_leftmenu_default"
+            android:textSize="20dp"
+            android:clickable="true"
+            android:textAllCaps="false" />
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
             android:text="All Tree"
             android:id="@+id/nav_alltree"
             android:layout_gravity="center_horizontal"

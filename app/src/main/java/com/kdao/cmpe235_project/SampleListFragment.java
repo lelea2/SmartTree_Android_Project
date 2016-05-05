@@ -22,6 +22,7 @@ public class SampleListFragment extends Fragment implements View.OnClickListener
     private Button nav_scan;
     private Button nav_photo;
     private Button nav_audio;
+    private Button nav_home;
 
     private TextView fullName;
     private boolean userLoggedIn;
@@ -34,12 +35,14 @@ public class SampleListFragment extends Fragment implements View.OnClickListener
         nav_scan = (Button) view.findViewById(R.id.nav_scan);
         nav_photo = (Button) view.findViewById(R.id.nav_photo);
         nav_audio = (Button) view.findViewById(R.id.nav_audio);
+        nav_audio = (Button) view.findViewById(R.id.nav_home);
         fullName = (TextView) view.findViewById(R.id.nav_fullName);
         register_link.setOnClickListener(this);
         nav_alltree.setOnClickListener(this);
         nav_scan.setOnClickListener(this);
         nav_photo.setOnClickListener(this);
         nav_audio.setOnClickListener(this);
+        nav_home.setOnClickListener(this);
         if (userLoggedIn == true) { //user logged in
             fullName.setText(PreferenceData.getLoggedInUserFullname(getActivity().getApplicationContext()));
         } else {
@@ -68,9 +71,18 @@ public class SampleListFragment extends Fragment implements View.OnClickListener
             case R.id.nav_audio:
                 navAudio(v);
                 break;
+            case R.id.nav_home:
+                navHome(v);
+                break;
             default:
                 break;
         }
+    }
+
+    private void navHome(View v) {
+        Intent launchActivity = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+        launchActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(launchActivity);
     }
 
     private void navAllTree(View v) {
